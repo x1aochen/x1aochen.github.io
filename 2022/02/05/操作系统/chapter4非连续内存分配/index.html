@@ -21,7 +21,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/网站头像.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/网站头像.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -149,8 +149,6 @@
                     <div class="author">
                         <span class="name">陈嘉俊</span>
                         
-                            <span class="author-label">Lv1</span>
-                        
                     </div>
                     <div class="meta-info">
                         <div class="article-meta-info">
@@ -186,7 +184,15 @@
 
     
     
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.7k 字</span>
+        </span>
     
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
     
 </div>
 
@@ -487,6 +493,16 @@
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
         </div>
         
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
         <div class="theme-info info-item">
             由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
@@ -564,7 +580,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">第四章 非连续内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%88%86%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">4.1 分段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">1.2.</span> <span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A7%EF%BC%88Frame%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">帧（Frame）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%EF%BC%88Page%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">页（Page）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E9%A1%B5%E8%A1%A8-%E6%A6%82%E8%BF%B0%E3%80%81TLB"><span class="nav-number">1.3.</span> <span class="nav-text">4.3 页表-概述、TLB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E8%A1%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.1.</span> <span class="nav-text">页表概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Translation-Look-aside-Buffer%EF%BC%88TLB%EF%BC%89%EF%BC%88%E8%A7%A3%E5%86%B3%E9%80%9F%E5%BA%A6%E4%B8%8A%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Translation Look-aside Buffer（TLB）（解决速度上问题）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E9%A1%B5%E8%A1%A8-%E4%BA%8C%E7%BA%A7%EF%BC%8C%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4.4 页表-二级，多级页表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E9%A1%B5%E8%A1%A8-%E5%8F%8D%E5%90%91%E9%A1%B5%E8%A1%A8"><span class="nav-number">1.5.</span> <span class="nav-text">4.5 页表-反向页表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%A1%B5%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88page-registers%EF%BC%89%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">1.5.1.</span> <span class="nav-text">基于页寄存器（page registers）的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%85%B3%E8%81%94%E5%86%85%E5%AD%98-associative-memory-%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">1.5.2.</span> <span class="nav-text">基于关联内存(associative memory)的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%93%88%E5%B8%8C-hash-%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">1.5.3.</span> <span class="nav-text">基于哈希(hash)的方案</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-text">第四章 非连续内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%88%86%E6%AE%B5"><span class="nav-text">4.1 分段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A7%EF%BC%88Frame%EF%BC%89"><span class="nav-text">帧（Frame）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%EF%BC%88Page%EF%BC%89"><span class="nav-text">页（Page）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E9%A1%B5%E8%A1%A8-%E6%A6%82%E8%BF%B0%E3%80%81TLB"><span class="nav-text">4.3 页表-概述、TLB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E8%A1%A8%E6%A6%82%E8%BF%B0"><span class="nav-text">页表概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Translation-Look-aside-Buffer%EF%BC%88TLB%EF%BC%89%EF%BC%88%E8%A7%A3%E5%86%B3%E9%80%9F%E5%BA%A6%E4%B8%8A%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-text">Translation Look-aside Buffer（TLB）（解决速度上问题）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E9%A1%B5%E8%A1%A8-%E4%BA%8C%E7%BA%A7%EF%BC%8C%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8"><span class="nav-text">4.4 页表-二级，多级页表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E9%A1%B5%E8%A1%A8-%E5%8F%8D%E5%90%91%E9%A1%B5%E8%A1%A8"><span class="nav-text">4.5 页表-反向页表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%A1%B5%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88page-registers%EF%BC%89%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">基于页寄存器（page registers）的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%85%B3%E8%81%94%E5%86%85%E5%AD%98-associative-memory-%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">基于关联内存(associative memory)的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%93%88%E5%B8%8C-hash-%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">基于哈希(hash)的方案</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
