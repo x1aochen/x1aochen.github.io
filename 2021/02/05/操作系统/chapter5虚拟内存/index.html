@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            第五章 虚拟内存 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/网站头像.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">第五章 虚拟内存</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-02-05 15:54:34</span>
+        <span class="mobile">2021-02-05 15:54</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">内存分配</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="第五章-虚拟内存"><a href="#第五章-虚拟内存" class="headerlink" title="第五章 虚拟内存"></a>第五章 虚拟内存</h2><h3 id="5-1-起因"><a href="#5-1-起因" class="headerlink" title="5.1 起因"></a>5.1 起因</h3><p>程序规模的增长远大于存储器容量发展的速度，让更多的程序跑在有限的内存里面</p>
+<p><strong>使用硬盘/磁盘使更多的程序在有限的内存中运行</strong></p>
+<p>理想的存储器：</p>
+<p>更大，更快，更便宜的非易失性存储器</p>
+<p>实际中的存储器：</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/caozuoxitongcengcijiegou.png" alt="存储器层次结构"></p>
+<h3 id="5-2-覆盖技术"><a href="#5-2-覆盖技术" class="headerlink" title="5.2 覆盖技术"></a>5.2 覆盖技术</h3><p>目标：是在较小的可用内存中运行较大的程序, 常用于多道程序系统, 与分区存储管理配合使用</p>
+<p>原理：</p>
+<ul>
+<li>把程序按照其自身逻辑结构, 划分为若干个功能上相互独立的程序模块, 那些不会同时执行的模块共享同一块内存区域, 按时间先后来运行<ul>
+<li>必要部分(常用功能)的代码和数据常驻内存</li>
+<li>可选部分(不常用功能)在其他程序模块中实现, 平时存放在外存中, 在需要用到时才装入内存</li>
+<li>不存在调用关系的模块不必同时装入到内存, 从而可以相互覆盖, 即这些模块共用一个分区</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:\Users\Administrator\Desktop\笔记\图\覆盖技术.png" alt="覆盖技术"></p>
+<ul>
+<li>缺点：<ul>
+<li>由程序员来把一个大的程序划分为若干个小的功能模块, 并确定各个模块之间的覆盖关系, 费时费力, 增加了编程的复杂度</li>
+<li>覆盖模块并从外存装入内存, 实际上是以时间延长来换取空间节省</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-3-交换技术"><a href="#5-3-交换技术" class="headerlink" title="5.3 交换技术"></a>5.3 交换技术</h3><p><strong>如果是程序太多, 超过了内存的容量, 可以采用自动的交换(swapping)技术, 把暂时不能执行的程序送到外存中</strong></p>
+<p>目标：</p>
+<ul>
+<li>多道程序在内存时, 让正在运行的程序或需要运行的程序获得更多的内存资源</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>可将暂时不能运行的程序送到外存, 从而获得空闲内存空间</li>
+<li>操作系统把一个进程的整个地址空间的内容保存到外存中(换出 swap out), 而将外存中的某个进程的地址空间读入到内存中(换入 swap in). 换入换出内容的大小为整个程序的地址空间</li>
+</ul>
+<p>交换技术实现中的几个问题：</p>
+<ul>
+<li>交换时机的确定 : 何时需要发生交换? 只当内存空间不够或有不够的危险时换出</li>
+<li>交换区的大小 : 必须足够大以存放所有用户进程的所有内存映像的拷贝, 必须能够对这些内存映像进行直接存取</li>
+<li>程序换入时的重定位 : 换出后再换入的内存位置一定要在原来的位置上嘛?(可能出现寻址问题) 最好采用动态地址映射的方法</li>
+</ul>
+<p>覆盖与交换的比较</p>
+<ul>
+<li>覆盖只能发生在那些相互之间没有调用关系的程序模块之间, 因此程序员必须给出程序内的各个模块之间的逻辑覆盖结构</li>
+<li>交换技术是以在内存中的程序大小为单位进行的, 它不需要程序员给出各个模块之间的逻辑覆盖结构。换言之, 交换发生在内存中程序与管理程序或操作系统之间, 而覆盖则发生在运行程序的内部</li>
+</ul>
+<h3 id="5-4-虚存技术"><a href="#5-4-虚存技术" class="headerlink" title="5.4 虚存技术"></a>5.4 虚存技术</h3><p>在内存不够用的情形下, 可以采用覆盖技术和交换技术, 但是 :</p>
+<ul>
+<li>覆盖技术 : 需要程序要自己把整个程序划分为若干个小的功能模块, 并确定各个模块之间的覆盖关系, 增加了程序员的负担</li>
+<li>交换技术 : 以进程作为交换的单位, 需要把进程的整个地址空间都换入换出, 增加了处理器的开销</li>
+</ul>
+<p>目标：</p>
+<ul>
+<li>像覆盖技术那样, 不是把程序的所有内容都放在内存中, 因而能够运行比当前的空闲内存空间还要大的程序. 但做的更好, 由操作系统自动来完成, 无需程序员的干涉</li>
+<li>像交换技术那样, 能够实现进程在内存与外存之间的交换, 因而获得更多的空闲内存空间. 但做的更好, 只对进程的部分内容在内存和外存之间进行交换</li>
+<li>以更小的页粒度为单位装入更多更大的程序</li>
+</ul>
+<p><strong>程序的局部性原理</strong></p>
+<ul>
+<li>程序的局部性原理(principle of locality) : 指程序在执行过程中的一个较短时期, 所执行的指令地址和指令的操作数地址, 分别局限于一定的区域<ul>
+<li>时间局部性 : 一条指令的一次执行和下次执行, 一个数据的一次访问和下次访问都集中在一个较短时期内</li>
+<li>空间局部性 : 当前指令和邻近的几条指令, 当前访问的数据和邻近的几个数据都集中在一个较小区域内</li>
+</ul>
+</li>
+</ul>
+<p>程序的局部性原理表明, 从理论上来说, 虚拟存储技术是能够实现的. 而且在实现了以后应该是能够取得一个满意的效果</p>
+<p>实例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">页面大小为<span class="number">4</span>k, 分配给每个进程的物理页面是<span class="number">1.</span> </span><br><span class="line">在一个进程中, 定义了如下的二维数组 <span class="keyword">int</span> A[<span class="number">1024</span>][<span class="number">1024</span>]. 该数组按行存放在内存, 每一行放在一个页面中.</span><br><span class="line">考虑一下程序的编写方法对缺页率的影响?</span><br><span class="line"></span><br><span class="line">程序编写方法<span class="number">1</span> : (发生了<span class="number">1024</span>*<span class="number">1024</span>次缺页中断)</span><br><span class="line"><span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">1024</span>; j++)</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">1024</span>; i++)</span><br><span class="line">				A[i][j] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">程序编写方法<span class="number">2</span> : (发生了<span class="number">1024</span>次缺页中断)</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">1024</span>; i++)</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">1024</span>; j++)</span><br><span class="line">				A[i][j] = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>基本概念</p>
+<p><strong>可以在页式或段式内存管理的基础上实现</strong></p>
+<ul>
+<li>在装入程序时, 不必将其全部装入内存, 而只需将当前需要执行的部分页面或段装入到内存中, 就可以让程序开始执行</li>
+<li>在程序执行过程中, 如果需执行的指令或访问的数据尚未在内存中(称为<strong>缺页或缺段</strong>), 则由处理器通知操作系统将相应的页面或段调入到内存, 然后继续执行程序</li>
+<li>另一方面, 操作系统将内存中暂时不使用的页面或段调出保存在外存上, 从而腾出更多空闲内存空间存放将要装入的程序以及将要调入的页面或段</li>
+</ul>
+<p>基本特征</p>
+<ul>
+<li>大的用户空间 : 通过把物理内存和外存相结合, 提供给用户的虚拟内存空间通常大于实际的物理内存, 即实现了这两者的分离. 如32位的虚拟地址理论上可以访问4GB, 而可能计算机上仅有256M的物理内存, 但硬盘容量大于4GB</li>
+<li>部分交换 : 与交换技术相比较, 虚拟存储的调入和调出是对部分虚拟地址空间进行的</li>
+<li>不连续性 : 物理内存分配的不连续性, 虚拟地址空间使用的不连续性</li>
+</ul>
+<h4 id="页式内存管理"><a href="#页式内存管理" class="headerlink" title="页式内存管理"></a>页式内存管理</h4><p>页表 : 完成逻辑页到物理页帧的映射</p>
+<p>根据页号去页表中寻找索引, 先查看 resident bit 是否为0, 0表示不存在, 1表示映射关系存在, 获得帧号加上原本的偏移, 获得了物理地址</p>
+<p><strong>虚拟页式内存管理</strong></p>
+<ul>
+<li><p>大部分虚拟存储系统都采用虚拟页式存储管理技术, 即在页式存储管理的基础上, 增加请求调页和页面置换功能</p>
+</li>
+<li><p>基本思路</p>
+<ul>
+<li>当一个用户程序要调入内存运行时, 不是将该程序的所有页面都装入内存, 而是<strong>只装入部分的页面</strong>, 就可启动程序运行.</li>
+<li>在运行的过程中, 如果发现要运行的程序或要访问的数据不再内存, 则向系统发出缺页的中断请求, 系统在处理这个中断时, 将外存中相应的页面调入内存, 使得该程序能够继续运行</li>
+</ul>
+</li>
+<li><p>页表表项</p>
+<ul>
+<li>驻留位 : 表示该页是在内存中还是在外存</li>
+<li>保护位 : 表示允许对该页做何种类型的访问, 如只读, 可读写, 可执行等</li>
+<li>修改位 : 表示此页在内存中是否被修改过. 当系统回收该物理页面时, 根据此位来决定是否把它的内容写回外存</li>
+<li>访问位 : 如果该页被访问过(包括读写操作), 则设置此位. 用于页面置换算法</li>
+</ul>
+</li>
+<li><p>缺页中断处理过程</p>
+<ol>
+<li>如果在内存中有空闲的物理页面, 则分配一物理页帧f, 然后转第4步; 否则转到第2步</li>
+<li>采用某种页面置换算法, 选择一个将被替换的物理页帧f, 它所对应的逻辑页为q, 如果该页在内存期间被修改过, 则需要把它写回外存</li>
+<li>对q所对应的页表项修改, 把驻留位置为0</li>
+<li>将需要访问的页p装入到物理页面f当中</li>
+<li>修改p所对应的页表项的内容, 把驻留位置为1, 把物理页帧号置为f</li>
+<li>重新运行被中断是指令</li>
+</ol>
+</li>
+</ul>
+<p>在何处保存未被映射的页？</p>
+<ul>
+<li>能够简单地识别在二级存储器中的页</li>
+<li>交换空间(磁盘或者文件) : 特殊格式, 用于存储未被映射的页面</li>
+</ul>
+<h4 id="后备存储-backing-store（二级存储）"><a href="#后备存储-backing-store（二级存储）" class="headerlink" title="后备存储 backing store（二级存储）"></a>后备存储 backing store（二级存储）</h4><ul>
+<li>一个虚拟地址空间的页面可以被映射到一个文件(在二级存储中)的某个位置</li>
+<li>代码段 : 映射到可执行二进制文件</li>
+<li>动态加载的共享库程序段 : 映射到动态调用的库文件</li>
+<li>其他段 : 可能被映射到交换文件(swap file)</li>
+</ul>
+<h4 id="虚拟内存性能"><a href="#虚拟内存性能" class="headerlink" title="虚拟内存性能"></a>虚拟内存性能</h4><p>为了便于理解分页的开销, 使用有效存储器访问时间 effective memory access time (EAT)</p>
+<p>EAT = 访存时间 * 页表命中几率 + page fault处理时间 * page fault几率</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">#内存分配</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/09/hello-world/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">第五章 虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.1.</span> <span class="nav-text">5.1 起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E8%A6%86%E7%9B%96%E6%8A%80%E6%9C%AF"><span class="nav-number">1.2.</span> <span class="nav-text">5.2 覆盖技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E4%BA%A4%E6%8D%A2%E6%8A%80%E6%9C%AF"><span class="nav-number">1.3.</span> <span class="nav-text">5.3 交换技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E8%99%9A%E5%AD%98%E6%8A%80%E6%9C%AF"><span class="nav-number">1.4.</span> <span class="nav-text">5.4 虚存技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.1.</span> <span class="nav-text">页式内存管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E5%A4%87%E5%AD%98%E5%82%A8-backing-store%EF%BC%88%E4%BA%8C%E7%BA%A7%E5%AD%98%E5%82%A8%EF%BC%89"><span class="nav-number">1.4.2.</span> <span class="nav-text">后备存储 backing store（二级存储）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%80%A7%E8%83%BD"><span class="nav-number">1.4.3.</span> <span class="nav-text">虚拟内存性能</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
