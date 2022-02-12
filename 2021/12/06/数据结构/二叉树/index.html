@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            二叉树 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">二叉树</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-06 23:09:15</span>
+        <span class="mobile">2021-12-06 23:09</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.9k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>无论是向量还是列表都无法做到兼顾静态和动态的高效</p>
+<p>半线性结构：树型结构不是狭义的线性结构，却带有线性的特征</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%A0%91%E7%9A%84%E5%8A%A8%E6%9C%BA.png"></p>
+<p><strong>树是按照层次关系来组织数据项的方式</strong></p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%9C%89%E6%A0%B9%E6%A0%91.png"></p>
+<p>有根树：r树根（父亲），subtree子树，ri之间互称兄弟（sibling），d = degree（r)为r的度，e树的边数，n顶点总数</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%A0%91%E7%9A%84%E8%BE%B9%E4%B8%8E%E9%A1%B6%E7%82%B9.png"></p>
+<p>故在衡量相关复杂度时，可以n作为参照</p>
+<p>若指定Ti作为T的第i棵子树，ri作为r的第i个孩子，则T称作有序树(ordered tree)</p>
+<h4 id="路径-环路"><a href="#路径-环路" class="headerlink" title="路径+环路"></a>路径+环路</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E8%B7%AF%E5%BE%84%2B%E7%8E%AF%E8%B7%AF.png"></p>
+<h4 id="连通-无环"><a href="#连通-无环" class="headerlink" title="连通+无环"></a>连通+无环</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E8%BF%9E%E9%80%9A%2B%E6%97%A0%E7%8E%AF.png"></p>
+<p>一旦指定了根，其他的节点都将获得一个确定的指标，通过指标，同一类顶点所具有的指标都是相等的，也称为等价类</p>
+<h4 id="深度-层次"><a href="#深度-层次" class="headerlink" title="深度+层次"></a>深度+层次</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%B7%B1%E5%BA%A6%2B%E5%B1%82%E6%AC%A1.png"></p>
+<p>根节点是所有节点的公共祖先，深度为0</p>
+<p>没有后代的节点称作叶子（leaf）</p>
+<p>所有叶子深度中的最大者，称作树的高度</p>
+<p>一个节点都没有的树称作空树，高度为-1</p>
+<p>depth(v) + height(v) &lt;= height(T)</p>
+<h3 id="树的表示"><a href="#树的表示" class="headerlink" title="树的表示"></a>树的表示</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%A0%91%E7%9A%84%E6%8E%A5%E5%8F%A3.png"></p>
+<p><strong>性能</strong>：</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E7%88%B6%E8%8A%82%E7%82%B9.png"></p>
+<h4 id="长子-兄弟"><a href="#长子-兄弟" class="headerlink" title="长子+兄弟"></a>长子+兄弟</h4><p>每个节点均设两个引用</p>
+<p>纵：firstChild（）</p>
+<p>横：nextSibling（）</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E7%88%B6%E8%8A%82%E7%82%B9.png"></p>
+<h3 id="二叉树-1"><a href="#二叉树-1" class="headerlink" title="二叉树"></a>二叉树</h3><p>节点度数不超过2的树称作二叉树（binary tree）</p>
+<p>同一节点的孩子和子树，均以左、右区分</p>
+<p>在有根性和有序性能够保证的前提下，二叉树足以描述所有的树</p>
+<ul>
+<li><p>深度为k的节点，至多为2^k个</p>
+</li>
+<li><p>含n个节点，高度为h的二叉树中</p>
+<p>h &lt; n &lt; 2^h+1</p>
+</li>
+<li><p>n = h + 1时，退化为一条单链</p>
+</li>
+<li><p>n = 2^h+1 - 1时，即所谓满二叉树（full binary tree）</p>
+</li>
+</ul>
+<h4 id="真二叉树"><a href="#真二叉树" class="headerlink" title="真二叉树"></a>真二叉树</h4><p>每个节点的度数都是偶数</p>
+<p><strong>假想添加</strong>：</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E7%9C%9F%E4%BA%8C%E5%8F%89%E6%A0%91.png"></p>
+<p>用长子兄弟法将多叉树转化为二叉树</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%A4%9A%E5%8F%89%E8%BD%AC%E4%BA%8C%E5%8F%89.png"></p>
+<p>即可以用二叉树来表示任何一棵有根有序树</p>
+<p>正因如此，二叉树虽是树的特例，却可直接研究二叉树</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><h5 id="BinNode类"><a href="#BinNode类" class="headerlink" title="BinNode类"></a>BinNode类</h5><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/BinNode%E7%B1%BB.png"></p>
+<p>每个节点通过引用指向其他节点，每个节点所占据的一个空间为一个位置</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BinNodePosi(T) BinNode<span class="meta-string">&lt;T&gt;</span>* <span class="comment">//节点位置</span></span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">struct</span> <span class="title">BinNode</span>&#123;</span></span><br><span class="line">    <span class="built_in">BinNodePosi</span>(T) parent,lChild,rChild; <span class="comment">//父亲，孩子</span></span><br><span class="line">    T data; <span class="keyword">int</span> height; <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>; <span class="comment">//高度，子树规模</span></span><br><span class="line">    <span class="built_in">BinNodePosi</span>(T) <span class="built_in">insertAsLc</span>(T <span class="keyword">const</span> &amp;); <span class="comment">//作为左孩子插入新节点</span></span><br><span class="line">    <span class="built_in">BinNodePosi</span>(T) <span class="built_in">insertAsRc</span>(T <span class="keyword">const</span> &amp;); <span class="comment">//作为右孩子插入新节点</span></span><br><span class="line">    <span class="built_in">BinNodePosi</span>(T) <span class="built_in">succ</span>(); <span class="comment">//(中序遍历意义下)当前节点的直接后继</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travLevel</span><span class="params">( VST &amp; )</span></span>; <span class="comment">//子树层次遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPre</span><span class="params">( VST &amp; )</span></span>; <span class="comment">//子树先序遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travIn</span><span class="params">( VST &amp; )</span></span>; <span class="comment">//子树中序遍历</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> VST&gt; <span class="function"><span class="keyword">void</span> <span class="title">travPost</span><span class="params">( VST &amp; )</span></span>; <span class="comment">//子树后序遍历</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>接口实现</strong></p>
+<p>传入参数e进行封装，并且将它作为当前节点的左/右孩子，接入所属树中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="title">BinNodePosi</span><span class="params">(T)</span>::<span class="title">insertAsLc</span><span class="params">(T <span class="keyword">const</span> &amp; e)</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">return</span> l Child = <span class="keyword">new</span> <span class="built_in">BinNode</span>(e,<span class="keyword">this</span>); &#125; <span class="comment">//O(1)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>size</strong>(后代总数，即以其为根的子树的规模)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">int</span> BinNode&lt;T&gt;::<span class="built_in">size</span>()&#123;</span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">1</span>; <span class="comment">//计入本身</span></span><br><span class="line">    <span class="keyword">if</span>(lChild) s += lChild-&gt;<span class="built_in">size</span>(); <span class="comment">//递归计入左子树规模</span></span><br><span class="line">    <span class="keyword">if</span>(rChild) s += rChild-&gt;<span class="built_in">size</span>(); <span class="comment">//递归计入右子树规模</span></span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125; <span class="comment">//O(n=size)</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="BinTree模板类"><a href="#BinTree模板类" class="headerlink" title="BinTree模板类"></a>BinTree模板类</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">BinTree</span>&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> _size; <span class="comment">//规模</span></span><br><span class="line">    <span class="built_in">BinNodePosi</span>(T) _root; <span class="comment">//根节点</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">updateHeight</span><span class="params">( BinNodePosi(T) x)</span></span>; <span class="comment">//更新节点x的速度</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateHeightAbove</span><span class="params">(BinNodePosi(T) x)</span></span>; <span class="comment">//更新x即祖先的速度</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _size; &#125; <span class="comment">//规模</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> !_root; &#125; <span class="comment">//判空</span></span><br><span class="line">    <span class="built_in">BinNodePosi</span>(T) <span class="built_in">root</span>() <span class="keyword">const</span> &#123; <span class="keyword">return</span> _root; &#125; <span class="comment">//树根</span></span><br><span class="line">    <span class="comment">/* ...子树接入、删除和分离接口...*/</span></span><br><span class="line">    <span class="comment">/* ...遍历接口... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="高度更新"><a href="#高度更新" class="headerlink" title="高度更新"></a>高度更新</h5><p>根节点高度为0，空树高度为-1</p>
+<p>一个节点的高度恰好等于左右孩子中的更大者+1</p>
+<p>定义一个新的等价意义上的高度，使得算法更为简便：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stature(p) ( (p) ? (p)-&gt;height : -1)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="comment">//更新节点x高度，具体规则因树不同而异</span></span><br><span class="line"><span class="keyword">int</span> BinTree&lt;T&gt;::<span class="built_in">updateHeight</span>( <span class="built_in">BinNodePosi</span>(T) x)&#123;</span><br><span class="line">    <span class="keyword">return</span> x-&gt;height = <span class="number">1</span> + <span class="built_in">max</span>( <span class="built_in">stature</span>( x-&gt;lChild ),<span class="built_in">stature</span>( x-&gt;rChild ) );</span><br><span class="line">&#125; <span class="comment">//此处采用常规二叉树规则，O(1)</span></span><br></pre></td></tr></table></figure>
+
+<p>如果x的父节点存在，那么x的高度变化，则会连锁到父节点，祖父节点…，因此更新节点从x出发，向上逐层追溯它的历代祖先直到抵达根节点</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="comment">//更新v及其历代祖先的高度</span></span><br><span class="line"><span class="keyword">void</span> BinTree&lt;T&gt;::<span class="built_in">updateHeightAbove</span>( <span class="built_in">BinNodePosi</span>(T) x )&#123;</span><br><span class="line">    <span class="keyword">while</span>(x) <span class="comment">//可优化：一旦高度未变，即可终止</span></span><br><span class="line">    &#123; <span class="built_in">updateHeight</span>(x); x = x-&gt;parent; &#125;</span><br><span class="line">&#125; <span class="comment">//O( n = depth(x) )</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="节点插入"><a href="#节点插入" class="headerlink" title="节点插入"></a>节点插入</h5><p>在一棵二叉树中，将某个新生成的节点，作为树中某一原本没有右孩子的节点的右孩子接入</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E8%8A%82%E7%82%B9%E6%8F%92%E5%85%A5.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="title">BinNodePosi</span><span class="params">(T)</span></span></span><br><span class="line"><span class="function">BinTree&lt;T&gt;::<span class="title">insertAsRc</span><span class="params">( BinNodePosi(T) X,T <span class="keyword">const</span> &amp; e )</span></span>&#123;</span><br><span class="line">    _size++;</span><br><span class="line">    x-&gt;<span class="built_in">insertAsRc</span>(e); <span class="comment">//x祖先的高度可能增加，其余节点必要不变</span></span><br><span class="line">    <span class="built_in">updateHeightAbove</span>(x);</span><br><span class="line">    <span class="keyword">return</span> x-&gt;rChild;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h3><p><strong>遍历</strong>：按照某种<strong>次序</strong>访问树中各节点，每个节点被访问恰好一次</p>
+<p>先序：V-&gt;L-&gt;R        中序：L-&gt;V-&gt;R        后序：L-&gt;R-&gt;V</p>
+<p><strong>先序遍历顺序</strong>：自上而下访问左侧链上的节点，再自下而上访问它们的右子树</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(BinNodePosi(T) x,VST &amp; visit)</span></span>&#123; <span class="comment">//递归实现</span></span><br><span class="line">    <span class="keyword">if</span>(!x) <span class="keyword">return</span>; <span class="comment">//递归基的处理</span></span><br><span class="line">    <span class="built_in">visit</span>( x-&gt;data ); </span><br><span class="line">    <span class="built_in">traverse</span>( x-&gt;lChild,visit );</span><br><span class="line">    <span class="built_in">traverse</span>( x-&gt;rChild,visit );</span><br><span class="line">&#125; <span class="comment">//T(n) = O(1) + T(a) + T(n-a-1) = O(n)</span></span><br></pre></td></tr></table></figure>
+
+<p>这种算法只具有渐进的意义，在实际过程中，因为递归程序的实现机制，只能采用通用的方法，运行栈中每个递归实例都具有一帧，但是因为它们必须具有通用格式，所以并不能做到足够的小。因此，作为树算法的重要基石，遍历算法非常有必要从递归改写为迭代</p>
+<h4 id="迭代实现-1"><a href="#迭代实现-1" class="headerlink" title="迭代实现(1)"></a>迭代实现(1)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travPre_I1</span><span class="params">( BinNodePosi(T) x,VST &amp; visit)</span></span>&#123;</span><br><span class="line">    Stack&lt;<span class="built_in">BinNodePosi</span>(T)&gt; S; <span class="comment">//辅助栈</span></span><br><span class="line">    <span class="keyword">if</span>(x) S.<span class="built_in">push</span>(x); <span class="comment">//根节点入栈</span></span><br><span class="line">    <span class="keyword">while</span>( !S.<span class="built_in">empty</span>() )&#123; <span class="comment">//在栈变空之前反复循环</span></span><br><span class="line">        x = S.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="built_in">visit</span>( x-&gt;data ); <span class="comment">//弹出并访问当前节点</span></span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">HasRChild</span>(*x) ) S.<span class="built_in">push</span>(x-&gt;rChild); <span class="comment">//右孩子先入后出</span></span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">HasLchild</span>(*x) ) S.<span class="built_in">push</span>(x-&gt;lChild); <span class="comment">//左孩子后入先出</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有的遍历算法都是先访问左孩子再访问右孩子，所以依据栈的特性，右孩子先入后出（后遍历）</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%85%88%E5%BA%8F%E8%BF%AD%E4%BB%A3%E5%AE%9E%E4%BE%8B1.png"></p>
+<p>对于任何一根子树，我们都将起始于树根的总是沿着左侧孩子分支不断下行的这条链，称作当前这棵子树的左侧链</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%85%88%E5%BA%8F%E6%96%B0%E6%9E%84%E6%80%9D.png"></p>
+<p>首先自顶而下的依次访问左侧链上的沿途节点，再倒过来，自底而上地依次遍历各个层次上的右子树</p>
+<h4 id="迭代实现-2"><a href="#迭代实现-2" class="headerlink" title="迭代实现(2)"></a>迭代实现(2)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt; <span class="comment">//分摊(1)</span></span><br><span class="line">	 <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">visitAlongLeftBranch</span><span class="params">(BinNodePosi(T) x,VST &amp; visit,Stack&lt;BinNodePosi&gt; &amp; s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x)&#123;</span><br><span class="line">        <span class="built_in">visit</span>( x-&gt;data ); <span class="comment">//反复访问当前节点</span></span><br><span class="line">        S.<span class="built_in">push</span>( x-&gt;rChild ); <span class="comment">//右孩子入栈</span></span><br><span class="line">        x = x-&gt;lChild; <span class="comment">//沿左侧链下行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travPre_I2</span><span class="params">( BinNodePosi(T) x,VST &amp; visit )</span></span>&#123;</span><br><span class="line">    Stack&lt;<span class="built_in">BinNodePosi</span>(T)&gt;S; <span class="comment">//辅助栈</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123; <span class="comment">//以右子树为单位，逐批访问节点</span></span><br><span class="line">        <span class="built_in">visitAlongLeftBranch</span>( x,visit,S); <span class="comment">//访问子树x的左侧链，右子树入栈缓冲</span></span><br><span class="line">        <span class="keyword">if</span>( S.<span class="built_in">empty</span>() ) <span class="keyword">break</span>; <span class="comment">//栈空即退出</span></span><br><span class="line">        x = S.<span class="built_in">pop</span>(); <span class="comment">//弹出下一子树的根</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%85%88%E5%BA%8F%E8%BF%AD%E4%BB%A3%E5%AE%9E%E4%BE%8B2.png"></p>
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>递归：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">( BinNodePosi(T) x,VST &amp; visit )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( !x ) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">traverse</span>( x-&gt;lChild,visit );</span><br><span class="line">    <span class="built_in">visit</span>( x-&gt;data );</span><br><span class="line">    <span class="built_in">traverse</span>( x-&gt;rChild,visit );</span><br><span class="line">&#125; <span class="comment">//T(n) = T(a) + O(1) + T(n-a-1) = O(n)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E8%A7%82%E5%AF%9F.png"></p>
+<p>从根节点开始一直沿着左侧分支逐层向下直到末端</p>
+<p>因此整个中序遍历分解为在不同尺度下的一系列的对左侧分支的逐步处理</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E6%9E%84%E6%80%9D.png"></p>
+<ul>
+<li>从根出发沿左分支下行，直到最深的节点——它就是全局首先被访问者</li>
+<li>自上而下谦让，再自下而上访问</li>
+</ul>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">goAlingLeftBranch</span><span class="params">( BinNodePosi(T) x,Stack&lt;BinNodePosi(T)&gt; &amp; S )</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">while</span>(x) &#123; S.<span class="built_in">push</span>(x); x = x-&gt;lChild; &#125;&#125; <span class="comment">//反复地入栈，沿左分支深入</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> v&gt; </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travIn_I1</span><span class="params">( BinNodePosi(T) x,V&amp; visit )</span></span>&#123;</span><br><span class="line">    Stack&lt;<span class="built_in">BinNodePosi</span>(T)&gt; S; <span class="comment">//辅助栈</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="built_in">goAlongLeftBranch</span>(x, S); <span class="comment">//从当前节点出发，逐批入栈</span></span><br><span class="line">        <span class="keyword">if</span>( S.<span class="built_in">empty</span>() ) <span class="keyword">break</span>; <span class="comment">//直至所有节点处理完毕</span></span><br><span class="line">        x = S.<span class="built_in">pop</span>(); <span class="comment">//x的左子树或为空，或已遍历（等效于空），故可以</span></span><br><span class="line">        <span class="built_in">visit</span>( x-&gt;data ); <span class="comment">//立即访问之</span></span><br><span class="line">        x = x-&gt;rChild; <span class="comment">//再转向其右子树(可能为空，需留意处理手法)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E4%B8%AD%E5%BA%8F%E6%8E%92%E5%88%97%E5%AE%9E%E4%BE%8B.png"></p>
+<p>所有左侧链的长度集中在一起也就是O(n)</p>
+<p>每一个节点的入栈操作对应的是左侧链上的一步，因此左侧链的长度就是push的操作次数</p>
+<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><p>递归：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">( BinNodePosi&lt;T&gt; x,VST &amp; visit )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( !x ) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">traverse</span>( x-&gt;lc,visit );</span><br><span class="line">    <span class="built_in">traverse</span>( x-&gt;rc,visit );</span><br><span class="line">    <span class="built_in">visit</span>( x-&gt;data );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E8%97%A4%E7%BC%A0%E6%A0%91.png"></p>
+<ul>
+<li>从根出发下行，尽可能沿左分支，实不得已，才沿右分支</li>
+<li>最后一个节点，必是叶子，而且是按中序遍历次序最靠左者，也是递归版中visit()首次执行处</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">gotoleftmostleaf</span><span class="params">( Stack&lt;BinNodePosi&lt;T&gt;&gt; &amp; S)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>( BinNOdePosi&lt;T&gt; x = S.<span class="built_in">top</span>() ) <span class="comment">//自顶而下反复检查栈顶节点</span></span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">HasLChild</span>(*x) )&#123; <span class="comment">//尽可能向左，在此之前</span></span><br><span class="line">            <span class="keyword">if</span>( <span class="built_in">HasRChild</span>(*x) ) <span class="comment">//若有右孩子，则</span></span><br><span class="line">                S.<span class="built_in">push</span>( x-&gt;rc ); <span class="comment">//优先入栈</span></span><br><span class="line">            S.<span class="built_in">push</span>( x-&gt;lc ); <span class="comment">//然后转向左孩子</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="comment">//实不得已</span></span><br><span class="line">            S.<span class="built_in">push</span>( x-&gt;rc ); <span class="comment">//才转向右孩子</span></span><br><span class="line">    S.<span class="built_in">pop</span>(); <span class="comment">//返回之前，弹出栈顶的空节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> VST&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">travPost_I</span><span class="params">( BinNodePosi&lt;T&gt; x,VST &amp; visit )</span></span>&#123;</span><br><span class="line">    Stack&lt;BinNodePosi&lt;T&gt;&gt; S; <span class="comment">//辅助栈</span></span><br><span class="line">    <span class="keyword">if</span>(</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h3><p>在此前的三种遍历中，都是后代先于祖先访问，即逆序，为此，都会使用到栈</p>
+<p>而在层次遍历中，所有节点都将按照深度次序由高至低访问</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> BinNode&lt;T&gt;::<span class="built_in">travLevel</span>( VST &amp; visit)</span><br><span class="line">    Queue&lt;<span class="built_in">BinNodePosi</span>(T) Q; <span class="comment">//引入辅助队列</span></span><br><span class="line">	Q.<span class="built_in">enqueue</span>( <span class="keyword">this</span> ); <span class="comment">//根节点入队</span></span><br><span class="line">	<span class="keyword">while</span>( !Q.<span class="built_in">empty</span>() )&#123; <span class="comment">//在队列再次清空之前，反复迭代</span></span><br><span class="line">        <span class="built_in">BinNodePosi</span>(T) x = Q.<span class="built_in">dequeue</span>(); <span class="comment">//在取出队首节点</span></span><br><span class="line">        <span class="built_in">visit</span>( x-&gt;data ); </span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">HasLChild</span>(*x) ) Q.<span class="built_in">enqueue</span>( x-&gt;lChild ); <span class="comment">//左孩子入队</span></span><br><span class="line">        <span class="keyword">if</span>( <span class="built_in">HasRChile</span>(*x) ) Q.<span class="built_in">enqueue</span>( x-&gt;rChild ); <span class="comment">//右孩子入队</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E5%AE%9E%E4%BE%8B.png"></p>
+<h3 id="Huffman树"><a href="#Huffman树" class="headerlink" title="Huffman树"></a>Huffman树</h3><h4 id="无前缀冲突编码"><a href="#无前缀冲突编码" class="headerlink" title="无前缀冲突编码"></a>无前缀冲突编码</h4><p>各自的叶子不会待在另一叶子的通路上</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/PFC%E7%BC%96%E7%A0%81.png"></p>
+<h4 id="编码成本"><a href="#编码成本" class="headerlink" title="编码成本"></a>编码成本</h4><p>相差一个bit，影响的是带宽，费用，成本等等</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/pfc%E7%BC%96%E7%A0%81%E6%88%90%E6%9C%AC.png"></p>
+<p>之所以要平衡，是为了杜绝深度差够大，至少是2的瑕疵，一旦有这种瑕疵，就可以通过交换进行优化</p>
+<h4 id="带权编码长度"><a href="#带权编码长度" class="headerlink" title="带权编码长度"></a>带权编码长度</h4><p>因为频度的不同</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%B8%A6%E5%85%A8%E7%BC%96%E7%A0%81%E9%95%BF%E5%BA%A6.png"></p>
+<p>根据频率高/低的(超)字符，应尽可能放在高/低处</p>
+<p>故此，通过适当的交换，同样可以缩短wald(T)</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E9%AB%98%E4%BD%8E%E9%A2%91%E7%8E%87.png"></p>
+<h4 id="编码算法"><a href="#编码算法" class="headerlink" title="编码算法"></a>编码算法</h4><p>贪婪策略：频率低的字符优先引入，位置亦更低</p>
+<p>为每个字符创建一棵单节点的树，组成森林F</p>
+<p>按照出现频率，对所有树排列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>( F中的树不止一棵 )</span><br><span class="line">    取频率最小的两棵树：T1和T2</span><br><span class="line">    将它们合并成一棵新树T，并令：</span><br><span class="line">    	<span class="built_in">lchild</span>(T) = T1且<span class="built_in">rChild</span>(T) = T2</span><br><span class="line">    	<span class="built_in">w</span>(<span class="built_in">root</span>(T)) = <span class="built_in">w</span>(<span class="built_in">root</span>(t1)) + <span class="built_in">w</span>(<span class="built_in">root</span>(T2))</span><br></pre></td></tr></table></figure>
+
+<h4 id="构造编码书"><a href="#构造编码书" class="headerlink" title="构造编码书"></a>构造编码书</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%9E%84%E9%80%A0%E7%BC%96%E7%A0%81%E6%A0%91.png"></p>
+<p>每次取最小两个数合并(贪心)，并慢慢成长</p>
+<p> <img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E6%9E%84%E9%80%A0%E7%BC%96%E7%A0%81%E6%A0%911.png"></p>
+<p>编码表：遍历，先中后序都可以，因为都是深度优先</p>
+<p>解码：从根开始，走到叶子，打印字符，再重置到根循环</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">#数据结构与算法</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/09/hello-world/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">栈与队列</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84-%E7%8E%AF%E8%B7%AF"><span class="nav-text">路径+环路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E9%80%9A-%E6%97%A0%E7%8E%AF"><span class="nav-text">连通+无环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6-%E5%B1%82%E6%AC%A1"><span class="nav-text">深度+层次</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-text">树的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%95%BF%E5%AD%90-%E5%85%84%E5%BC%9F"><span class="nav-text">长子+兄弟</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91-1"><span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9C%9F%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">真二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BinNode%E7%B1%BB"><span class="nav-text">BinNode类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BinTree%E6%A8%A1%E6%9D%BF%E7%B1%BB"><span class="nav-text">BinTree模板类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AB%98%E5%BA%A6%E6%9B%B4%E6%96%B0"><span class="nav-text">高度更新</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%8F%92%E5%85%A5"><span class="nav-text">节点插入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">先序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">迭代实现(1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%AE%9E%E7%8E%B0-2"><span class="nav-text">迭代实现(2)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">中序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-text">后序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86"><span class="nav-text">层次遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Huffman%E6%A0%91"><span class="nav-text">Huffman树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E5%89%8D%E7%BC%80%E5%86%B2%E7%AA%81%E7%BC%96%E7%A0%81"><span class="nav-text">无前缀冲突编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%88%90%E6%9C%AC"><span class="nav-text">编码成本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E6%9D%83%E7%BC%96%E7%A0%81%E9%95%BF%E5%BA%A6"><span class="nav-text">带权编码长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95"><span class="nav-text">编码算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E7%BC%96%E7%A0%81%E4%B9%A6"><span class="nav-text">构造编码书</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
