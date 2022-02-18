@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            二叉树搜索树 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">二叉树搜索树</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-08 22:17:59</span>
+        <span class="mobile">2021-12-08 22:17</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>二叉树结构可以认为是二维的列表(列表在维度上的扩充)</p>
+<p>二叉搜索树在形式上继承了二叉树(列表结构的特点)，同时也巧妙的借鉴了有序向量的特点和优势(一种质的提高)</p>
+<h4 id="循关键码访问"><a href="#循关键码访问" class="headerlink" title="循关键码访问"></a>循关键码访问</h4><ul>
+<li>数据项之间，依照各自的关键码彼此区分</li>
+<li>条件：关键码之间支持大小比较与想等比对</li>
+<li>数据集合中的数据项，统一地表示和实现为词条entry形式</li>
+</ul>
+<h4 id="词条"><a href="#词条" class="headerlink" title="词条"></a>词条</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">emplate &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt; <span class="class"><span class="keyword">struct</span> <span class="title">Entry</span> &#123;</span> <span class="comment">//词条模板类</span></span><br><span class="line">   K key; V value; <span class="comment">//关键码、数值</span></span><br><span class="line">   <span class="built_in">Entry</span> ( K k = <span class="built_in">K</span>(), V v = <span class="built_in">V</span>() ) : <span class="built_in">key</span> ( k ), <span class="built_in">value</span> ( v ) &#123;&#125;; <span class="comment">//默认构造函数</span></span><br><span class="line">   <span class="built_in">Entry</span> ( Entry&lt;K, V&gt; <span class="keyword">const</span>&amp; e ) : <span class="built_in">key</span> ( e.key ), <span class="built_in">value</span> ( e.value ) &#123;&#125;; <span class="comment">//基于克隆的构造函数</span></span><br><span class="line">   <span class="keyword">bool</span> <span class="keyword">operator</span>&lt; ( Entry&lt;K, V&gt; <span class="keyword">const</span>&amp; e ) &#123; <span class="keyword">return</span> key &lt;  e.key; &#125;  <span class="comment">//比较器：小于</span></span><br><span class="line">   <span class="keyword">bool</span> <span class="keyword">operator</span>&gt; ( Entry&lt;K, V&gt; <span class="keyword">const</span>&amp; e ) &#123; <span class="keyword">return</span> key &gt;  e.key; &#125;  <span class="comment">//比较器：大于</span></span><br><span class="line">   <span class="keyword">bool</span> <span class="keyword">operator</span>== ( Entry&lt;K, V&gt; <span class="keyword">const</span>&amp; e ) &#123; <span class="keyword">return</span> key == e.key; &#125; <span class="comment">//判等器：等于</span></span><br><span class="line">   <span class="keyword">bool</span> <span class="keyword">operator</span>!= ( Entry&lt;K, V&gt; <span class="keyword">const</span>&amp; e ) &#123; <span class="keyword">return</span> key != e.key; &#125; <span class="comment">//判等器：不等于</span></span><br><span class="line">&#125;; <span class="comment">//得益于比较器和判等器，从此往后，不必严格区分词条及其对应的关键码</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h4><ul>
+<li>局部性的特征</li>
+</ul>
+<p>BST(二叉搜索树)：节点<del>词条</del>关键码</p>
+<p>顺序性：任一节点均不小于/不大于其左/右后代</p>
+<p>只含单个节点或即便只含单分支，都可以称作BST</p>
+<h4 id="单调性"><a href="#单调性" class="headerlink" title="单调性"></a>单调性</h4><p>BST的中序遍历序列，必然单调非降</p>
+<p>这一性质，也是BST的充要条件</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/BST%E9%A1%BA%E5%BA%8F%E6%80%A7.png"></p>
+<p>所有节点的垂直投影所构成的序列即是中序序列</p>
+<p>在微观上处处满足顺序性，在宏观上整体满足单调性</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">BST</span> :</span> <span class="keyword">public</span> BinTree&lt;T&gt; &#123; <span class="comment">//由BinTree派生BST模板类</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">   BinNodePosi&lt;T&gt; _hot; <span class="comment">//“命中”节点的父亲</span></span><br><span class="line">   <span class="function">BinNodePosi&lt;T&gt; <span class="title">connect34</span> <span class="params">( <span class="comment">//按照“3 + 4”结构，联接3个节点及四棵子树</span></span></span></span><br><span class="line"><span class="params"><span class="function">      BinNodePosi&lt;T&gt;, BinNodePosi&lt;T&gt;, BinNodePosi&lt;T&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">      BinNodePosi&lt;T&gt;, BinNodePosi&lt;T&gt;, BinNodePosi&lt;T&gt;, BinNodePosi&lt;T&gt; )</span></span>;</span><br><span class="line">   <span class="function">BinNodePosi&lt;T&gt; <span class="title">rotateAt</span> <span class="params">( BinNodePosi&lt;T&gt; x )</span></span>; <span class="comment">//对x及其父亲、祖父做统一旋转调整</span></span><br><span class="line"><span class="keyword">public</span>: <span class="comment">//基本接口：以virtual修饰，强制要求所有派生类（BST变种）根据各自的规则对其重写</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> BinNodePosi&lt;T&gt; &amp; <span class="title">search</span> <span class="params">( <span class="keyword">const</span> T&amp; e )</span></span>; <span class="comment">//查找</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> BinNodePosi&lt;T&gt; <span class="title">insert</span> <span class="params">( <span class="keyword">const</span> T&amp; e )</span></span>; <span class="comment">//插入</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">remove</span> <span class="params">( <span class="keyword">const</span> T&amp; e )</span></span>; <span class="comment">//删除</span></span><br><span class="line">   <span class="comment">/*DSA*/</span></span><br><span class="line">   <span class="comment">/*DSA*/</span><span class="function"><span class="keyword">void</span> <span class="title">stretchToLPath</span><span class="params">()</span> </span>&#123; <span class="built_in">stretchByZag</span> ( _root ); &#125; <span class="comment">//借助zag旋转，转化为左向单链</span></span><br><span class="line">   <span class="comment">/*DSA*/</span><span class="function"><span class="keyword">void</span> <span class="title">stretchToRPath</span><span class="params">()</span> </span>&#123; <span class="built_in">stretchByZig</span> ( _root ); &#125; <span class="comment">//借助zig旋转，转化为右向单链</span></span><br><span class="line">   <span class="comment">/*DSA*/</span><span class="function"><span class="keyword">void</span> <span class="title">stretch</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/BST%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.png"></p>
+<p>减而治之：从根节点出发，逐步地缩小查找范围，直到发现目标(成功)，或查找范围缩小至空树(失败)</p>
+<p>对照中序遍历序列可见，整个过程可视作是在仿效有序向量的二分查找</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="built_in">BinNodePosi</span>(T) &amp; BST&lt;T&gt;::<span class="built_in">search</span>(<span class="keyword">const</span> T &amp; e)</span><br><span class="line">&#123;<span class="keyword">return</span> <span class="built_in">searchIn</span>( _root,e,_hot = <span class="literal">NULL</span>);&#125; <span class="comment">//从根节点启动查找</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">BinNodePosi</span><span class="params">(T)</span> &amp; <span class="title">searchIn</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    BinNodePosi(T) &amp; v,<span class="comment">//当前(子)树根</span></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">const</span> T &amp; e, <span class="comment">//目标关键码</span></span></span></span><br><span class="line"><span class="params"><span class="function">    BinNodePosi(T) &amp; hot)</span> <span class="comment">//记忆热点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!v || (e == v-&gt;data)) <span class="keyword">return</span> v; <span class="comment">//足以确定失败，成功，或者</span></span><br><span class="line">    hot = v; <span class="comment">//先记下当前(非空)节点，然后再...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">searchIn</span>(((e &lt; v-&gt;data) ? v-&gt;lChild : v-&gt;rChild),e,hot);</span><br><span class="line">&#125; <span class="comment">//运行时间正比于返回节点v的深度，不超过树高O(h)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/BST%E6%9F%A5%E6%89%BE%E8%AF%AD%E4%B9%89.png"></p>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/BST%E6%8F%92%E5%85%A5.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; BinNodePosi&lt;T&gt; BST&lt;T&gt;::<span class="built_in">insert</span> ( <span class="keyword">const</span> T&amp; e ) &#123; <span class="comment">//将关键码e插入BST树中</span></span><br><span class="line">BinNodePosi&lt;T&gt; &amp; x = <span class="built_in">search</span> ( e );</span><br><span class="line">   <span class="keyword">if</span> ( x ) <span class="keyword">return</span> x; <span class="comment">//确认目标不存在（留意对_hot的设置）</span></span><br><span class="line">    x = <span class="keyword">new</span> BinNode&lt;T&gt; ( e, _hot ); <span class="comment">//创建新节点x：以e为关键码，以_hot为父</span></span><br><span class="line">	_size++; <span class="comment">//更新全树规模</span></span><br><span class="line">	<span class="built_in">updateHeightAbove</span> ( x ); <span class="comment">//更新x及其历代祖先的高度</span></span><br><span class="line">   <span class="keyword">return</span> x; <span class="comment">//新插入的节点，必为叶子</span></span><br><span class="line">&#125; <span class="comment">//无论e是否存在于原树中，返回时总有x-&gt;data == e</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">bool</span> BST&lt;T&gt;::<span class="built_in">remove</span> ( <span class="keyword">const</span> T&amp; e ) &#123; <span class="comment">//从BST树中删除关键码e</span></span><br><span class="line">   BinNodePosi&lt;T&gt; &amp; x = <span class="built_in">search</span> ( e ); <span class="keyword">if</span> ( !x ) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//确认目标存在（留意_hot的设置）</span></span><br><span class="line">   <span class="built_in">removeAt</span> ( x, _hot ); _size--; <span class="comment">//实施删除</span></span><br><span class="line">   <span class="built_in">updateHeightAbove</span> ( _hot ); <span class="comment">//更新_hot及其历代祖先的高度</span></span><br><span class="line">   <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125; <span class="comment">//删除成功与否，由返回值指示</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">static</span> BinNodePosi&lt;T&gt; <span class="title">removeAt</span> <span class="params">( BinNodePosi&lt;T&gt; &amp; x, BinNodePosi&lt;T&gt; &amp; hot )</span> </span>&#123;</span><br><span class="line">   BinNodePosi&lt;T&gt; w = x; <span class="comment">//实际被摘除的节点，初值同x</span></span><br><span class="line">   BinNodePosi&lt;T&gt; succ = <span class="literal">NULL</span>; <span class="comment">//实际被删除节点的接替者</span></span><br><span class="line">   <span class="keyword">if</span> ( !<span class="built_in">HasLChild</span> ( *x ) ) <span class="comment">//若*x的左子树为空，则可</span></span><br><span class="line">      succ = x = x-&gt;rc; <span class="comment">//直接将*x替换为其右子树</span></span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span> ( !<span class="built_in">HasRChild</span> ( *x ) ) <span class="comment">//若右子树为空，则可</span></span><br><span class="line">      succ = x = x-&gt;lc; <span class="comment">//对称地处理——注意：此时succ != NULL</span></span><br><span class="line">   <span class="keyword">else</span> &#123; <span class="comment">//若左右子树均存在，则选择x的直接后继作为实际被摘除节点，为此需要</span></span><br><span class="line">      w = w-&gt;<span class="built_in">succ</span>(); <span class="comment">//（在右子树中）找到*x的直接后继*w</span></span><br><span class="line">      <span class="built_in">swap</span> ( x-&gt;data, w-&gt;data ); <span class="comment">//交换*x和*w的数据元素</span></span><br><span class="line">      BinNodePosi&lt;T&gt; u = w-&gt;parent;</span><br><span class="line">      ( ( u == x ) ? u-&gt;rc : u-&gt;lc ) = succ = w-&gt;rc; <span class="comment">//隔离节点*w</span></span><br><span class="line">   &#125;</span><br><span class="line">   hot = w-&gt;parent; <span class="comment">//记录实际被删除节点的父亲</span></span><br><span class="line">   <span class="keyword">if</span> ( succ ) succ-&gt;parent = hot; <span class="comment">//并将被删除节点的接替者与hot相联</span></span><br><span class="line">   <span class="built_in">release</span> ( w-&gt;data ); <span class="built_in">release</span> ( w ); <span class="keyword">return</span> succ; <span class="comment">//释放被摘除节点，返回接替者</span></span><br><span class="line">&#125; <span class="comment">//release()负责释放复杂结构，与算法无直接关系，具体实现详见代码包</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="平衡"><a href="#平衡" class="headerlink" title="平衡"></a>平衡</h3><p>极短退化：当BST中所有节点的度数都不超过1，实际上已经退化成一条单链，此时整棵树的高度与整棵树的节点个数成线性正比关系(h=n-1)，这种情况下，最坏和平均意义都需要O(n)的时间</p>
+<h4 id="平均高度"><a href="#平均高度" class="headerlink" title="平均高度"></a>平均高度</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/BST%E5%B9%B3%E5%9D%87%E9%AB%98%E5%BA%A6.png"></p>
+<p>随机生成的统一口径：当关键码总数为n时，可能的排列为n!棵，平均高度为logn，会出现冗余</p>
+<p>随机组成：将所有n个关键码视作n个互异的积木，所有BST的平均高度值为根号n</p>
+<p>中位数或是越接近与中位数的关键码，越是更早的插入，这类BST的高度会更低</p>
+<h4 id="理想-适度"><a href="#理想-适度" class="headerlink" title="理想+适度"></a>理想+适度</h4><p>什么样的树高度相对会更低</p>
+<ul>
+<li><p>节点数目固定时，兄弟子树高度越接近(平衡)，全树也将倾向于更低</p>
+</li>
+<li><p>由n个节点组成的二叉树，高度不低于[ log<sub>2</sub>n]，恰为log<sub>2</sub>n时，称作理想平衡</p>
+<ul>
+<li>这样一种树在实际应用中是可遇不可求的，即便BST在某一时刻能够达到，在接下来的动态操作中，这样的高度也难以持续，因此所谓的理想平衡在实际意义中是不具任何意义的</li>
+</ul>
+</li>
+<li><p>理想平衡出现概率极低，维护成本过高，故须适当地放松标准</p>
+</li>
+<li><p>退一步海阔天空：高度渐进地不超过O(logn)，即称作适度平衡</p>
+</li>
+<li><p>适度平衡BST，称作平衡二叉搜索树(BBST)</p>
+</li>
+</ul>
+<h4 id="歧义-等价"><a href="#歧义-等价" class="headerlink" title="歧义=等价"></a>歧义=等价</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E7%AD%89%E4%BB%B7BST.png"></p>
+<p>相互等价的BST：两组BST的中序遍历序列完全一样，而拓扑却不尽相同</p>
+<ul>
+<li>上下可变：联接关系不尽相同，承袭关系可能颠倒，如19和16可以交换</li>
+<li>左右不乱：中序遍历序列完全一致，全局单调非降</li>
+</ul>
+<h4 id="等价交换"><a href="#等价交换" class="headerlink" title="等价交换"></a>等价交换</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E7%AD%89%E4%BB%B7%E5%8F%98%E6%8D%A2.png"></p>
+<p>遵循两大准则</p>
+<ul>
+<li>局部性：执行的每一次等价变换，都应该局限在某一常数规模的局部(v和c)</li>
+<li>在将一棵刚刚失衡的BBST重新恢复于BST的过程中，累计需要执行的操作次数不要过多，至多不超过O(logn)</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">#数据结构与算法</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE%E5%BA%94%E7%94%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">图应用</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9B%BE/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">图</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-text">二叉搜索树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E5%85%B3%E9%94%AE%E7%A0%81%E8%AE%BF%E9%97%AE"><span class="nav-text">循关键码访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%8D%E6%9D%A1"><span class="nav-text">词条</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E6%80%A7"><span class="nav-text">有序性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%80%A7"><span class="nav-text">单调性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-text">接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-text">查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1"><span class="nav-text">平衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E5%9D%87%E9%AB%98%E5%BA%A6"><span class="nav-text">平均高度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E6%83%B3-%E9%80%82%E5%BA%A6"><span class="nav-text">理想+适度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A7%E4%B9%89-%E7%AD%89%E4%BB%B7"><span class="nav-text">歧义&#x3D;等价</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E4%BA%A4%E6%8D%A2"><span class="nav-text">等价交换</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
