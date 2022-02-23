@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            第八章 调度算法 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">第八章 调度算法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        .article-meta-info {
+  font-size: 0.8rem;
+  color: var(--third-text-color);
+
+  .article-meta-item {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .article-date {
+
+    .mobile {
+      display: none;
+    }
+
+    +keep-tablet() {
+      .pc {
+        display: none;
+      }
+
+      .mobile {
+        display: inline;
+      }
+    }
+
+  }
+
+
+  .article-tags, .article-categories {
+    display: inline;
+
+    ul, li {
+      display: inline;
+    }
+
+    a {
+      color: var(--third-text-color);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .article-tags {
+    +keep-tablet() {
+      display: none;
+    }
+  }
+
+  .article-min2read, .article-wordcount {
+    +keep-mobile() {
+      display: none;
+    }
+  }
+}
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第八章-调度算法"><a href="#第八章-调度算法" class="headerlink" title="第八章 调度算法"></a>第八章 调度算法</h1><h2 id="8-1-背景"><a href="#8-1-背景" class="headerlink" title="8.1 背景"></a>8.1 背景</h2><p><strong>上下文切换</strong></p>
+<ul>
+<li>切换CPU的当前任务, 从一个进程/线程到另一个</li>
+<li>保存当前进程/线程在PCB/TCB中的执行上下文(CPU状态)</li>
+<li>读取下一个进程/线程的上下文</li>
+</ul>
+<p><strong>CPU调度</strong></p>
+<ul>
+<li>从就绪队列中挑选一个进程/线程作为CPU将要运行的下一个进程/线程</li>
+<li>调度程序：挑选进程/线程的内核函数(通过一些调度策略)</li>
+<li>什么时候进行调度？</li>
+</ul>
+<p><strong>内核运行调度程序的条件（满足一条即可）</strong></p>
+<ul>
+<li>一个进程从运行状态切换到等待状态</li>
+<li>一个进程被终结了</li>
+</ul>
+<p><strong>不可抢占</strong></p>
+<ul>
+<li>调度程序必须等待事件结束</li>
+</ul>
+<p><strong>可以抢占</strong></p>
+<ul>
+<li>调度程序在中断被响应后执行</li>
+<li>当前的进程从运行切换到就绪，或者一个进程从等待切换到就绪</li>
+<li>当前运行的进程可以被换出</li>
+</ul>
+<h2 id="8-2-调度原则"><a href="#8-2-调度原则" class="headerlink" title="8.2 调度原则"></a>8.2 调度原则</h2><p><strong>评价指标</strong></p>
+<ul>
+<li>CPU使用率：CPU处于忙状态所占时间的百分比</li>
+<li>吞吐量：在单位时间内完成的进程数量</li>
+<li>周转时间：一个进程从初始化到结束，包括所有等待时间所花费的时间</li>
+<li>等待时间：进程在就绪队列中的总时间</li>
+<li>响应时间：从一个请求被提交到产生第一次相应所花费的总时间</li>
+</ul>
+<p>人们通常都需要“更快”的服务</p>
+<p>什么是更快</p>
+<ul>
+<li>传输文件时的<strong>高带宽</strong></li>
+<li>玩游戏时的<strong>低延迟</strong></li>
+<li>这两个因素是独立的</li>
+</ul>
+<p>和水管类比</p>
+<ul>
+<li>低延迟：喝水的时候想要一打开水龙头水就流出来</li>
+<li>高带宽：给游泳池冲水时希望从水龙头里同时流出大量的水，并且不介意是否存在延迟</li>
+</ul>
+<p><strong>目标：</strong></p>
+<ul>
+<li><p>减少响应时间：及时处理用户的输出并且尽快将输出提供给用户</p>
+</li>
+<li><p>减少平均响应时间的波动：在交互系统中，可预测性比高差异低平均更重要</p>
+</li>
+<li><p>增加吞吐量</p>
+<ul>
+<li>减少开销（操作系统开销，上下文切换）</li>
+<li>系统资源的高效利用（CPU，I/O设备）</li>
+</ul>
+</li>
+<li><p>减少等待时间：减少每个进程的等待时间</p>
+</li>
+</ul>
+<p><strong>各指标在操作系统上的表现：</strong></p>
+<ul>
+<li><p>低延迟调度增加了交互式表现</p>
+<ul>
+<li>如果移动了鼠标，但是屏幕中的光标却没动，我们可能会重启电脑</li>
+</ul>
+</li>
+<li><p>操作系统需要保证低吞吐量不受影响</p>
+<ul>
+<li>我想要结束长时间的编程，所以操作系统必须不时进行调度，即使存在许多交互任务</li>
+</ul>
+</li>
+<li><p>吞吐量是操作系统的计算带宽</p>
+</li>
+<li><p>响应时间是操作系统的计算延迟</p>
+</li>
+</ul>
+<p><strong>公平的定义</strong></p>
+<p>举例：</p>
+<ul>
+<li>保证每个进程占用相同的CPU时间</li>
+<li>这公平嘛?如果一个用户比其他用户运行更多的进程怎么办</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li>保证每个进程都等待相同的时间</li>
+</ul>
+<p>公平通常会增加平均响应时间</p>
+<h2 id="8-3-8-4-调度算法"><a href="#8-3-8-4-调度算法" class="headerlink" title="8.3-8.4 调度算法"></a>8.3-8.4 调度算法</h2><p>面向通用型计算机系统的调度算法</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.png"></p>
+<h3 id="一-FCFS（先来先去服务）"><a href="#一-FCFS（先来先去服务）" class="headerlink" title="一. FCFS（先来先去服务）"></a>一. FCFS（先来先去服务）</h3><p>FIFO队列的规定</p>
+<ul>
+<li>如果进程在执行中阻塞，队列中的下一个会得到CPU</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/FCFS.png"></p>
+<ul>
+<li>优点：简单</li>
+<li>缺点<ul>
+<li>平均等待时间波动较大</li>
+<li>花费时间少的任务可能排在花费时间长的任务后面</li>
+<li>可能导致I/O和CPU之间的重叠处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="二-SPN-SRT-短进程优先"><a href="#二-SPN-SRT-短进程优先" class="headerlink" title="二. SPN/SRT 短进程优先"></a>二. SPN/SRT 短进程优先</h3><p>Shortest Process Next(Shortest Job First) Shortest Remaining Time</p>
+<ul>
+<li><p>按照预测的完成时间来将任务入队</p>
+</li>
+<li><p>可以是可抢占或者不可抢占的</p>
+<ul>
+<li>可抢占：又叫Shortest-Remaining-Time(SRT)（最短剩余时间）</li>
+</ul>
+</li>
+<li><p>可能导致饥饿</p>
+<ul>
+<li>连续的短任务流会使长任务饥饿</li>
+<li>短任务可用时的任何长任务的CPU时间都会增加平均等待时间</li>
+</ul>
+</li>
+<li><p>需要预知未来</p>
+<ul>
+<li>怎么预估下一个CPU突发的持续时间</li>
+<li>简单的解决办法：询问用户</li>
+<li>如果用户欺骗就杀死进程</li>
+<li>如果用户不知道怎么办<ul>
+<li>从执行历史来推断</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三-HRRN-最高响应比优先"><a href="#三-HRRN-最高响应比优先" class="headerlink" title="三. HRRN 最高响应比优先"></a>三. HRRN 最高响应比优先</h3><p>Highest Response Ratio Next（HRRN)</p>
+<ul>
+<li>在SPN调度的基础上改进</li>
+<li>不可抢占</li>
+<li>关注进程等待了多长时间</li>
+<li>防止无限期推迟</li>
+</ul>
+<p><strong>综合考虑了进程的执行时间和等待时间</strong></p>
+<p>饥饿现象得到有效的缓解</p>
+<p>问题</p>
+<ul>
+<li>不可抢占</li>
+<li>依然需要知道进程的执行时间</li>
+</ul>
+<h3 id="四-Round-Robin-轮循"><a href="#四-Round-Robin-轮循" class="headerlink" title="四. Round Robin 轮循"></a>四. Round Robin 轮循</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E8%BD%AE%E5%BE%AA.png"></p>
+<ul>
+<li><p>PR花销：额外的上下文切换</p>
+</li>
+<li><p>时间量子太大</p>
+<ul>
+<li>等待时间过长</li>
+<li>极限情况退化成FCFS</li>
+</ul>
+</li>
+<li><p>时间量子太小</p>
+<ul>
+<li>反应迅速</li>
+<li>吞吐量由于大量的上下文切换开销收到影响</li>
+</ul>
+</li>
+</ul>
+<p>目标：</p>
+<ul>
+<li>选择一个合适的时间量子</li>
+<li>经验规则：维持上下文切换开销处于1%以内</li>
+</ul>
+<h3 id="五-MLFQ-多级反馈队列"><a href="#五-MLFQ-多级反馈队列" class="headerlink" title="五. MLFQ 多级反馈队列"></a>五. MLFQ 多级反馈队列</h3><p>Multilevel Feedback Queues</p>
+<ul>
+<li><p>就绪队列被划分成独立的队列：</p>
+<p>比如前台（交互），后台（批处理）</p>
+</li>
+<li><p>每个队列拥有自己的调度策略：</p>
+<p>比如前台（PR），后台（FCFS）</p>
+</li>
+<li><p>调度必须在队列间进行</p>
+<ul>
+<li>固定优先级<ul>
+<li>先处理前台，然后处理后台</li>
+<li>可能导致饥饿</li>
+</ul>
+</li>
+<li>时间切片<ul>
+<li>每个队列都得到一个确定的能够调度其进程的CPU总时间</li>
+<li>比如，80%给使用PR的前台，20%给使用FCFS的后台</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>一个进程可以在不同的队列中移动</p>
+</li>
+<li><p>例如：n级优先级—优先级调度在所有级别中，PR在每个级别中</p>
+<ul>
+<li>时间量子大小随优先级别增加而增加</li>
+<li>如果任务在当前的时间量子中没有完成，则降到下一个优先级</li>
+</ul>
+</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>CPU密集型任务的优先级下降很快</li>
+<li>I/O密集型任务停留在高优先级</li>
+</ul>
+<h3 id="六-Fair-Share-Scheduling-公平共享调度"><a href="#六-Fair-Share-Scheduling-公平共享调度" class="headerlink" title="六. Fair-Share Scheduling 公平共享调度"></a>六. Fair-Share Scheduling 公平共享调度</h3><p>FSS控制用户对系统资源的访问</p>
+<ul>
+<li>一些用户组比其他用户组更重要</li>
+<li>保证不重要的组无法垄断资源</li>
+<li>未使用的资源按照每个组所分配的资源的比例来分配</li>
+<li>没有达到资源使用率目标的组获得更高的优先级</li>
+</ul>
+<h2 id="8-5-实时调度"><a href="#8-5-实时调度" class="headerlink" title="8.5 实时调度"></a>8.5 实时调度</h2><p><strong>定义：</strong>正确性依赖于时间和功能两方面的一种操作系统</p>
+<p><strong>性能指标：</strong>时间约束的及时性；速度和平均性能相对不重要</p>
+<p><strong>主要特性</strong>：时间约束的可预测性</p>
+<p>两类：</p>
+<ul>
+<li>强实时系统：需要在保证的时间内完成重要任务，必须完成</li>
+<li>弱实时系统：要求重要的进程的优先级更高，尽量完成，并非必须</li>
+</ul>
+<p><strong>任务（工作单元）</strong>：一次计算，一次文件读取，一次信息传递等等</p>
+<p><strong>属性</strong>：取得进展所需要的资源；定时参数</p>
+<p>RM（Rate Monotonic）速率单调调度</p>
+<ul>
+<li>最佳静态优先级调度</li>
+<li>通过周期安排优先级</li>
+<li>周期越短优先级越高</li>
+<li>执行周期最短的任务</li>
+</ul>
+<p>EDF（Earliest Deadline First）最早期限调度</p>
+<ul>
+<li>最佳的动态优先级调度</li>
+<li>Deadline越早优先级越高</li>
+<li>执行Deadline最早的任务</li>
+</ul>
+<h2 id="8-6-多处理器调度与优先级反转"><a href="#8-6-多处理器调度与优先级反转" class="headerlink" title="8.6 多处理器调度与优先级反转"></a>8.6 多处理器调度与优先级反转</h2><p>多处理器的CPU调度更复杂</p>
+<ul>
+<li>多个相同的单处理器组成一个多处理器</li>
+<li>优点：复杂共享</li>
+</ul>
+<p>对称多处理器（SMP）</p>
+<ul>
+<li>每个处理器运行自己的调度程序</li>
+<li>需要在调度程序中同步</li>
+</ul>
+<p><strong>优先级反转</strong></p>
+<ul>
+<li>可以发生在任务基于优先级的可抢占的调度机制中</li>
+<li>当系统内的环境强制使高优先级任务等待低优先级任务时发生</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%B0%83%E5%BA%A6/">#调度</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%AA%E8%AE%BA/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">绪论</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter7%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">第七章 进程管理</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">第八章 调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-%E8%83%8C%E6%99%AF"><span class="nav-text">8.1 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-%E8%B0%83%E5%BA%A6%E5%8E%9F%E5%88%99"><span class="nav-text">8.2 调度原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-8-4-%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">8.3-8.4 调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-FCFS%EF%BC%88%E5%85%88%E6%9D%A5%E5%85%88%E5%8E%BB%E6%9C%8D%E5%8A%A1%EF%BC%89"><span class="nav-text">一. FCFS（先来先去服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-SPN-SRT-%E7%9F%AD%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88"><span class="nav-text">二. SPN&#x2F;SRT 短进程优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89-HRRN-%E6%9C%80%E9%AB%98%E5%93%8D%E5%BA%94%E6%AF%94%E4%BC%98%E5%85%88"><span class="nav-text">三. HRRN 最高响应比优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B-Round-Robin-%E8%BD%AE%E5%BE%AA"><span class="nav-text">四. Round Robin 轮循</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94-MLFQ-%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97"><span class="nav-text">五. MLFQ 多级反馈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD-Fair-Share-Scheduling-%E5%85%AC%E5%B9%B3%E5%85%B1%E4%BA%AB%E8%B0%83%E5%BA%A6"><span class="nav-text">六. Fair-Share Scheduling 公平共享调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5-%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6"><span class="nav-text">8.5 实时调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6-%E5%A4%9A%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC"><span class="nav-text">8.6 多处理器调度与优先级反转</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
