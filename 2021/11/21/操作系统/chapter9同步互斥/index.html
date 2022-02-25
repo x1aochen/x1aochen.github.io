@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            第九章 同步互斥 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">第九章 同步互斥</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-21 23:17:29</span>
+        <span class="mobile">2021-11-21 23:17</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/">同步互斥</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第九章-同步互斥"><a href="#第九章-同步互斥" class="headerlink" title="第九章 同步互斥"></a>第九章 同步互斥</h1><h2 id="9-1-背景"><a href="#9-1-背景" class="headerlink" title="9.1 背景"></a>9.1 背景</h2><p>到目前为止</p>
+<ul>
+<li>多道程序设计: 现代操作系统的重要特性</li>
+<li>并行很有用(为什么?) 提示: 多个并发实体: CPU IO 用户 等</li>
+<li>进程,线程: 操作系统抽象出来用于支持多道程序设计</li>
+<li>CPU调度: 实现多道程序设计的机制</li>
+<li>调度算法: 不同的策略</li>
+</ul>
+<p>独立的线程：</p>
+<ul>
+<li>不和其他线程共享资源或状态</li>
+<li>确定性: 输入状态决定结果</li>
+<li>可重现: 能够重现起始条件，I/O</li>
+<li>调度顺序不重要</li>
+</ul>
+<p>合作的线程：</p>
+<ul>
+<li>在多个线程中共享状态</li>
+<li>不确定性</li>
+<li>不可重现</li>
+</ul>
+<p><strong>不确定性和不可重现意味着bug可能是间歇性发生的</strong></p>
+<p>进程/线程，计算机/设备需要合作</p>
+<p>优点1：共享资源</p>
+<ul>
+<li>一台电脑，多个用户</li>
+<li>一个银行存款余额，多台ATM机</li>
+<li>嵌入式系统（机器人控制：手臂和手的协调）</li>
+</ul>
+<p>优点2：加速</p>
+<ul>
+<li>I/O操作和计算机可以重写</li>
+<li>多处理器-将程序分成多个部分并执行</li>
+</ul>
+<p>优点3：模块化</p>
+<ul>
+<li>将大程序分解成小程序</li>
+<li>使系统易于扩展</li>
+</ul>
+<p>程序可以调用函数fork（）来创建一个新的进程</p>
+<ul>
+<li><p>操作系统需要分配一个新的并且唯一的进程ID</p>
+</li>
+<li><p>因此在内核中，这个系统调用会运行</p>
+<ul>
+<li>new_pid=next_pid++;</li>
+</ul>
+</li>
+<li><p>翻译成机器指令</p>
+<ul>
+<li>LOAD next_pid Reg1</li>
+<li>STORE Reg1 new_pid</li>
+<li>INC Reg1</li>
+<li>STORE Reg1 next_pid</li>
+</ul>
+</li>
+</ul>
+<p>假如两个进程并发执行</p>
+<ul>
+<li><p>如果next_pid等于100，那么其中一个进程得到的ID应该是100，另一个进程的ID应该是101，next_pid应该增加到102</p>
+</li>
+<li><p>可能在INC前进行了上下文切换, 最终导致两个进程的pid都是100，而next_pid也是101</p>
+</li>
+</ul>
+<h2 id="9-2-9-4-概念"><a href="#9-2-9-4-概念" class="headerlink" title="9.2-9.4 概念"></a>9.2-9.4 概念</h2><p><strong>前面的现象称为Race Condition(竞态条件)</strong></p>
+<p>系统缺陷: 结果依赖于并发执行或者时间的顺序,时间</p>
+<ul>
+<li>不确定性</li>
+<li>不可重视</li>
+</ul>
+<p>Atomic Operator(原子操作)</p>
+<p><strong>原子操作是指一次不存在任何终端或者失败的执行</strong></p>
+<ul>
+<li>该执行成功结束</li>
+<li>或者根本没有执行</li>
+<li>并且不应发生任何部分执行的状态</li>
+</ul>
+<p>实际上操作往往不是原子的</p>
+<ul>
+<li>有些看上去是原子操作,实际上不是</li>
+<li>连x++这样的简单语句,实际上是由三条指令构成的</li>
+<li>有时候甚至连单条假期指令都不是原子的</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C.png">)</p>
+<p>Critical section（临界区）：进程中的一段需要访问共享资源并且当另一个进程处于相应代码区域时便不会被执行的代码区域</p>
+<p>Mutual exclusion（互斥）：当一个进程处于临界区并访问共享资源时，没有其他进程会处于临界区并且访问任何相同的共享资源</p>
+<p>Dead lock（死锁）：是指两个或以上进程，在相互等待完成特定任务，而最终没法将自身任务进行下去</p>
+<p>Starvation（饥饿）：一个可执行的进程，被调度器持续忽略，以至于虽然处于可执行状态却不被执行</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E9%94%81.png"></p>
+<h2 id="9-5-临界区"><a href="#9-5-临界区" class="headerlink" title="9.5 临界区"></a>9.5 临界区</h2><p><strong>互斥</strong>：同一时间临界区中最多存在一个线程</p>
+<p><strong>Progress</strong>：如果一个线程想要进入临界区，那么它最终会成功</p>
+<p><strong>有限等待</strong>：如果一个线程i处于入口区，那么在i的请求被接受之前，其他线程进入临界区的时间是有限制的（如果无线等待，则会进入饥饿）</p>
+<p><strong>无忙等待（可选）</strong>：如果一个进程在等待进入临界区，那么在它可以进入之前会被挂起</p>
+<h2 id="9-6-方法一-禁用硬件中断"><a href="#9-6-方法一-禁用硬件中断" class="headerlink" title="9.6 方法一 禁用硬件中断"></a>9.6 方法一 禁用硬件中断</h2><p><strong>没有中断，没有上下文切换，因此没有并发</strong></p>
+<ul>
+<li>硬件将中断处理延迟到中断被启用之后</li>
+<li>大多数现代计算机体系结构都提供指令来完成</li>
+</ul>
+<p><strong>进入临界区</strong></p>
+<ul>
+<li>禁用中断</li>
+</ul>
+<p><strong>离开临界区</strong></p>
+<ul>
+<li>开启中断</li>
+</ul>
+<p><strong>一旦中断被禁用，线程就无法被停止</strong></p>
+<ul>
+<li>整个系统都会为你停下来</li>
+<li>可能导致七天线程处于饥饿状态</li>
+</ul>
+<p><strong>要是临界区可以任意长怎么办</strong></p>
+<ul>
+<li>无法限制响应中断所需的时间（可能存在硬件影响）</li>
+</ul>
+<p>要小心使用</p>
+<p><strong>简单有效，受制于临界区时间，整个系统效率会产生很大影响，不太适合于多CPU</strong></p>
+<h2 id="9-7-方法2-基于软件的解决方法"><a href="#9-7-方法2-基于软件的解决方法" class="headerlink" title="9.7 方法2 基于软件的解决方法"></a>9.7 方法2 基于软件的解决方法</h2><p><strong>满足进程Pi和Pj之间互斥的经典的基于软件的解决方法(1981年)</strong></p>
+<ul>
+<li><p>使用两个共享数据项</p>
+<p>int turn；//指示该谁进入临界区</p>
+<p>boolean flag[]；//指示进程是否准备好进入临界区</p>
+</li>
+<li><p>进入临界区</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flag[i] = TRUE;</span><br><span class="line">turn = j;</span><br><span class="line"><span class="keyword">while</span>(flag[j] &amp;&amp; turn==j);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>退出临界区</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag[i]=FALSE;</span><br></pre></td></tr></table></figure>
+
+<p>进程pi的算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	flag[i] = <span class="literal">true</span>;</span><br><span class="line">	turn = j;</span><br><span class="line">	<span class="keyword">while</span>(flag[j] &amp;&amp; turn == j);</span><br><span class="line">		CRITICAL SECTION</span><br><span class="line">	flag[i] = <span class="literal">false</span>;</span><br><span class="line">		REMAINDER SECTION</span><br><span class="line">&#125;<span class="keyword">while</span>(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Bakery 算法(N个进程的临界区)</p>
+<ul>
+<li>进入临界区之前,进程接收一个数字</li>
+<li>得到的数字最小的进入临界区</li>
+<li>如果进程Pi和Pj收到相同的数字,那么如果i&lt;j,Pi先进入临界区,否则Pj先进入临界区</li>
+<li>编号方案总是按照枚举的增加顺序生成数字</li>
+</ul>
+<p><strong>复杂</strong></p>
+<ul>
+<li>需要两个进程的共享数据项</li>
+</ul>
+<p><strong>需要忙等待</strong></p>
+<ul>
+<li>浪费CPU时间</li>
+</ul>
+<p><strong>没有硬件保证的情况下无真正的软件解决方案</strong></p>
+<ul>
+<li>Perterson算法需要原子的LOAD和STORE指令</li>
+</ul>
+<p><strong>软件方法的开销与实现复杂性较大</strong></p>
+<h2 id="9-8-方法3-更高级的抽象"><a href="#9-8-方法3-更高级的抽象" class="headerlink" title="9.8 方法3 更高级的抽象"></a>9.8 方法3 更高级的抽象</h2><p><strong>硬件提供了一些原语</strong></p>
+<ul>
+<li>像中断禁用，原子操作指令等</li>
+<li>大多数现代体系结构都这样</li>
+</ul>
+<p><strong>操作系统提供更高级的编程抽象来简化并行编程</strong></p>
+<ul>
+<li>例如：锁，信号量</li>
+<li>从硬件原语中构建</li>
+</ul>
+<p><strong>锁是一个抽象的数据结构</strong></p>
+<ul>
+<li>一个二进制状态（锁定/解锁），两种办法</li>
+<li>Lock::Acquire() — 锁被释放前一直等待，然后得到锁</li>
+<li>Lock::Release() — 释放锁，唤醒任何等待的进程</li>
+</ul>
+<p>使用锁来编写临界区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lock_next_pid-&gt;Acquire();</span><br><span class="line">new_pid = next_pid++;</span><br><span class="line">lock_next_pid-&gt;Release();</span><br></pre></td></tr></table></figure>
+
+<p>大多数现代体系结构都提供特殊的原子操作指令</p>
+<ul>
+<li>通过特殊的内存访问电路</li>
+<li>针对单处理器和多处理器</li>
+</ul>
+<p>Test-and-Set 测试和置位</p>
+<ul>
+<li>从内存中读取值</li>
+<li>测试该值是否为1（然后返回真或假）</li>
+<li>内存值设置为1</li>
+</ul>
+<p>交换</p>
+<ul>
+<li>交换内存中的两个值</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">boolean <span class="title">TestandSet</span><span class="params">(boolean *target)</span></span>&#123;</span><br><span class="line">		boolean rv = *target;</span><br><span class="line">		*target = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">return</span> rv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Exchange</span><span class="params">(boolean *a, boolean *b)</span></span>&#123;</span><br><span class="line">		boolean tmp = *a;</span><br><span class="line">		*a = *b;</span><br><span class="line">		*b = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>采取基于原子操作的机器指令方式：</p>
+<ul>
+<li><p><strong>优点：</strong></p>
+<ul>
+<li>适用于单处理器或者共享主存的多处理器中任意数量的进程</li>
+<li>简单并且容易证明</li>
+<li>可以用于支持多临界区</li>
+</ul>
+</li>
+<li><p><strong>缺点：</strong></p>
+<ul>
+<li>忙等待消耗处理器时间</li>
+<li>当进程离开临界区并且多个进程在等待的时候可能导致饥饿</li>
+<li>死锁：如果一个低优先级的进程拥有临界区并且一个高优先级进程也需求，那么高优先级进程会获得处理器并等待临界区</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>锁是更高等级的编程抽象</p>
+<ul>
+<li>互斥可以使用锁来实现</li>
+<li>通常需要一个等级的硬件支持</li>
+</ul>
+</li>
+<li><p>常用的三种实现方法</p>
+<ul>
+<li>禁用中断（仅限于单处理器）</li>
+<li>软件方法（复杂）</li>
+<li>原子操作指令（单处理器或多处理器均可）</li>
+</ul>
+</li>
+<li><p>可选的实现内容：</p>
+<ul>
+<li>有忙等待</li>
+<li>无忙等待</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/">#同步互斥</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%AA%E8%AE%BA/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">绪论</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/19/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter8%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">第八章 调度算法</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5"><span class="nav-text">第九章 同步互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E8%83%8C%E6%99%AF"><span class="nav-text">9.1 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-9-4-%E6%A6%82%E5%BF%B5"><span class="nav-text">9.2-9.4 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-%E4%B8%B4%E7%95%8C%E5%8C%BA"><span class="nav-text">9.5 临界区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-%E6%96%B9%E6%B3%95%E4%B8%80-%E7%A6%81%E7%94%A8%E7%A1%AC%E4%BB%B6%E4%B8%AD%E6%96%AD"><span class="nav-text">9.6 方法一 禁用硬件中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7-%E6%96%B9%E6%B3%952-%E5%9F%BA%E4%BA%8E%E8%BD%AF%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-text">9.7 方法2 基于软件的解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-8-%E6%96%B9%E6%B3%953-%E6%9B%B4%E9%AB%98%E7%BA%A7%E7%9A%84%E6%8A%BD%E8%B1%A1"><span class="nav-text">9.8 方法3 更高级的抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
