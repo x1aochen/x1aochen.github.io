@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            第十章 信号量和管程 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">第十章 信号量和管程</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-22 21:48:44</span>
+        <span class="mobile">2021-11-22 21:48</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F-%E7%AE%A1%E7%A8%8B/">信号量 管程</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第十章-信号量和管程"><a href="#第十章-信号量和管程" class="headerlink" title="第十章 信号量和管程"></a>第十章 信号量和管程</h1><h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>信号量的抽象数据类型</p>
+<ul>
+<li>一个整形(sem),具有两个原子操作</li>
+<li>P(): sem减一,如果sem&lt;0,等待,否则继续</li>
+<li>V(): sem加一,如果sem≤0,唤醒一个等待的P</li>
+</ul>
+<p><strong>信号量是整形</strong></p>
+<p><strong>信号量是被保护的变量</strong></p>
+<ul>
+<li>初始化完成后,唯一改变一个信号量的值的办法是通过P()和V()</li>
+<li>操作必须是原子</li>
+</ul>
+<p><strong>P()能够阻塞,V()不会阻塞</strong></p>
+<p>我们假定信号量是公平的</p>
+<ul>
+<li>没有线程被阻塞在P()仍然堵塞如果V()被无限频繁调用(在同一个信号量)</li>
+<li>在实践中,FIFO经常被使用</li>
+</ul>
+<p><strong>两个类型信号量</strong></p>
+<ul>
+<li>二进制信号量: 可以是0或1</li>
+<li>计数信号量: 可以取任何非负数</li>
+<li>两者相互表现(给定一个可以实现另一个)</li>
+</ul>
+<p>信号量可以用在2个方面</p>
+<ul>
+<li>互斥</li>
+<li>条件同步(调度约束——一个线程等待另一个线程的事情发生)</li>
+</ul>
+<h2 id="10-3-信号量的使用"><a href="#10-3-信号量的使用" class="headerlink" title="10.3 信号量的使用"></a>10.3 信号量的使用</h2><ol>
+<li><p>用二进制信号量实现的互斥</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutex = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">mutex-&gt;P();</span><br><span class="line">...</span><br><span class="line">mutex-&gt;V();</span><br></pre></td></tr></table></figure></li>
+<li><p>用二进制信号量实现的调度约束</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">condition = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Thread A</span></span><br><span class="line">...</span><br><span class="line">condition-&gt;P(); <span class="comment">//等待线程B某一些指令完成之后再继续运行,在此阻塞</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//Thread B</span></span><br><span class="line">...</span><br><span class="line">condition-&gt;V(); <span class="comment">//信号量增加唤醒线程A</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>一个线程等待另一个线程处理事情</li>
+<li>比如生产东西或消费东西(生产者消费者模式)</li>
+<li>互斥(锁机制)是不够的</li>
+<li>有界缓冲区的生产者-消费者问题<ul>
+<li>一个或者多个生产者产生数据将数据放在一个缓冲区里</li>
+<li>单个消费者每次从缓冲区取出数据</li>
+<li>在任何一个时间只有一个生产者或消费者可以访问该缓冲区</li>
+</ul>
+</li>
+</ul>
+<p><strong>正确性要求</strong></p>
+<ul>
+<li>在任何一个时间只能有一个线程操作缓冲区(互斥)</li>
+<li>当缓冲区为空时,消费者必须等待生产者(调度,同步约束)</li>
+<li>当缓存区满,生产者必须等待消费者(调度,同步约束)</li>
+</ul>
+<p><strong>每个约束用一个单独的信号量</strong></p>
+<ul>
+<li>二进制信号量互斥</li>
+<li>一般信号量 fullBuffers</li>
+<li>一般信号了 emptyBuffers</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BoundedBuffer</span>&#123;</span></span><br><span class="line">		mutex = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);</span><br><span class="line">		fullBuffers = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);   <span class="comment">//说明缓冲区初始为空</span></span><br><span class="line"> 		emptyBuffers = <span class="keyword">new</span> Semaphore(n);  <span class="comment">//同时可以有n个生产者来生产</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">BoundedBuffer::Deposit(c)&#123;</span><br><span class="line">		emptyBuffers-&gt;P();</span><br><span class="line">		mutex-&gt;P();</span><br><span class="line">		Add c to the buffer;</span><br><span class="line">		mutex-&gt;V();</span><br><span class="line">		fullBuffers-&gt;V();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BoundedBuffer::Remove(c)&#123;</span><br><span class="line">		fullBuffers-&gt;P();</span><br><span class="line">		mutex-&gt;P();</span><br><span class="line">		Remove c from buffer;</span><br><span class="line">		mutex-&gt;V();</span><br><span class="line">		emptyBuffers-&gt;V();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-4-信号量的实现"><a href="#10-4-信号量的实现" class="headerlink" title="10.4 信号量的实现"></a>10.4 信号量的实现</h2><p><strong>使用硬件原语</strong></p>
+<ul>
+<li>禁用中断</li>
+<li>原子指令</li>
+</ul>
+<p>类似锁</p>
+<ul>
+<li>禁用中断</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Semaphore</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> sem;</span><br><span class="line">		WaitQueue q;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Semaphore::P()&#123;</span><br><span class="line">		--sem;</span><br><span class="line">		<span class="keyword">if</span>(sem &lt; <span class="number">0</span>)&#123;</span><br><span class="line">				Add <span class="keyword">this</span> thread t to q;</span><br><span class="line">				block(p);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Semaphore::V()&#123;</span><br><span class="line">		++sem;</span><br><span class="line">		<span class="keyword">if</span>(sem &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">				Remove a thread t from q;</span><br><span class="line">				wakeup(t);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>信号量的双用途</strong></p>
+<ul>
+<li>互斥和条件同步</li>
+<li>但等待条件是独立的互斥</li>
+</ul>
+<p><strong>读,开发代码比较困难</strong></p>
+<ul>
+<li>程序员必须非常精通信号量</li>
+</ul>
+<p><strong>容易出错</strong></p>
+<ul>
+<li>使用的信号量已经被另一个线程占用</li>
+<li>忘记释放信号量</li>
+</ul>
+<p><strong>不能够处理死锁问题</strong></p>
+<h2 id="10-5-管程"><a href="#10-5-管程" class="headerlink" title="10.5 管程"></a>10.5 管程</h2><p>管程是包含了一系列的共享变量，以及针对共享变量的操作函数的组合模块</p>
+<p><strong>目的：</strong>分离互斥和条件同步的关注</p>
+<p><strong>什么是管程</strong></p>
+<ul>
+<li>一个锁：指定临界区</li>
+<li>0或者多个条件变量：等待/通知信号用于管理并发访问共享数据</li>
+</ul>
+<p><strong>一般方法</strong></p>
+<ul>
+<li>收集在对象/模块中的相关共享数据</li>
+<li>定义方法来访问共享数据</li>
+</ul>
+<p>Lock</p>
+<ul>
+<li>Lock::Acquire() 等待直到锁可用,然后抢占锁</li>
+<li>Lock::Release() 释放锁,唤醒等待者如果有</li>
+</ul>
+<p>Condition Variable</p>
+<ul>
+<li>允许等待状态进入临界区<ul>
+<li>允许处于等待(睡眠)的线程进入临界区</li>
+<li>某个时刻原子释放锁进入睡眠</li>
+</ul>
+</li>
+<li>Wait() operation<ul>
+<li>释放锁,睡眠,重新获得锁放回</li>
+</ul>
+</li>
+<li>Signal() operation(or broadcast() operation)<ul>
+<li>唤醒等待者(或者所有等待者),如果有</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现</strong></p>
+<ul>
+<li><p>需要维持每个条件队列</p>
+</li>
+<li><p>线程等待的条件等待signal（）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Condition</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> numWaiting = <span class="number">0</span>;</span><br><span class="line">		WaitQueue q;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Condition::Wait(lock)&#123;</span><br><span class="line">		numWaiting++;</span><br><span class="line">		Add <span class="keyword">this</span> thread t to q;</span><br><span class="line">		release(lock);</span><br><span class="line">		schedule(); <span class="comment">//need mutex</span></span><br><span class="line">		require(lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Condition::Signal()&#123;</span><br><span class="line">		<span class="keyword">if</span>(numWaiting &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				Remove a thread t from q;</span><br><span class="line">				wakeup(t); <span class="comment">//need mutex</span></span><br><span class="line">				numWaiting--;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>管程解决生产者-消费者问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BoundedBuffer</span>&#123;</span></span><br><span class="line">		Lock lock;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;  <span class="comment">//buffer 为空</span></span><br><span class="line">		Condition notFull,notEmpty;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">BoundedBuffer::Deposit(c)&#123;</span><br><span class="line">		lock-&gt;Acquire();    <span class="comment">//管程的定义:只有一个线程能够进入管程</span></span><br><span class="line">		<span class="keyword">while</span>(count == n)</span><br><span class="line">			notFull.Wait(&amp;lock); <span class="comment">//释放前面的锁</span></span><br><span class="line">		Add c to the buffer;</span><br><span class="line">		count++;</span><br><span class="line">		notEmpty.Signal();</span><br><span class="line">		lock-&gt;Release();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BoundedBuffer::Remove(c)&#123;</span><br><span class="line">		lock-&gt;Acquire();</span><br><span class="line">		<span class="keyword">while</span>(count == <span class="number">0</span>)</span><br><span class="line">			notEmpty.Wait(&amp;lock);</span><br><span class="line">		Remove c from buffer;</span><br><span class="line">		count--;</span><br><span class="line">		notFull.Signal();</span><br><span class="line">		lock-&gt;Release();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>由于同步互斥机制的存在，即使有方法解决，但由于不确定性</p>
+<ul>
+<li><p>开发/调试并行程序很难</p>
+<ul>
+<li>非确定性的交叉指令</li>
+</ul>
+</li>
+<li><p>同步结构</p>
+<ul>
+<li>锁：互斥</li>
+<li>条件变量：有条件的同步</li>
+<li>其他原语：信号量</li>
+</ul>
+</li>
+<li><p>怎样有效的使用这些结构</p>
+<ul>
+<li>制定并遵循严格的程序设计风格/策略</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-6-10-8-经典同步问题"><a href="#10-6-10-8-经典同步问题" class="headerlink" title="10.6-10.8 经典同步问题"></a>10.6-10.8 经典同步问题</h2><h3 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h3><p><strong>动机</strong></p>
+<ul>
+<li>共享数据访问</li>
+</ul>
+<p><strong>两种类型使用者</strong></p>
+<ul>
+<li>读者：不需要修改数据</li>
+<li>写者：读取和修改数据</li>
+</ul>
+<p><strong>问题的约束</strong></p>
+<ul>
+<li>允许同一时间有多个读者，但在任何时候只有一个写者</li>
+<li>当没有写者时，读者才能访问数据</li>
+<li>当没有读者和写者时，写者才能访问数据</li>
+<li>在任何时候只能有一个线程可以操作共享变量</li>
+</ul>
+<p><strong>多个并发进程的数据集共享</strong></p>
+<ul>
+<li>读者 - 只读数据集：他们不执行任何更新</li>
+<li>写者 - 可以读取和写入</li>
+</ul>
+<p><strong>共享数据</strong></p>
+<ul>
+<li>数据集</li>
+<li>信号量CountMutex初始化为1</li>
+<li>信号量WriteMutex初始化为1</li>
+<li>整数Rcount（读者的个数）初始化为0</li>
+</ul>
+<ol>
+<li>读者优先</li>
+</ol>
+<p>只要有一个读者处于活动状态, 后来的读者都会被接纳.如果读者源源不断的出现,那么写者使用处于阻塞状态</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//信号量实现</span></span><br><span class="line"><span class="comment">//writer</span></span><br><span class="line">sem_wait(WriteMutex);</span><br><span class="line">write;</span><br><span class="line">sem_post(WriteMutex);</span><br><span class="line"></span><br><span class="line"><span class="comment">//reader</span></span><br><span class="line">sem_wait(CountMutex);</span><br><span class="line"><span class="keyword">if</span>(Rcount == <span class="number">0</span>)</span><br><span class="line">		sem_wait(WriteMutex); <span class="comment">//确保后续不会有写者进入</span></span><br><span class="line">++Rcount;</span><br><span class="line">read;</span><br><span class="line">--Rcount;</span><br><span class="line"><span class="keyword">if</span>(Rcount == <span class="number">0</span>)</span><br><span class="line">		sem_post(WriteMutex); <span class="comment">//全部读者全部离开才能唤醒写者</span></span><br><span class="line">sem_post(CountMutex);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>写者优先</li>
+</ol>
+<p>一旦写者就绪,那么写者会尽可能的执行写操作.如果写者源源不断的出现的话,那么读者就始终处于阻塞状态</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//writer</span></span><br><span class="line">Database::Write()&#123;</span><br><span class="line">		Wait until readers/writers;</span><br><span class="line">		write database;</span><br><span class="line">		check out - wake up waiting readers/writers;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//reader</span></span><br><span class="line">Database::Read()&#123;</span><br><span class="line">		Wait until no writers;</span><br><span class="line">		read database;</span><br><span class="line">		check out - wake up waiting writers;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//管程实现</span></span><br><span class="line">AR = <span class="number">0</span>; <span class="comment">// # of active readers</span></span><br><span class="line">AW = <span class="number">0</span>; <span class="comment">// # of active writers</span></span><br><span class="line">WR = <span class="number">0</span>; <span class="comment">// # of waiting readers</span></span><br><span class="line">WW = <span class="number">0</span>; <span class="comment">// # of waiting writers</span></span><br><span class="line">Condition okToRead;</span><br><span class="line">Condition okToWrite;</span><br><span class="line">Lock lock;</span><br><span class="line"><span class="comment">//writer</span></span><br><span class="line"><span class="function">Public <span class="title">Database::Write</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//Wait until no readers/writers;</span></span><br><span class="line">		StartWrite();</span><br><span class="line">		write database;</span><br><span class="line">		<span class="comment">//check out - wake up waiting readers/writers;</span></span><br><span class="line">		DoneWrite();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Private <span class="title">Database::StartWrite</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lock.Acquire();</span><br><span class="line">		<span class="keyword">while</span>((AW + AR) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				WW++;</span><br><span class="line">				okToWrite.wait(&amp;lock);</span><br><span class="line">				WW--;		</span><br><span class="line">		&#125;</span><br><span class="line">		AW++;</span><br><span class="line">		lock.Release();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Private <span class="title">Database::DoneWrite</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lock.Acquire();</span><br><span class="line">		AW--;</span><br><span class="line">		<span class="keyword">if</span>(WW &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				okToWrite.signal();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(WR &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				okToRead.broadcast(); <span class="comment">//唤醒所有reader </span></span><br><span class="line">		&#125;</span><br><span class="line">		lock.Release();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//reader</span></span><br><span class="line"><span class="function">Public <span class="title">Database::Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//Wait until no writers;</span></span><br><span class="line">		StartRead();</span><br><span class="line">		read database;</span><br><span class="line">		<span class="comment">//check out - wake up waiting writers;</span></span><br><span class="line">		DoneRead();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Private <span class="title">Database::StartRead</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lock.Acquire();</span><br><span class="line">		<span class="keyword">while</span>(AW + WW &gt; <span class="number">0</span>)&#123;    <span class="comment">//关注等待的writer,体现出写者优先</span></span><br><span class="line">				WR++;</span><br><span class="line">				okToRead.wait(&amp;lock);</span><br><span class="line">				WR--;</span><br><span class="line">		&#125;</span><br><span class="line">		AR++;</span><br><span class="line">		lock.Release();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Database::DoneRead</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lock.Acquire();</span><br><span class="line">		AR--;</span><br><span class="line">		<span class="keyword">if</span>(AR == <span class="number">0</span> &amp;&amp; WW &gt; <span class="number">0</span>)&#123;  <span class="comment">//只有读者全部没有了,才需要唤醒</span></span><br><span class="line">				okToWrite.signal();</span><br><span class="line">		&#125;</span><br><span class="line">		lock.Release();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-9-10-11-哲学家就餐问题"><a href="#10-9-10-11-哲学家就餐问题" class="headerlink" title="10.9-10.11 哲学家就餐问题"></a>10.9-10.11 哲学家就餐问题</h2><p>怎么来编写程序？</p>
+<ol>
+<li>必须有数据结构，来描述每个哲学家的当前状态；</li>
+<li>该状态是一个临界资源，各个哲学家对它的访问应该互斥地进行——进程互斥；</li>
+<li>一个哲学家吃饱后，可能要唤醒它的左邻右舍，两者之间存在着同步关系——进程同步；</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">共享数据:</span><br><span class="line"><span class="function">Bowl of <span class="title">rice</span><span class="params">(data <span class="built_in">set</span>)</span></span></span><br><span class="line"><span class="function">Semaphone fork [5] initialized to 1</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> N 5</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> LEFT (i + N - 1) % N <span class="comment">// 左邻居</span></span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> RIGHT (i + 1) % N    <span class="comment">// 右邻居</span></span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> THINKING 0</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> HUNGRY   1</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="meta-keyword">define</span> EATING   2</span></span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">int</span> semaphore</span>;</span><br><span class="line"><span class="keyword">int</span> state[N];                <span class="comment">// 跟踪每个哲学家的状态</span></span><br><span class="line">semaphore mutex = <span class="number">1</span>;         <span class="comment">// 临界区的互斥，临界区是 state 数组，对其修改需要互斥</span></span><br><span class="line">semaphore s[N];              <span class="comment">// 每个哲学家一个信号量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">philosopher</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(TRUE) &#123;</span><br><span class="line">        think(i);</span><br><span class="line">        take_two(i);</span><br><span class="line">        eat(i);</span><br><span class="line">        put_two(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">take_two</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    down(&amp;mutex);</span><br><span class="line">    state[i] = HUNGRY;</span><br><span class="line">    check(i);</span><br><span class="line">    up(&amp;mutex);</span><br><span class="line">    down(&amp;s[i]); <span class="comment">// 只有收到通知之后才可以开始吃，否则会一直等下去</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">put_two</span><span class="params">(i)</span> </span>&#123;</span><br><span class="line">    down(&amp;mutex);</span><br><span class="line">    state[i] = THINKING;</span><br><span class="line">    check(LEFT); <span class="comment">// 尝试通知左右邻居，自己吃完了，你们可以开始吃了</span></span><br><span class="line">    check(RIGHT);</span><br><span class="line">    up(&amp;mutex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">eat</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    down(&amp;mutex);</span><br><span class="line">    state[i] = EATING;</span><br><span class="line">    up(&amp;mutex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查两个邻居是否都没有用餐，如果是的话，就 up(&amp;s[i])，使得 down(&amp;s[i]) 能够得到通知并继续执行</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(i)</span> </span>&#123;         </span><br><span class="line">    <span class="keyword">if</span>(state[i] == HUNGRY &amp;&amp; state[LEFT] != EATING &amp;&amp; state[RIGHT] !=EATING) &#123;</span><br><span class="line">        state[i] = EATING;</span><br><span class="line">        up(&amp;s[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F-%E7%AE%A1%E7%A8%8B/">#信号量 管程</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%AA%E8%AE%BA/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">绪论</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/21/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter9%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">第九章 同步互斥</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0-%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E7%AE%A1%E7%A8%8B"><span class="nav-text">第十章 信号量和管程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">10.3 信号量的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">10.4 信号量的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-%E7%AE%A1%E7%A8%8B"><span class="nav-text">10.5 管程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-10-8-%E7%BB%8F%E5%85%B8%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="nav-text">10.6-10.8 经典同步问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E8%80%85-%E5%86%99%E8%80%85%E9%97%AE%E9%A2%98"><span class="nav-text">读者-写者问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-9-10-11-%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98"><span class="nav-text">10.9-10.11 哲学家就餐问题</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
