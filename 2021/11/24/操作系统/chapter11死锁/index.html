@@ -9,7 +9,7 @@
     
     <title>
         
-            第四章 非连续内存分配 |
+            第十一章 死锁 |
         
         keep
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">第四章 非连续内存分配</span>
+            <span class="title-hover-animation">第十一章 死锁</span>
         </div>
 
         
@@ -154,8 +154,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-11-11 22:19:35</span>
-        <span class="mobile">2021-11-11 22:19</span>
+        <span class="pc">2021-11-24 23:51:27</span>
+        <span class="mobile">2021-11-24 23:51</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -175,7 +175,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">内存分配</a>&nbsp;
+                        <a href="/tags/%E6%AD%BB%E9%94%81/">死锁</a>&nbsp;
                     </li>
                 
             </ul>
@@ -185,7 +185,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.7k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.7k 字</span>
         </span>
     
     
@@ -202,222 +202,327 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="第四章-非连续内存分配"><a href="#第四章-非连续内存分配" class="headerlink" title="第四章 非连续内存分配"></a>第四章 非连续内存分配</h1><ul>
-<li>为什么需要非连续内存分配</li>
-</ul>
-<p>连续内存分配的缺点</p>
+            <h1 id="第十一章-死锁"><a href="#第十一章-死锁" class="headerlink" title="第十一章 死锁"></a>第十一章 死锁</h1><p><strong>一组阻塞的进程持有一种资源等待获取另一个进程所占有的一个资源</strong></p>
+<p>由于进程的并发执行的情况导致出现死锁</p>
+<p><strong>通常操作系统一般遇到死锁都使用鸵鸟算法（不理会）</strong></p>
+<h2 id="11-2-系统模型"><a href="#11-2-系统模型" class="headerlink" title="11.2 系统模型"></a>11.2 系统模型</h2><p>需求方：进程        需求资源：CPU，内存单元，I/O。。。</p>
+<p>进程对资源的访问情况：</p>
 <ol>
-<li>分配给一个程序的物理内存是连续的</li>
-<li>内存利用率低</li>
-<li>有外碎片，内碎片的问题</li>
+<li>需要资源——向空闲资源申请</li>
+<li>得到资源——资源变为被使用状态，其他进程则不能用</li>
+<li>使用资源时间有限——用完释放（free）</li>
 </ol>
-<p>非连续内存分配的优点</p>
+<p><strong>可重复使用的资源</strong></p>
+<ul>
+<li>在一个时间只能一个进程使用且不能被删除</li>
+<li>进程获得资源，后来释放由其他进程重用</li>
+<li>处理器，I/O通道，主和副存储器，设备和数据结构，如文件，数据库和信号量</li>
+<li>如果每个进程拥有一个资源并请求其他资源，死锁可能发生</li>
+</ul>
+<p><strong>使用资源</strong></p>
+<ul>
+<li>创建和销毁</li>
+<li>在I/O缓冲区的中断，信号，消息，信息</li>
+<li>如果接受消息阻塞可能会发生死锁</li>
+<li>可能少见的组合事件会引起死锁</li>
+</ul>
+<p><strong>资源分配图</strong></p>
+<p>一组顶点V和边E的集合</p>
+<ul>
+<li><p>V有两种类型：</p>
+<ul>
+<li>P={P1,P2,…,Pn},集合包括系统中的所有进程</li>
+<li>R={R1,R2,…,Rm},集合包括系统中的所有资源类型</li>
+</ul>
+</li>
+<li><p>requesting,claiming edge - directed edge Pi → Rj</p>
+</li>
+<li><p>assignment,holding edge - directed edge Rj → Pi</p>
+</li>
+</ul>
+<p>基本情况</p>
+<ul>
+<li>如果如钟不包含循环==没有死锁</li>
+<li>如果图中包含循环<ul>
+<li>如果每个资源类只有一个实例，那么死锁</li>
+<li>如果每个资源类有几个实例，可能死锁</li>
+</ul>
+</li>
+</ul>
+<h2 id="11-3-死锁特征"><a href="#11-3-死锁特征" class="headerlink" title="11.3 死锁特征"></a>11.3 死锁特征</h2><p><strong>死锁出现一定会出现以下四个条件，但是出现以下四个条件不一定死锁：（必要条件）</strong></p>
+<ul>
+<li>互斥：在一个时间只能有一个进程使用资源</li>
+<li>持有并等待：进程保持至少一个资源正在等待获取其他进程持有的额外资源</li>
+<li>无抢占：一个资源只能被进程自愿释放，进程已经完成了它的任务之后</li>
+<li> 循坏等待：进程资源链接的关系形成了一个环</li>
+</ul>
+<p><img src="C:\Users\Administrator\Desktop\笔记\图\死锁.png" alt="死锁"></p>
+<h2 id="11-4-死锁处理办法"><a href="#11-4-死锁处理办法" class="headerlink" title="11.4 死锁处理办法"></a>11.4 死锁处理办法</h2><ol>
+<li><p>确保系统永远不会进入死锁状态</p>
+</li>
+<li><p>运行系统进入死锁状态，然后恢复</p>
+</li>
+<li><p>忽略这个问题，假装系统中从来没有发生死锁；用于大多数操作系统，包括UNIX</p>
+</li>
+</ol>
+<h2 id="11-5-死锁预防和死锁避免"><a href="#11-5-死锁预防和死锁避免" class="headerlink" title="11.5 死锁预防和死锁避免"></a>11.5 死锁预防和死锁避免</h2><h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><p><strong>限制申请方式</strong></p>
+<ul>
+<li><p>互斥 - 共享资源不是必须的，必须占用非共享资源</p>
+</li>
+<li><p>占用并等待 - 必须保证当一个进程请求的资源，它不持有任何其他资源（要么拿所有资源，要么sleep）</p>
+<ul>
+<li>需要进程请求并分配其所有资源，它开始执行之前或允许进程请求资源仅当进程没有资源</li>
+<li>资源利用率低：可能发生饥饿</li>
+</ul>
+</li>
+<li><p>无抢占</p>
+<ul>
+<li>如果进程占有某些资源，并请求其他不能被立即分配的资源，则释放当前正占有的资源</li>
+<li>被抢占资源添加到资源列表中</li>
+<li>只有当它能够获得旧的资源以及它请求新的资源，进程可以得到执行</li>
+</ul>
+</li>
+<li><p>循环等待 - 对所有资源类型进行排序，并要求每个进程按照资源的顺序进行申请</p>
+<ul>
+<li>确保进程之间形不成环</li>
+<li>通用操作系统用的不多，嵌入式操作系统用的多</li>
+</ul>
+</li>
+</ul>
+<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p><strong>需要操作系统具有一些额外的先验信息提供</strong></p>
+<ul>
+<li><p>最简单和最有效的模式是要求每个进程声明它可能需要的每个类型资源的<strong>最大数目</strong></p>
+</li>
+<li><p>资源的分配状态是通过限定<strong>提供</strong>与<strong>分配</strong>的资源数量,和进程的<strong>最大</strong>需求（不超过最大）</p>
+</li>
+<li><p>死锁避免算法<strong>动态检查</strong>的资源分配状态,以确保永远不会有一个环形等待状态（不安全状态，处于环形并不一定是死锁，约束较大）</p>
+</li>
+<li><p>当一个进程请求可用资源，系统必须判断立即分配是否能使系统处于安全状态</p>
+</li>
+<li><p>系统处于安全状态指：针对所有进程，存在安全序列序列&lt;P1,P2,…,Pn&gt;是安全的: 针对每个Pi,Pi要求的资源能够由当前可用的资源+所有的Pj持有的资源来满足,其中j&lt;i</p>
+<ul>
+<li>如果Pi资源的需求不是立即可用，那么Pi可以等到所有Pj完成</li>
+<li>当Pi完成后，Pi+1可以得到所需要的的资源，执行，返回所分配的资源，并终止</li>
+<li>用同样的方法，Pi+2，Pi+3和Pn能够获得其所需的资源</li>
+</ul>
+</li>
+<li><p>如果系统处于安全状态==无死锁</p>
+</li>
+<li><p>如果系统处于不安全状态==可能死锁</p>
+</li>
+<li><p>避免死锁：确保操作系统永远不会进入不安全状态</p>
+</li>
+</ul>
+<h2 id="11-6-银行家算法"><a href="#11-6-银行家算法" class="headerlink" title="11.6 银行家算法"></a>11.6 银行家算法</h2><p><strong>Banker‘s Algorithm 前提条件</strong></p>
+<ul>
+<li><p>多个资源实例</p>
+</li>
+<li><p>每个进程都必须能最大限度地利用资源</p>
+</li>
+<li><p>当一个进程请求一个资源，就不得不等待</p>
+</li>
+<li><p>当一个进程获得所有的资源就必须在一段有限的时间释放它们</p>
+</li>
+</ul>
+<p><strong>银行家算法数据结构</strong></p>
+<p>n = 进程数量，m = 资源类型数量</p>
+<ul>
+<li><p>max（总需求量）：n*m矩阵。如果max[i , j] = k，表示进程Pi最多请求资源类型Rj的k个实例</p>
+</li>
+<li><p>Available（剩余空闲量）：长度为m的向量。如果Available[j] = k，有k个类型Rj的资源实例可用</p>
+</li>
+<li><p>Allocation（已分配量）：n*m矩阵。如果Allocation[i , j] = k，则Pi当前分配了k个Rj的实例</p>
+</li>
+<li><p>Need（未来需要量）：n*m矩阵。如果Need[i , j] = k，则Pi可能需要至少k个Rj实例完成任务</p>
+</li>
+</ul>
+<p>Need[i , j] = max[i , j] - Allocation[i , j] </p>
+<p>  具体算法：</p>
 <ol>
-<li>一个程序的物理地址是非连续的</li>
-<li>更好的内存利用和管理</li>
-<li>允许共享代码与数据（共享库等）</li>
-<li>支持动态加载和动态链接</li>
+<li><p>work和finish分别是长度m和n的向量</p>
+<p>初始化： work = Available         //当前资源剩余空闲量</p>
+<p>​                finish[i] = false for i - 1,2，。。。，n     //线程i没结束</p>
+</li>
+<li><p>找这样的i：        //接下来找出need比work小的进程i</p>
+<ul>
+<li><p>finish[i] = false</p>
+</li>
+<li><p>needi&lt;=work</p>
+<p>没有找到这样的i，转到4。</p>
+</li>
+</ul>
+</li>
+<li><p>work = work + Allocation      //进程i的资源需求量小于剩余空闲资源量，所以配置给它再回收</p>
+<p>finish[i] = true</p>
+<p>转到2.</p>
+</li>
+<li><p>if finish[i] == true for all i,           //所有进程的finish为true，表明系统处于安全状态</p>
+</li>
 </ol>
-<p>非连续分配缺点</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/huibian/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95.png"></p>
+<h2 id="11-7-死锁检测和死锁恢复"><a href="#11-7-死锁检测和死锁恢复" class="headerlink" title="11.7 死锁检测和死锁恢复"></a>11.7 死锁检测和死锁恢复</h2><h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><ul>
+<li>允许系统进入死锁状态</li>
+<li>死锁检测算法</li>
+<li>恢复机制</li>
+</ul>
+<p><img src="C:\Users\Administrator\Desktop\笔记\图\死锁检测算法.png" alt="死锁检测算法"></p>
+<p>开销大，更多用在调试系统与应用程序</p>
+<p>检测算法使用</p>
 <ul>
-<li>如何建立虚拟地址和物理地址之间的转换<ul>
-<li>软件方案</li>
-<li>硬件方案（分段，分页）</li>
+<li><p>何时，使用什么样的频率来检测依赖于：</p>
+<ul>
+<li>死锁多久可能会发生？</li>
+<li>多久进程需要被回滚？</li>
+</ul>
+</li>
+<li><p>如果检测算法多次被调用，有可能是资源图有多个循环，所以我们无法分辨出多个可能死锁进程中的哪些”造成”死锁</p>
+</li>
+</ul>
+<h3 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h3><ul>
+<li>终止所有的死锁进程</li>
+<li>在一个时间内终止一个进程直到死锁消除</li>
+<li>终止进程的顺序应该是<ul>
+<li>进程的优先级</li>
+<li>进程运行了多久以及需要多少时间才能完成</li>
+<li>进程占用的资源</li>
+<li>进程完成需要的资源</li>
+<li>多少进程需要被终止</li>
+<li>进程是交互还是批处理</li>
 </ul>
 </li>
 </ul>
-<h2 id="4-1-分段"><a href="#4-1-分段" class="headerlink" title="4.1 分段"></a>4.1 分段</h2><ul>
-<li><p>程序的分段地址空间，分段寻址方案</p>
-</li>
-<li><p>计算机程序由各种段组成</p>
-</li>
-<li><p>分段：更好的分离和共享</p>
-</li>
-</ul>
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%88%86%E6%AE%B51.png"></p>
-<p>左边连续的虚拟地址，右边不连续的物理地址，采用映射机制进行两边的关联</p>
-<ol>
-<li>分段寻址方案</li>
-</ol>
+<p><strong>存在强制性和不合理性</strong></p>
+<p>死锁恢复是出现死锁的最后手段</p>
+<p>资源抢占：</p>
 <ul>
-<li>一个段：一个内存“块”</li>
+<li>选择一个受害者 - 最小的成本</li>
+<li>回滚 - 返回一些安全状态，重启进程到安全状态</li>
+<li>饥饿 - 同一进程可能一直被选做受害者，包括回滚的数量</li>
 </ul>
-<ol start="2">
-<li>程序访问内存需要：</li>
-</ol>
+<h2 id="11-8-IPC（进程间通讯）"><a href="#11-8-IPC（进程间通讯）" class="headerlink" title="11.8 IPC（进程间通讯）"></a>11.8 IPC（进程间通讯）</h2><p>进程之间相互保存独立，一个进程不能访问另一个进程的地址空间</p>
+<p>进程与进程之间也需要一定的沟通和协作来完成大的任务</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a><strong>概述</strong></h3><ul>
+<li><p>进程通信的机制及同步</p>
+</li>
+<li><p>不使用共享变量的进程通信</p>
+</li>
+<li><p>IPC facility 提供2个操作：</p>
 <ul>
-<li>一个2维的二元组（s，addr）<ul>
-<li>s—段号</li>
-<li>addr—段内偏移</li>
+<li>send（message）- 消息大小固定或者可变</li>
+<li>receive（message）</li>
 </ul>
 </li>
-</ul>
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%88%86%E6%AE%B5%E5%AF%BB%E5%9D%80%E6%96%B9%E6%A1%88.png"></p>
-<p>操作系统建立段表</p>
-<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><ul>
-<li><p>划分物理内存至固定大小的帧</p>
+<li><p>如果P和Q想通讯，需要：</p>
 <ul>
-<li>大小是2的幂，e.g.，512,4096,8192</li>
+<li>在它们之间建立通信链路</li>
+<li>通过send/receive交换信息</li>
 </ul>
 </li>
-<li><p>划分逻辑地址空间至相同大小的页</p>
+<li><p>通信链路的实现</p>
 <ul>
-<li>大小同物理地址</li>
-</ul>
-</li>
-<li><p>建立方案 转换逻辑地址为物理地址（pages to frames）</p>
-<ul>
-<li>页表</li>
-<li>MMU/TLB（加速地址的转换）</li>
+<li>物理（例如，共享内存，硬件总线）</li>
+<li>逻辑（例如，逻辑属性）</li>
 </ul>
 </li>
 </ul>
-<h3 id="帧（Frame）"><a href="#帧（Frame）" class="headerlink" title="帧（Frame）"></a>帧（Frame）</h3><ul>
-<li><p>物理内存被分割为大小相等的帧</p>
-</li>
-<li><p>一个内存物理地址是一个二元组（f，o）</p>
+<p>​    <strong>直接通讯</strong></p>
 <ul>
-<li>f—帧号（F位，共有2<sup>F</sup>个帧）</li>
-<li>o—帧内偏移（S位，每帧有2<sup>S</sup>字节）</li>
-<li>物理地址=2<sup>S</sup> * f + o</li>
+<li><p>进程必须正确的命名对方：</p>
+<ul>
+<li>send（P, message）- 发送消息到进程P</li>
+<li>receive（Q, message）- 从进程Q接收信息</li>
 </ul>
 </li>
-<li><p>16-bit地址空间, 9-bit(512 byte) 大小的页帧</p>
+<li><p>通信链路的属性</p>
 <ul>
-<li>物理地址=（3，6）</li>
-<li>物理地址=1542</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E9%A1%B5%E5%B8%A7.png"></p>
-<h3 id="页（Page）"><a href="#页（Page）" class="headerlink" title="页（Page）"></a>页（Page）</h3><ul>
-<li><p>一个程序的逻辑地址空间被划分为大小相等的页</p>
-<ul>
-<li>页内偏移的大小 = 帧内偏移的大小</li>
-<li>页号大小 &lt;&gt; 帧号大小</li>
-</ul>
-</li>
-<li><p>一个逻辑地址是一个二元组(p, o) </p>
-<ul>
-<li>p—页号（P位，2<sup>P</sup>个页）</li>
-<li>o—页内偏移（S位，每页有2<sup>S</sup>字节）</li>
-<li>逻辑地址=2<sup>S</sup> * P + o</li>
+<li>自动建立链路</li>
+<li>一条链路恰好对应一对通信进程</li>
+<li>每对进程之间只有一个链路存在</li>
+<li>链路可以是单向的,但通常是双向的</li>
 </ul>
 </li>
 </ul>
-<p><strong>页寻址机制</strong></p>
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E9%A1%B5%E5%AF%BB%E5%9D%80%E6%9C%BA%E5%88%B6.png"></p>
-<p>操作系统建立页表</p>
+<p><strong>间接通讯</strong></p>
 <ul>
-<li>逻辑地址空间应当大于物理内存空间</li>
-<li>页映射到帧</li>
-<li>页是连续的虚拟内存</li>
-<li>帧是非连续的物理内存(有助于减少碎片的产生)</li>
-<li>不是所有的页都有对应的帧</li>
+<li><p>定向从消息队列接受消息</p>
+<ul>
+<li>每个消息队列都有一个唯一的ID</li>
+<li>只有它们共享了一个消息队列，进程才能够通信</li>
 </ul>
-<h2 id="4-3-页表-概述、TLB"><a href="#4-3-页表-概述、TLB" class="headerlink" title="4.3 页表-概述、TLB"></a>4.3 页表-概述、TLB</h2><h3 id="页表概述"><a href="#页表概述" class="headerlink" title="页表概述"></a>页表概述</h3><p><strong>页表结构</strong></p>
+</li>
+<li><p>通信链路的属性</p>
 <ul>
-<li>每一个运行的程序都有一个页表<ul>
-<li>属于程序运行状态, 会动态变化</li>
-<li>PTBR : 页表基址寄存器</li>
+<li>只有进程共享一个共同的消息队列,才建立链路</li>
+<li>链接可以与许多进程相关联</li>
+<li>每对进程可以共享多个通信链路</li>
+<li><code>链接可以是单向或者双向</code></li>
+</ul>
+</li>
+<li><p>操作</p>
+<ul>
+<li>创建一个新的消息队列</li>
+<li>通过消息队列发送和接收消息</li>
+<li>销毁消息队列</li>
+</ul>
+</li>
+<li><p>原语的定义如下:</p>
+<ul>
+<li>send(A, message)</li>
+<li>receive(A, message)</li>
+</ul>
+</li>
+<li><p>队列的消息被附加到链路：</p>
+<ul>
+<li><p>0容量 - 0 message</p>
+<p>发送方必须等待接收方</p>
+</li>
+<li><p>有限容量 - n message的有限长度</p>
+<p>发送方必须等待，如果队列满</p>
+</li>
+<li><p>无线容量 - 无限长度</p>
+<p>发送发不需要等待</p>
+</li>
 </ul>
 </li>
 </ul>
-<p><strong>地址转换</strong></p>
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png"></p>
-<p><strong>分页机制的性能问题</strong></p>
-<p>问题：访问一个内存单元需要2次内存访问</p>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>signal（信号）</p>
 <ul>
-<li>一次用于获取页表项</li>
-<li>一次用于访问数据</li>
+<li>软件中断通知事件处理</li>
 </ul>
-<p>页表可能非常大</p>
+<p>接收到信号时会发生什么</p>
 <ul>
-<li>64位机器如果每页1024字节, 那么一个页表的大小会是多少？(2<sup>64</sup> / 2<sup>10</sup> = 2<sup>54</sup> 存放不下)</li>
-<li>每一个运行的程序都需要有一个页表</li>
-</ul>
-<p>如何处理</p>
-<ul>
-<li>缓存</li>
-<li>间接访问</li>
-</ul>
-<h3 id="Translation-Look-aside-Buffer（TLB）（解决速度上问题）"><a href="#Translation-Look-aside-Buffer（TLB）（解决速度上问题）" class="headerlink" title="Translation Look-aside Buffer（TLB）（解决速度上问题）"></a>Translation Look-aside Buffer（TLB）（解决速度上问题）</h3><p>CPU的MMU里面的一个缓冲，CPU中的快表</p>
-<p>缓存近期访问的页帧转换表项</p>
-<ul>
-<li>TLB使用associative memory（关联内存）实现, 具备快速访问性能</li>
-<li>如果TLB命中, 物理页号可以很快被获取</li>
-<li>如果TLB未命中, 对应的表项被更新到TLB中</li>
-<li>常用的表项放在TLB里面</li>
-<li>TLB的miss不会很大</li>
-<li>写程序时，写出的程序尽量具有访问的局部性，把平时的访问集中在一个区域里，有效较少TLB的缺失</li>
-<li>x86的CPU由硬件实现, 其他的可能是由操作系统实现</li>
-</ul>
-<h2 id="4-4-页表-二级，多级页表"><a href="#4-4-页表-二级，多级页表" class="headerlink" title="4.4 页表-二级，多级页表"></a>4.4 页表-二级，多级页表</h2><p><strong>二级页表（解决空间上问题）</strong></p>
-<ul>
-<li>将页号分为两个部分, 页表分为两个, 一级页号对应一级页表, 二级页号对应二级页表.</li>
-<li>一级页号查表获得在二级页表的起始地址, 地址加上二级页号的值, 在二级页表中获得帧号</li>
-<li>节约了一定的空间, 在一级页表中如果resident bit = 0, 可以使得在二级页表中不存储相关index,而只有一张页表的话, 这一些index都需要保留多级页表</li>
-</ul>
-<ul>
-<li>通过把页号分为k个部分, 来实现多级间接页表, 建立一棵页表”树”</li>
-</ul>
-<h2 id="4-5-页表-反向页表"><a href="#4-5-页表-反向页表" class="headerlink" title="4.5 页表-反向页表"></a>4.5 页表-反向页表</h2><p>大地址空间问题</p>
-<ul>
-<li>有大地址空间(64-bits), 前向映射页表变得繁琐. 比如 : 使用了5级页表</li>
-<li>不是让页表与逻辑地址空间的大小相对应, 而是让页表与物理地址空间的大小相对应. 逻辑地址空间增长速度快于物理地址空间 </li>
-</ul>
-<h3 id="基于页寄存器（page-registers）的方案"><a href="#基于页寄存器（page-registers）的方案" class="headerlink" title="基于页寄存器（page registers）的方案"></a>基于页寄存器（page registers）的方案</h3><p>每一个帧和一个寄存器关联, 寄存器内容包括 :</p>
-<ul>
-<li>resident bit : 此帧是否被占用</li>
-<li>occupier : 对应的页号 p</li>
-<li>protection bits : 保护位</li>
-</ul>
-<p>实例</p>
-<ul>
-<li>物理内存大小是 : 4096 * 4096 = 4K * 4KB = 16 MB</li>
-<li>页面大小是 : 4096 bytes = 4 KB</li>
-<li>页帧数 : 4096 = 4 K</li>
-<li>页寄存器使用的空间(假设8 bytes / register) : 8 * 4096 = 32 Kbytes</li>
-<li>页寄存器带来的额外开销 : 32K / 16M = 0.2%</li>
-<li>虚拟内存大小 : 任意</li>
-</ul>
-<p>优势</p>
-<ul>
-<li>转换表的大小相对于物理内存来说很小</li>
-<li>转换表的大小跟逻辑地址空间的大小无关</li>
-</ul>
-<p>劣势</p>
-<ul>
-<li>需要的信息对调了, 即根据帧号可以找到页号</li>
-<li>如何转换回来? (如何根据页号找到帧号)</li>
-<li>在需要在反向页表中搜索想要的页号</li>
-</ul>
-<h3 id="基于关联内存-associative-memory-的方案"><a href="#基于关联内存-associative-memory-的方案" class="headerlink" title="基于关联内存(associative memory)的方案"></a>基于关联内存(associative memory)的方案</h3><p>硬件逻辑复杂，容量不能做太大，还需要放到CPU里面</p>
-<ul>
-<li><p>如果帧数较少, 页寄存器可以被放置在关联内存中</p>
-</li>
-<li><p>在关联内存中查找逻辑页号</p>
-<ul>
-<li>成功 : 帧号被提取</li>
-<li>失败 : 页错误异常 (page fault)</li>
-</ul>
-</li>
-<li><p>限制因素：</p>
-<ul>
-<li>大量的关联内存非常昂贵(难以在单个时钟周期内完成 ; 耗电)</li>
+<li>catch：指定信号处理函数被调用</li>
+<li>ignore：依靠操作系统的默认操作</li>
+<li>mask：闭塞信号因此不会传送<ul>
+<li>可能是暂时的（当处理同样类型的信号）</li>
 </ul>
 </li>
 </ul>
-<h3 id="基于哈希-hash-的方案"><a href="#基于哈希-hash-的方案" class="headerlink" title="基于哈希(hash)的方案"></a>基于哈希(hash)的方案</h3><p>哈希表，哈希函数 : h(PID, p) 从 PID 标号获得页号</p>
-<p>在反向页表中通过哈希算法来搜索一个页对应的帧号</p>
+<p>不足</p>
 <ul>
-<li>对页号做哈希计算, 为了在帧表中获取对应的帧号</li>
-<li>页 i 被放置在表 f(i) 位置, 其中 f 是设定的哈希函数</li>
-<li>为了查找页 i , 执行下列操作 :<ul>
-<li>计算哈希函数 f(i) 并且使用它作为页寄存器表的索引, 获取对应的页寄存器</li>
-<li>检查寄存器标签是否包含 i, 如果包含, 则代表成功, 否则失败</li>
+<li>不能传输要交换的任何数据</li>
 </ul>
-</li>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>子进程从父进程继承文件描述符</p>
+<p>进程不知道（或不关心）从键盘，文件，程序读取或写入到终端，文件，程序。</p>
+<p>例如: $ ls | more (两个进程, 管道是缓存,对于ls来说是stdout,对于more来说是stdin )</p>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>消息队列按FIFO来管理消息</p>
+<ul>
+<li>message: 作为一个字节序列存储</li>
+<li>message queues: 消息数组</li>
+<li>FIFO &amp; FILO configuration</li>
+</ul>
+<h3 id="共享队列"><a href="#共享队列" class="headerlink" title="共享队列"></a>共享队列</h3><p>进程</p>
+<ul>
+<li>每个进程都有私有地址空间</li>
+<li>在每个地址空间内，明确地设置了共享内存段</li>
+</ul>
+<p>优点</p>
+<ul>
+<li>快速，方便地共享数据</li>
+</ul>
+<p>不足</p>
+<ul>
+<li>必须同步数据访问</li>
 </ul>
 
         </div>
@@ -428,7 +533,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">#内存分配</a>&nbsp;
+                        <a href="/tags/%E6%AD%BB%E9%94%81/">#死锁</a>&nbsp;
                     </li>
                 
             </ul>
@@ -440,13 +545,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/11/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter5%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/"
+                           href="/2021/12/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%AA%E8%AE%BA/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">第五章 虚拟内存</span>
+                                <span class="post-nav-title-item">绪论</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -456,10 +561,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter3%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"
+                           href="/2021/11/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter10%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E7%AE%A1%E7%A8%8B/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">第三章 物理内存分配</span>
+                                <span class="post-nav-title-item">第十章 信号量和管程</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
