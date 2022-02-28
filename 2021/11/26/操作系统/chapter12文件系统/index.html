@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            第十二章 文件系统 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/f98f4bd9fcfb199c5b8fa27fdfb5726b.jpeg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">第十二章 文件系统</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-26 21:43:19</span>
+        <span class="mobile">2021-11-26 21:43</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">文件系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.1k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第十二章-文件系统"><a href="#第十二章-文件系统" class="headerlink" title="第十二章 文件系统"></a>第十二章 文件系统</h1><h2 id="12-1-12-9-基本概念"><a href="#12-1-12-9-基本概念" class="headerlink" title="12.1-12.9 基本概念"></a>12.1-12.9 基本概念</h2><h3 id="文件系统和文件"><a href="#文件系统和文件" class="headerlink" title="文件系统和文件"></a>文件系统和文件</h3><p><strong>文件系统</strong>：一种用于持久性存储的系统抽象</p>
+<ul>
+<li>在存储器上：组织，控制，导航，访问和检索数据</li>
+<li>大多数计算机系统包含文件系统</li>
+<li>个人电脑，服务器，笔记本电脑</li>
+<li>ipod，tivo/机顶盒，手机/掌上电脑</li>
+<li>google可能是由一个文件系统构成的</li>
+</ul>
+<p><strong>文件</strong>：文件系统中一个单元的相关数据在操作系统中的抽象</p>
+<h4 id="文件系统的功能"><a href="#文件系统的功能" class="headerlink" title="文件系统的功能"></a>文件系统的功能</h4><p>分配文件磁盘空间</p>
+<ul>
+<li><p>管理文件块（哪一种属于哪一个文件）</p>
+</li>
+<li><p>管理空闲空间（哪一块是空闲的）</p>
+</li>
+<li><p>分配算法（策略）</p>
+</li>
+</ul>
+<p>管理文件集合</p>
+<ul>
+<li>定位文件及其内容</li>
+<li>命名：通过名字找到文件的接口</li>
+<li>最常见：分层文件系统</li>
+<li>文件系统类型（组织文件的不同方式）</li>
+</ul>
+<p>提供便利及特征</p>
+<ul>
+<li>保护：分层来保护数据安全</li>
+<li>可靠性/持久性：保持文件的持久及时发生崩溃、媒体错误、攻击等</li>
+</ul>
+<h4 id="文件和块"><a href="#文件和块" class="headerlink" title="文件和块"></a>文件和块</h4><p>文件属性</p>
+<ul>
+<li>名称、类型、位置、大小、保护、创建者、创建时间、最近修改时间、。。。</li>
+</ul>
+<p>文件头</p>
+<ul>
+<li>在存储元数据中保存了每个文件的信息</li>
+<li>保存文件的属性</li>
+<li>跟踪哪一块存储块属于逻辑上文件结构的哪个偏移</li>
+</ul>
+<h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><p>文件使用模式</p>
+<ul>
+<li>使用程序必须在使用前先“打开”文件</li>
+</ul>
+<p>内核跟踪每个进程打开的文件</p>
+<ul>
+<li>操作系统为每个进程维护一个打开文件表</li>
+<li>一个打开文件描述符是这个表中的索引</li>
+</ul>
+<p>需要元数据来管理打开文件：</p>
+<ul>
+<li><strong>文件指针</strong>：指向最近的一次读写位置，每个打开了这个文件的进程都这个指针</li>
+<li><strong>文件打开次数</strong>：记录文件打开的次数 - 当最后一个进程关闭了文件时，允许将其从打开文件表中移除</li>
+<li><strong>文件磁盘位置</strong>：缓存数据访问信息</li>
+<li><strong>访问权限</strong>：每个程序访问模式信息</li>
+</ul>
+<p>用户视图：</p>
+<ul>
+<li>持久的数据结构</li>
+</ul>
+<p>系统访问接口：</p>
+<ul>
+<li>字节的集合</li>
+<li>系统不会关心你想存储在磁盘上的任何数据结构</li>
+</ul>
+<p>操作系统内部视角</p>
+<ul>
+<li>块的集合（块是逻辑转换单元，而扇区是物理转换单元）</li>
+<li>块大小&lt;&gt;扇区大小；在UNIX中，块的大小是4KB</li>
+</ul>
+<p>当用户说：给我2-12字节空间时会发生什么</p>
+<ul>
+<li>获取字节所在的块</li>
+<li>返回块内对应部分</li>
+</ul>
+<p>如果说要写2-12字节呢？</p>
+<ul>
+<li>获取块</li>
+<li>修改块内对应部分</li>
+<li>写回块</li>
+</ul>
+<p>在文件系统中的所有操作都是在整个块空间上进行的</p>
+<ul>
+<li><code>getc()</code> <code>putc()</code> 即使每次只访问1字节的数据,也会缓存目标数据4096字节(一个磁盘块)</li>
+</ul>
+<p>用户怎么访问文件</p>
+<ul>
+<li>在系统层面需要知道用户的访问模式</li>
+</ul>
+<p><strong>顺序访问</strong>：按字节一次读取</p>
+<ul>
+<li>几乎所有的访问都是这种方式</li>
+</ul>
+<p><strong>随机访问</strong>：从中间读写</p>
+<ul>
+<li>不常用，但是任然重要。例如，虚拟内存支持文件：内存页存储在文件中</li>
+<li>更加快速 - 不希望获取文件中间的内容的时候也必须先获取块内所有的字节</li>
+</ul>
+<p>基于内容访问：通过特征</p>
+<ul>
+<li>许多系统不提供此种访问方式，相反，数据库是建立在索引内容的磁盘访问上（需要高效的随机访问）</li>
+</ul>
+<h3 id="文件内部结构"><a href="#文件内部结构" class="headerlink" title="文件内部结构"></a>文件内部结构</h3><p>无结构</p>
+<ul>
+<li>单词，比特的队列</li>
+</ul>
+<p>简单记录结构</p>
+<ul>
+<li>列</li>
+<li>固定长度</li>
+<li>可变长度</li>
+</ul>
+<p>复杂结构</p>
+<ul>
+<li>格式化的文档</li>
+<li>可执行文件（如，MS word ，pdf）</li>
+<li>…</li>
+</ul>
+<p><strong>多用户系统中的文件共享是很必要的</strong></p>
+<p>访问控制</p>
+<ul>
+<li>谁能够获得哪些文件的哪些访问权限</li>
+<li>访问模式：读，写，执行，删除，列举等</li>
+</ul>
+<p>文件访问控制列表（ACL）</p>
+<ul>
+<li>文件实体，权限</li>
+</ul>
+<p>UNIX：</p>
+<ul>
+<li>&lt;用户|组|所有人,读|写|可执行&gt;</li>
+<li>用户ID识别用户,表明每个用户所允许的权限及保护模式</li>
+<li>组ID允许用户组成组,并指定了组访问权限</li>
+</ul>
+<p>指定多用户/客户如何同时访问共享文件</p>
+<ul>
+<li>和过程同步算法类似</li>
+<li>因磁盘I/O和网络延迟而设计简单</li>
+</ul>
+<p>UNIX文件系统（UFS）语义</p>
+<ul>
+<li>对打开文件的写入内容立即对其他打开同一文件的其他用户可见</li>
+<li>共享文件指针允许多用户同时读取和写入文件</li>
+</ul>
+<p>会话语义</p>
+<ul>
+<li>写入内容只有当文件关闭时可见</li>
+</ul>
+<p>锁</p>
+<ul>
+<li>一些操作系统和文件系统提供该功能</li>
+</ul>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>文件以目录的方式组织起来</p>
+<p>目录是一类特殊的文件</p>
+<ul>
+<li>每个目录都包含了一张表</li>
+</ul>
+<p>目录和文件的树型结构，层次命名空间</p>
+<p><strong>目录操作</strong></p>
+<p>典型操作</p>
+<ul>
+<li>搜索，创建，删除文件，枚举目录，重命名文件，在文件系统中遍历一个路径</li>
+</ul>
+<p>操作系统应该只允许内核模式修改目录</p>
+<ul>
+<li>确保映射的完整性</li>
+<li>应用程序能够读目录（如ls）</li>
+</ul>
+<p>文件名的线性列表，包涵了指向数据块的指针</p>
+<ul>
+<li>编程简单，执行耗时</li>
+</ul>
+<p>Hash表 - hash数据结构的线性表</p>
+<ul>
+<li>减少目录搜索时间</li>
+<li>碰撞 - 两个文件名的hash值相同</li>
+<li>固定大小</li>
+</ul>
+<p><strong>路径遍历</strong></p>
+<p>名字解析：逻辑名字转换成物理资源（如文件）的过程</p>
+<ul>
+<li>在文件系统中：到实际文件的文件名（路径）</li>
+<li>遍历文件目录直到找到目标文件</li>
+</ul>
+<p>举例：解析“/bin/ls”</p>
+<ul>
+<li>读取root的文件头（在磁盘固定位置）</li>
+<li>读取root的数据块；搜索“bin”项</li>
+<li>读取bin的文件头</li>
+<li>读取bin的数据块：搜索ls项</li>
+<li>读取ls的文件头</li>
+</ul>
+<p>当前工作目录</p>
+<ul>
+<li>每个进程都会指向一个文件目录用于解析文件名</li>
+<li>允许用户指定相对路径来代替绝对路径</li>
+</ul>
+<p>一个文件系统需要先挂载才能被访问</p>
+<p>一个未挂载的文件系统被挂载在挂载点上</p>
+<h3 id="文件别名"><a href="#文件别名" class="headerlink" title="文件别名"></a>文件别名</h3><p>两个或多个文件名关联同一个文件</p>
+<p><strong>硬链接</strong>：多个文件项指向一个文件</p>
+<p><strong>软链接</strong>：以“快捷方式”指向其他文件（存的是路径名）</p>
+<p>通过存储真实文件的逻辑名称来实现</p>
+<p>因为目录是树型结构，引入链接可能导致出现循环路径，如何保证没有循环呢？</p>
+<ul>
+<li>只允许到文件的链接，不允许在子目录的链接</li>
+<li>每增加一个新的链接都利用循环检测算法确定是否合理</li>
+<li>限制路径可遍历文件目录的数量</li>
+</ul>
+<h3 id="文件系统种类"><a href="#文件系统种类" class="headerlink" title="文件系统种类"></a>文件系统种类</h3><p><strong>磁盘文件系统</strong></p>
+<ul>
+<li>文件存储在数据存储设备上，如磁盘</li>
+<li>例如：FAT，NTFS，ext2/3，ISO9660，等</li>
+</ul>
+<p><strong>数据库文件系统</strong></p>
+<ul>
+<li>文件根据其特征是可被寻址的（辨识）的</li>
+<li>例如：WinFS</li>
+</ul>
+<p><strong>日志文件系统</strong></p>
+<ul>
+<li>计算机可能掉电导致文件系统混乱，因此下一次开机时会进行检查文件的内容一致性，导致开销很大，为此增加日志功能，可快速恢复</li>
+<li>记录文件系统的修改/事件</li>
+<li>例如：journaling file system</li>
+</ul>
+<p><strong>网络/分布式文件系统</strong></p>
+<ul>
+<li>例如：NFS，SMB，AFS，GFS</li>
+<li>在局域网范围内可快速方便的访问另一台机器的文件</li>
+</ul>
+<h2 id="12-10-虚拟文件系统"><a href="#12-10-虚拟文件系统" class="headerlink" title="12.10 虚拟文件系统"></a>12.10 虚拟文件系统</h2><p><strong>分层结构</strong></p>
+<ul>
+<li>上层：虚拟（逻辑）文件系统</li>
+<li>底层：特定文件系统模块</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/huibian/%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E5%B1%82.png"></p>
+<p>目的：对所有不同文件系统的抽象</p>
+<p>功能：</p>
+<ul>
+<li>提供相同的文件和文件系统<strong>接口</strong></li>
+<li>管理所有文件和文件系统关联的<strong>数据结构</strong></li>
+<li>高效查询<strong>例程</strong>，遍历文件系统</li>
+<li>与特定文件系统模块的<strong>交互</strong></li>
+</ul>
+<p><strong>文件系统基本数据结构</strong>：</p>
+<ol>
+<li>卷控制块（UNIX：“superblock”）</li>
+</ol>
+<ul>
+<li>每个文件系统一个</li>
+<li>文件系统详细的信息</li>
+<li>块、块的大小、空余块。计数/指针等</li>
+</ul>
+<ol start="2">
+<li>文件控制块（UNIX：“vnode” or “inode”）</li>
+</ol>
+<ul>
+<li>每个文件一个</li>
+<li>文件详细信息</li>
+<li>许可、拥有者、大小、数据库位置等</li>
+</ul>
+<ol start="3">
+<li>目录节点（Linux：“dentry”）</li>
+</ol>
+<ul>
+<li>每个目录项一个（目录和文件）</li>
+<li>将目录项数据结构及树型布局编码成树型结构</li>
+<li>指向文件控制块，父节点，项目列表等</li>
+</ul>
+<p>持续存储在二级存储中</p>
+<ul>
+<li><p>映射到磁盘的一个或多个扇区</p>
+</li>
+<li><p>分配在存储设备中的数据块中</p>
+</li>
+</ul>
+<p>当需要时加载进内存</p>
+<ul>
+<li>1 当文件系统挂载时进入内存</li>
+<li>2 当文件被访问时进入每次</li>
+<li>3 在遍历一个文件路径时进入内存</li>
+</ul>
+<h2 id="12-11-数据缓存"><a href="#12-11-数据缓存" class="headerlink" title="12.11 数据缓存"></a>12.11 数据缓存</h2><p>数据块按需读入内存</p>
+<ul>
+<li>提供read（）操作</li>
+<li>预读：预选读取后面的数据块</li>
+</ul>
+<p>数据块使用后被缓存</p>
+<ul>
+<li>假设数据将会再次被使用</li>
+<li>写操作可能被缓存和延迟写入</li>
+</ul>
+<p>两种数据块缓存方式</p>
+<ul>
+<li>普通缓冲区缓存</li>
+<li>页缓存：统一缓存数据块和内存页</li>
+</ul>
+<p>缓存和页式管理结合，实现基于分页的缓存机制</p>
+<p>分页要求</p>
+<ul>
+<li>当需要一个页时才将其载入内存</li>
+</ul>
+<p>支持存储</p>
+<ul>
+<li>一个页（在虚拟地址空间中）可以被映射到一个本地文件中（在二级存储中）</li>
+</ul>
+<p>文件数据块的页缓存</p>
+<ul>
+<li>在虚拟内存中文件数据块被映射成页</li>
+<li>文件的读/写操作被转换成对内存的访问</li>
+<li>可能导致缺页或设置为脏页</li>
+</ul>
+<h2 id="12-12-打开文件的数据结构"><a href="#12-12-打开文件的数据结构" class="headerlink" title="12.12 打开文件的数据结构"></a>12.12 打开文件的数据结构</h2><p>硬盘存的关于文件的文件控制块的内容读到内存中，把相关信息放在打开文件表里，项的索引返回给应用程序</p>
+<p>  打开文件描述</p>
+<ul>
+<li>每个被打开的文件一个</li>
+<li>文件状态信息</li>
+<li>目录项，当前文件指针，文件操作设置等</li>
+</ul>
+<p>打开文件表</p>
+<ul>
+<li>一个进程一个</li>
+<li>一个系统级的</li>
+<li>每个卷控制块也会保存一个列表</li>
+<li>所以如果有文件被打开将不能卸载 </li>
+</ul>
+<p>锁</p>
+<ul>
+<li>一些操作系统和文件系统提供该功能</li>
+<li>调节对文件的访问</li>
+<li>强制和劝告<ul>
+<li>强制 - 根据锁保持情况和需求拒绝访问</li>
+<li>劝告 - 进程可以查看锁的状态来决定怎么做</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-13-文件分配"><a href="#12-13-文件分配" class="headerlink" title="12.13 文件分配"></a>12.13 文件分配</h2><p>大多数文件都很小</p>
+<ul>
+<li>需要对小文件提供强力的支持</li>
+<li>块空间不能太大</li>
+</ul>
+<p>一些文件非常大</p>
+<ul>
+<li>必须支持大文件（64-bit 文件偏移）</li>
+<li>大文件访问需要相当高效</li>
+</ul>
+<p>如何为一个文件分配数据块</p>
+<p>分配方式</p>
+<ul>
+<li>连续，链式，索引</li>
+</ul>
+<p>指标：</p>
+<ul>
+<li>高效：如存储利用（外部碎片）</li>
+<li>表现：如访问速度</li>
+</ul>
+<h3 id="连续分配"><a href="#连续分配" class="headerlink" title="连续分配"></a>连续分配</h3><p>文件头指定起始块和长度，数组方式</p>
+<p>位置/分配策略</p>
+<ul>
+<li>最先匹配，最佳匹配。。。</li>
+</ul>
+<p>优势</p>
+<ul>
+<li>文件读取表现好</li>
+<li>高效的顺序和随机访问</li>
+</ul>
+<p>劣势</p>
+<ul>
+<li>碎片</li>
+<li>文件增长问题</li>
+</ul>
+<p><strong>组织好，性能糟糕，适合只读</strong></p>
+<h3 id="链式分配"><a href="#链式分配" class="headerlink" title="链式分配"></a>链式分配</h3><p>文件以数据块链表方式存储</p>
+<p>文件头包含了到第一块和最后一块的指针</p>
+<p>优点</p>
+<ul>
+<li>创建，增大，缩小很容易</li>
+<li>没有碎片</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>不可能进行真正的随机访问（访问第二块要先找到第一块）</li>
+<li>可靠性（一旦断了一个链。。。）</li>
+</ul>
+<h3 id="索引分配"><a href="#索引分配" class="headerlink" title="索引分配"></a>索引分配</h3><p>为每个文件创建一个名索引数据块的非数据数据块</p>
+<ul>
+<li>到文件数据块的指针列表</li>
+</ul>
+<p>文件头包含了索引数据块</p>
+<ul>
+<li>得到索引快后调入内存，然后查找对应文件位置</li>
+</ul>
+<p>优点</p>
+<ul>
+<li>创建，增大，缩小很容易</li>
+<li>没有碎片</li>
+<li>支持直接访问</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>当文件很小时，存储索引的开销大</li>
+<li>很大的文件，索引块能够表示的数据块的个数有限，一个索引块不够，其他索引块又要如何管理</li>
+</ul>
+<p><strong>链式索引块（IB+IB+…)</strong></p>
+<p>线性扩展的方式，对大文件的扩展还是有限，万一链断了怎么办</p>
+<p><strong>多级索引块（IB*IB…)</strong></p>
+<p>分层方式灵活支持大小文件</p>
+<h2 id="12-14-空闲空间列表"><a href="#12-14-空闲空间列表" class="headerlink" title="12.14 空闲空间列表"></a>12.14 空闲空间列表</h2><p>跟踪在存储中的所有未分配的数据块</p>
+<p>空闲空间列表存储在哪里？</p>
+<p>空闲空间列表的最佳数据结构怎么样？</p>
+<p>用位图代表空闲数据块列表</p>
+<ul>
+<li>11111101101110111 如果 i = 0表明数据块i是空闲的,反之是分配的</li>
+</ul>
+<p>使用简单但是可能回事一个big vector</p>
+<ul>
+<li><p>160GB disk → 40M blocks → 5MB worth of bits</p>
+</li>
+<li><p>然而，如果空闲空间在磁盘中均匀分布,那么再找到”0“之前需要扫描的开销：</p>
+<p>磁盘上数据块总数 / 空闲块的数目</p>
+</li>
+</ul>
+<h2 id="12-15-多磁盘管理-RAID"><a href="#12-15-多磁盘管理-RAID" class="headerlink" title="12.15 多磁盘管理-RAID"></a>12.15 多磁盘管理-RAID</h2><p>通常磁盘通过分区来最大限度减少寻道时间</p>
+<ul>
+<li>一个分区是一个柱面的集合</li>
+<li>每个分区都是逻辑上独立的磁盘</li>
+</ul>
+<p>分区：硬件磁盘的一种适合操作系统指定格式的划分</p>
+<p>卷（多个disk变成一个卷）：一个拥有一个文件系统实例的可访问的存储空间</p>
+<p><strong>RAID</strong></p>
+<p>提高磁盘访问效率</p>
+<p>使用多个并行磁盘来增加</p>
+<ul>
+<li>吞吐量（通过并行）</li>
+<li>可靠性和可用性（通过冗余）</li>
+</ul>
+<p>RAID - 冗余磁盘阵列</p>
+<ul>
+<li>各种磁盘管理技术</li>
+<li>RAID level：不同RAID分类（如，RAID-0，RAID-1，RAID-5）</li>
+</ul>
+<p>实现</p>
+<ul>
+<li>在操作系统内核：存储/卷管理</li>
+<li>RAID硬件控制器（I/O）</li>
+</ul>
+<p>RAID-0（提高吞吐量）</p>
+<p>数据块分成多个子块，存储在独立的磁盘中</p>
+<ul>
+<li>和内存交叉相似</li>
+</ul>
+<p>通过更大的有效快大小来提供更大的磁盘带宽</p>
+<p>RAID-1（提高可靠性）</p>
+<p>可靠性成倍增长</p>
+<p>读取性能线性增加</p>
+<ul>
+<li>向两个硬盘写入，随机一个读取</li>
+</ul>
+<p>RAID-4（即提高性能，又增加可靠性）</p>
+<p>数据块级磁带配有专用奇偶校验磁盘</p>
+<ul>
+<li>允许从任意一个故障磁盘中恢复</li>
+</ul>
+<p>额外的盘完成容错功能</p>
+<p>往任何一个disk里写一个数据，就要往parity disk里面也做写操作</p>
+<p>PAID-5</p>
+<p>把奇偶校验的块均匀分布在不同的disk里面，开销均匀，访问并行。允许有一个disk错误</p>
+<p>RAID-6</p>
+<p>两个冗余块，有一种特殊的编码方式，允许两个磁盘错误</p>
+<h2 id="12-16-磁盘调度"><a href="#12-16-磁盘调度" class="headerlink" title="12.16 磁盘调度"></a>12.16 磁盘调度</h2><p>读取或写入时，磁头必须被定为在期望的磁道，并从所期望的扇区开始</p>
+<p>寻到时间</p>
+<ul>
+<li>定位到期望的磁道所花费的时间</li>
+</ul>
+<p>旋转延迟</p>
+<ul>
+<li>从扇区的开始到到达目的处所花费的时间</li>
+</ul>
+<p>寻道时间是性能上区别的原因</p>
+<p>对单个磁盘，会有一个IO请求数目</p>
+<p>如果请求是随机的,那么会表现很差</p>
+<p><strong>FIFO</strong></p>
+<ul>
+<li>按顺序处理请求</li>
+<li>公平对待所有进程</li>
+<li>在有很多进程的情况下，接近随机调度的性能</li>
+</ul>
+<p><strong>最短服务优先</strong></p>
+<ul>
+<li>选择从磁臂当前位置需要移动最少的I/O请求</li>
+<li>总是选择最短寻道时间</li>
+<li>如果请求频繁出现在当前访问位置，而远处的访问请求持续得不到服务，导致饥饿现象</li>
+<li>访问不公平性和不均匀性</li>
+</ul>
+<p><strong>skan</strong></p>
+<ul>
+<li><p>磁臂在一个方向上移动，满足所有未完成的请求，直到磁臂到达该方向上最后的磁道</p>
+</li>
+<li><p>调度方向</p>
+</li>
+</ul>
+<p><strong>c-skan</strong></p>
+<ul>
+<li>限制了仅在一个方向上扫描</li>
+<li>当最后一个磁道也被访问过了后，磁臂返回到磁盘的另外一端再次进行扫描</li>
+<li>公平效率高</li>
+</ul>
+<p><strong>c-loop</strong></p>
+<ul>
+<li>磁臂先到达该方向上最后一个请求处，然后立即反转</li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">#文件系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BB%AA%E8%AE%BA/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">绪论</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter11%E6%AD%BB%E9%94%81/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">第十一章 死锁</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-text">第十二章 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-12-9-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">12.1-12.9 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%96%87%E4%BB%B6"><span class="nav-text">文件系统和文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-text">文件系统的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E5%9D%97"><span class="nav-text">文件和块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-text">文件内部结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%88%AB%E5%90%8D"><span class="nav-text">文件别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A7%8D%E7%B1%BB"><span class="nav-text">文件系统种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-10-%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-text">12.10 虚拟文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-11-%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98"><span class="nav-text">12.11 数据缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-12-%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">12.12 打开文件的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-13-%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D"><span class="nav-text">12.13 文件分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D"><span class="nav-text">连续分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E5%88%86%E9%85%8D"><span class="nav-text">链式分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E9%85%8D"><span class="nav-text">索引分配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-14-%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4%E5%88%97%E8%A1%A8"><span class="nav-text">12.14 空闲空间列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-15-%E5%A4%9A%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86-RAID"><span class="nav-text">12.15 多磁盘管理-RAID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-16-%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6"><span class="nav-text">12.16 磁盘调度</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

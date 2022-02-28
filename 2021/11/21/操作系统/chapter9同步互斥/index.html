@@ -591,120 +591,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5"><span class="nav-text">第九章 同步互斥</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E8%83%8C%E6%99%AF"><span class="nav-text">9.1 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-9-4-%E6%A6%82%E5%BF%B5"><span class="nav-text">9.2-9.4 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-%E4%B8%B4%E7%95%8C%E5%8C%BA"><span class="nav-text">9.5 临界区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-%E6%96%B9%E6%B3%95%E4%B8%80-%E7%A6%81%E7%94%A8%E7%A1%AC%E4%BB%B6%E4%B8%AD%E6%96%AD"><span class="nav-text">9.6 方法一 禁用硬件中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7-%E6%96%B9%E6%B3%952-%E5%9F%BA%E4%BA%8E%E8%BD%AF%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-text">9.7 方法2 基于软件的解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-8-%E6%96%B9%E6%B3%953-%E6%9B%B4%E9%AB%98%E7%BA%A7%E7%9A%84%E6%8A%BD%E8%B1%A1"><span class="nav-text">9.8 方法3 更高级的抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

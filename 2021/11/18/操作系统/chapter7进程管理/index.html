@@ -678,120 +678,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="nav-text">第七章 进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-7-4-%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0"><span class="nav-text">7.1-7.4 进程描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">进程的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-text">进程的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">进程的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="nav-text">进程控制结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-7-7-%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-text">7.5-7.7 进程状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86"><span class="nav-text">进程生命周期管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-text">进程状态变化模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E6%8C%82%E8%B5%B7"><span class="nav-text">进程挂起</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-8-7-10-%E7%BA%BF%E7%A8%8B"><span class="nav-text">7.8-7.10 线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B"><span class="nav-text">为什么使用线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B"><span class="nav-text">什么是线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%BA%BF%E7%A8%8B"><span class="nav-text">用户线程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B"><span class="nav-text">内核线程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-11-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-text">7.11 上下文切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-12-7-14-%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-text">7.12-7.14 进程的控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9B%E7%A8%8B"><span class="nav-text">创建进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%89%A7%E8%A1%8C%E8%BF%9B%E7%A8%8B"><span class="nav-text">加载和执行进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E5%92%8C%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B"><span class="nav-text">等待和终止进程</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

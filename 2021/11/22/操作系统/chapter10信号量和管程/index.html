@@ -565,120 +565,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0-%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E7%AE%A1%E7%A8%8B"><span class="nav-text">第十章 信号量和管程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">10.3 信号量的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">10.4 信号量的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-%E7%AE%A1%E7%A8%8B"><span class="nav-text">10.5 管程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-10-8-%E7%BB%8F%E5%85%B8%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="nav-text">10.6-10.8 经典同步问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E8%80%85-%E5%86%99%E8%80%85%E9%97%AE%E9%A2%98"><span class="nav-text">读者-写者问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-9-10-11-%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98"><span class="nav-text">10.9-10.11 哲学家就餐问题</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

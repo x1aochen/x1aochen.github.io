@@ -578,120 +578,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-text">第四章 非连续内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%88%86%E6%AE%B5"><span class="nav-text">4.1 分段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A7%EF%BC%88Frame%EF%BC%89"><span class="nav-text">帧（Frame）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%EF%BC%88Page%EF%BC%89"><span class="nav-text">页（Page）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E9%A1%B5%E8%A1%A8-%E6%A6%82%E8%BF%B0%E3%80%81TLB"><span class="nav-text">4.3 页表-概述、TLB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E8%A1%A8%E6%A6%82%E8%BF%B0"><span class="nav-text">页表概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Translation-Look-aside-Buffer%EF%BC%88TLB%EF%BC%89%EF%BC%88%E8%A7%A3%E5%86%B3%E9%80%9F%E5%BA%A6%E4%B8%8A%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-text">Translation Look-aside Buffer（TLB）（解决速度上问题）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E9%A1%B5%E8%A1%A8-%E4%BA%8C%E7%BA%A7%EF%BC%8C%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8"><span class="nav-text">4.4 页表-二级，多级页表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E9%A1%B5%E8%A1%A8-%E5%8F%8D%E5%90%91%E9%A1%B5%E8%A1%A8"><span class="nav-text">4.5 页表-反向页表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%A1%B5%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88page-registers%EF%BC%89%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">基于页寄存器（page registers）的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%85%B3%E8%81%94%E5%86%85%E5%AD%98-associative-memory-%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">基于关联内存(associative memory)的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%93%88%E5%B8%8C-hash-%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-text">基于哈希(hash)的方案</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

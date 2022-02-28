@@ -347,120 +347,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

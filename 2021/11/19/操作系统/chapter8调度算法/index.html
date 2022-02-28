@@ -611,120 +611,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">第八章 调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-%E8%83%8C%E6%99%AF"><span class="nav-text">8.1 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-%E8%B0%83%E5%BA%A6%E5%8E%9F%E5%88%99"><span class="nav-text">8.2 调度原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-8-4-%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">8.3-8.4 调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-FCFS%EF%BC%88%E5%85%88%E6%9D%A5%E5%85%88%E5%8E%BB%E6%9C%8D%E5%8A%A1%EF%BC%89"><span class="nav-text">一. FCFS（先来先去服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-SPN-SRT-%E7%9F%AD%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88"><span class="nav-text">二. SPN&#x2F;SRT 短进程优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89-HRRN-%E6%9C%80%E9%AB%98%E5%93%8D%E5%BA%94%E6%AF%94%E4%BC%98%E5%85%88"><span class="nav-text">三. HRRN 最高响应比优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B-Round-Robin-%E8%BD%AE%E5%BE%AA"><span class="nav-text">四. Round Robin 轮循</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94-MLFQ-%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97"><span class="nav-text">五. MLFQ 多级反馈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD-Fair-Share-Scheduling-%E5%85%AC%E5%B9%B3%E5%85%B1%E4%BA%AB%E8%B0%83%E5%BA%A6"><span class="nav-text">六. Fair-Share Scheduling 公平共享调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5-%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6"><span class="nav-text">8.5 实时调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6-%E5%A4%9A%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC"><span class="nav-text">8.6 多处理器调度与优先级反转</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

@@ -483,120 +483,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">第六章 页面置换算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">6.1 页面置换算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E4%B8%8E%E7%9B%AE%E6%A0%87"><span class="nav-text">功能与目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">最优页面置换算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">局部页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%E7%AE%97%E6%B3%95"><span class="nav-text">6.2 先进先出算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E6%9C%80%E8%BF%91%E6%9C%80%E4%B9%85%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95"><span class="nav-text">6.3 最近最久未使用算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-%E6%97%B6%E9%92%9F%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">6.4 时钟页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-%E4%BA%8C%E6%AC%A1%E6%9C%BA%E4%BC%9A%E6%B3%95"><span class="nav-text">6.5 二次机会法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-%E6%9C%80%E4%B8%8D%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95"><span class="nav-text">6.6 最不常用算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-Belady%E7%8E%B0%E8%B1%A1%E3%80%81LRU%E3%80%81FIFO%E3%80%81Clock%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">6.7 Belady现象、LRU、FIFO、Clock的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Belady%E7%8E%B0%E8%B1%A1"><span class="nav-text">Belady现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU%E3%80%81FIFO%E5%92%8CClock%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">LRU、FIFO和Clock的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">全局页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-8-%E5%B1%80%E9%83%A8%E9%A1%B5%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%81%E5%B7%A5%E4%BD%9C%E6%9C%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">6.8 局部页替换算法的问题、工作机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E9%9B%86%E6%A8%A1%E5%9E%8B"><span class="nav-text">工作集模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%A9%BB%E9%9B%86"><span class="nav-text">常驻集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-9-%E4%B8%A4%E4%B8%AA%E5%85%A8%E5%B1%80%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">6.9 两个全局置换算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E9%9B%86%E9%A1%B5%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">工作集页置换算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B5%E7%8E%87%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">缺页率置换算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-10-%E6%8A%96%E5%8A%A8%E9%97%AE%E9%A2%98"><span class="nav-text">6.10 抖动问题</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

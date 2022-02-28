@@ -460,120 +460,17 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-text">接口与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%90%91%E9%87%8F%E5%88%B0%E5%88%97%E8%A1%A8"><span class="nav-text">从向量到列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E7%A7%A9%E5%88%B0%E4%BD%8D%E7%BD%AE"><span class="nav-text">从秩到位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-text">无序列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%8E%E6%9E%90%E6%9E%84"><span class="nav-text">删除与析构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-text">查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D"><span class="nav-text">去重</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-text">有序列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%94%AF%E4%B8%80%E5%8C%96"><span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-1"><span class="nav-text">查找</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%BA%8F%E5%AF%B9%EF%BC%88inversion%EF%BC%89"><span class="nav-text">逆序对（inversion）</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     
