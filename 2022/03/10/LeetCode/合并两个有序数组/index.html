@@ -9,7 +9,7 @@
     
     <title>
         
-            三数之和 |
+            合并两个有序数组 |
         
         keep
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">三数之和</span>
+            <span class="title-hover-animation">合并两个有序数组</span>
         </div>
 
         
@@ -154,8 +154,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-09 11:13:54</span>
-        <span class="mobile">2022-03-09 11:13</span>
+        <span class="pc">2022-03-10 21:00:00</span>
+        <span class="mobile">2022-03-10 21:00</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -174,7 +174,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>355 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>101 字</span>
         </span>
     
     
@@ -191,12 +191,8 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="排序-双指针"><a href="#排序-双指针" class="headerlink" title="排序+双指针"></a>排序+双指针</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">3</span>) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; len)&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//当i大于0，则后续不会再有三数和等于0了</span></span><br><span class="line">            <span class="keyword">int</span> left = i + <span class="number">1</span>,right = len - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right)&#123; </span><br><span class="line">                <span class="comment">//防止溢出</span></span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> y = <span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(nums[i]);</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> x = <span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(nums[left]);</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> z = <span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(nums[right]);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x + y &gt; <span class="number">0</span> - z) <span class="comment">//right太大，向前移动</span></span><br><span class="line">                    right--;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (x + y &lt; <span class="number">0</span> - z) <span class="comment">//left太小，向后移动</span></span><br><span class="line">                    left++;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    res.<span class="built_in">push_back</span>(&#123;nums[i],nums[left],nums[right]&#125;);</span><br><span class="line">                    <span class="comment">//跳过重复元素</span></span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>])</span><br><span class="line">                        left++;</span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>])</span><br><span class="line">                        right--;</span><br><span class="line"></span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (i + <span class="number">1</span> &lt; len &amp;&amp; nums[i] == nums[i + <span class="number">1</span>])</span><br><span class="line">                i++;</span><br><span class="line"></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+            <h3 id="双指针合并"><a href="#双指针合并" class="headerlink" title="双指针合并"></a>双指针合并</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (m == <span class="number">0</span> || n == <span class="number">0</span>) nums1 = nums2;</span><br><span class="line">                vector&lt;<span class="keyword">int</span>&gt; sum;</span><br><span class="line">                sum.<span class="built_in">resize</span>(m + n);</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">0</span>,j = <span class="number">0</span>,k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">                <span class="keyword">while</span>(i &lt; m &amp;&amp; j &lt; n)&#123;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span>(nums1[i] &lt; nums2[j]) sum[k++] = nums1[i++];</span><br><span class="line">                    <span class="keyword">else</span> sum[k++] = nums2[j++];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (i &lt; m)&#123;</span><br><span class="line">                    sum[k++] = nums1[i++];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (j &lt; n)&#123;</span><br><span class="line">                    sum[k++] = nums2[j++];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                nums1 = sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>第一重循环保持一个不动的数，第二重循环左右指针遍历数组寻找三数和</p>
-<p>每次循环判断三数和大于或小于0，大于0，则选择较小的数再进行判断，小于0则相反</p>
-<p>当a + b + c = 0且不能出现重复，那么必定要有两个数值发生变化，所以左右指针都需跳过重复元素，寻找新的三数和</p>
-<p>当排好序的数组剩余元素都为正数时，直接返回</p>
 
         </div>
 
@@ -207,29 +203,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/03/10/LeetCode/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">合并两个有序数组</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/03/08/LeetCode/%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/"
+                           href="/2022/03/09/LeetCode/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">排序数组</span>
+                                <span class="post-nav-title-item">三数之和</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -350,7 +331,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F-%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-text">排序+双指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88%E5%90%88%E5%B9%B6"><span class="nav-text">双指针合并</span></a></li></ol>
     </div>
 </div>
         </aside>
