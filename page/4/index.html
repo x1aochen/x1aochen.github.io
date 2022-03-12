@@ -9,8 +9,6 @@
     
     <title>
         
-            三数之和 |
-        
         keep
     </title>
     
@@ -425,141 +423,82 @@ $logo-image-box-width = 46px;
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">三数之和</span>
-        </div>
-
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
         
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter3%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
+                        第三章 物理内存分配
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        第三章 物理内存分配3.1 计算机体系结构及内存分层体系计算机体系结构计算机组成原理
+CPU，内存，总线，I/O
+内存体系结构OS内存管理目标
+抽象（逻辑地址空间）：应用程序不需要考虑底层细节
+保护（独立地址空间）：内存中可以运行多个应用程序，多个程...
+                    
                 </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">陈嘉俊</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        .article-meta-info {
-  font-size: 0.8rem;
-  color: var(--third-text-color);
 
-  .article-meta-item {
-    margin-right: 10px;
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Nov 10 2021 20:22:13 GMT+0800">2021-11-10</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">内存分配</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
 
-    &:last-child {
-      margin-right: 0;
-    }
+    <a href="/2021/11/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/chapter3%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        .paginator {
+  font-size: 1rem;
+  margin-top: 30px;
+
+  a.prev {
+    float: left;
   }
 
-  .article-date {
-
-    .mobile {
-      display: none;
-    }
-
-    +keep-tablet() {
-      .pc {
-        display: none;
-      }
-
-      .mobile {
-        display: inline;
-      }
-    }
-
+  a.next {
+    float: right;
   }
 
-
-  .article-tags, .article-categories {
-    display: inline;
-
-    ul, li {
-      display: inline;
-    }
-
-    a {
-      color: var(--third-text-color);
-
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
-  }
-
-  .article-tags {
-    +keep-tablet() {
-      display: none;
-    }
-  }
-
-  .article-min2read, .article-wordcount {
-    +keep-mobile() {
-      display: none;
-    }
-  }
 }
 
-                    </div>
-                </div>
-            </div>
-        
-
-        <div class="article-content markdown-body">
-            <h3 id="排序-双指针"><a href="#排序-双指针" class="headerlink" title="排序+双指针"></a>排序+双指针</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">3</span>) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; len)&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//当i大于0，则后续不会再有三数和等于0了</span></span><br><span class="line">            <span class="keyword">int</span> left = i + <span class="number">1</span>,right = len - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right)&#123; </span><br><span class="line">                <span class="comment">//防止溢出</span></span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> y = <span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(nums[i]);</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> x = <span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(nums[left]);</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> z = <span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(nums[right]);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (x + y &gt; <span class="number">0</span> - z) <span class="comment">//right太大，向前移动</span></span><br><span class="line">                    right--;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (x + y &lt; <span class="number">0</span> - z) <span class="comment">//left太小，向后移动</span></span><br><span class="line">                    left++;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    res.<span class="built_in">push_back</span>(&#123;nums[i],nums[left],nums[right]&#125;);</span><br><span class="line">                    <span class="comment">//跳过重复元素</span></span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>])</span><br><span class="line">                        left++;</span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>])</span><br><span class="line">                        right--;</span><br><span class="line"></span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (i + <span class="number">1</span> &lt; len &amp;&amp; nums[i] == nums[i + <span class="number">1</span>])</span><br><span class="line">                i++;</span><br><span class="line"></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>第一重循环保持一个不动的数，第二重循环左右指针遍历数组寻找三数和</p>
-<p>每次循环判断三数和大于或小于0，大于0，则选择较小的数再进行判断，小于0则相反</p>
-<p>当a + b + c = 0且不能出现重复，那么必定要有两个数值发生变化，所以左右指针都需跳过重复元素，寻找新的三数和</p>
-<p>当排好序的数组剩余元素都为正数时，直接返回</p>
-
-        </div>
-
-        
-
-        
-
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/03/10/LeetCode/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">合并两个有序数组</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2022/03/08/LeetCode/%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">排序数组</span>
-                                <span class="post-nav-item">下一篇</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
-
-        
     </div>
 </div>
 
@@ -603,62 +542,6 @@ $logo-image-box-width = 46px;
         </div>
     </div>
 
-    
-        <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
-
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
-
-        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -778,83 +661,6 @@ $tools-item-border-radius = 1px;
 
     </div>
 
-    
-        <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
-        </aside>
     
 
     .image-viewer-container {
@@ -1080,6 +886,7 @@ $tools-item-border-radius = 1px;
 
 
 
+
 <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
 
 
@@ -1093,8 +900,6 @@ $tools-item-border-radius = 1px;
 
 
 <div class="post-scripts">
-    
-        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
     
 </div>
 
