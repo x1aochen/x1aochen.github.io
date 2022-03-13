@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            数据链路层 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/wallhaven-l3zyg2_1920x1080.png","description":null},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">数据链路层</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-05 22:54:13</span>
+        <span class="mobile">2022-01-05 22:54</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">数据链路层</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/IP%E5%9C%B0%E5%9D%80/">IP地址</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/MAC%E5%9C%B0%E5%9D%80/">MAC地址</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>链路：就是从一个结点到相邻结点的一段物理线路，而中间没有任何其他的交换结点</li>
+<li>数据链路：是指把实现通信协议的硬件和软件加到链路上，就构成了数据链路</li>
+<li>数据链路层以帧为单位传输和处理数据</li>
+</ul>
+<p>三个重要问题：封装成帧，差错检测，可靠传输</p>
+<h3 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h3><ul>
+<li><p>数据链路层给上层交付的协议数据单元添加帧头和帧尾使之称为帧</p>
+<ul>
+<li>帧头和帧尾中包含有重要的控制信息</li>
+<li>帧头和帧尾的作用之一就是帧定界</li>
+</ul>
+</li>
+<li><p>透明传输是指数据链路层对上层交付的传输数据没有任何限制，就好像数据链路层不存在一样</p>
+</li>
+<li><p>为了提高帧的传输效率，应当使帧的数据部分的长度尽可能大些</p>
+</li>
+<li><p>考虑到差错控制等多种因素，每一种数据链路层协议都规定了帧的数据部分的长度上限，即最大传送单元MTU</p>
+</li>
+</ul>
+<h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><ul>
+<li>实际的通信链路都不是理想的，比特在传输过程中可能产生差错，这称为比特差错</li>
+<li>在一段时间内，传输错误的比特占所传输比特总数的比率称为误码率BER</li>
+<li>使用差错检测码来检测数据在传输过程中是否产生了比特差错，是数据链路层所要解决的重要问题之一</li>
+</ul>
+<h3 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h3><p>数据链路层向上提供的服务类型</p>
+<ul>
+<li><p>不可靠传输服务：仅仅丢弃误码的帧，其他什么也不做</p>
+</li>
+<li><p>可靠传输服务：想办法实现发送管发送什么，接收端就收到什么</p>
+</li>
+<li><p>一般情况下，有线链路的误码率比较低，为了减少开销，并不要求数据链路层想向上提供可靠传输服务。即使出现误码，可靠传输的问题由其上层处理</p>
+</li>
+<li><p>无线链路易受干扰，误码率较高，因此必须提供</p>
+</li>
+<li><p>可靠传输服务并不仅局限于数据链路层，其他各层均可选择实现可靠传输</p>
+</li>
+<li><p>可靠传输的实现比较复杂，开销也比较小，是否使用应根据实际应用需求</p>
+</li>
+</ul>
+<h4 id="停止-等待协议SW"><a href="#停止-等待协议SW" class="headerlink" title="停止-等待协议SW"></a>停止-等待协议SW</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AESW.png"></p>
+<h4 id="回退N帧协议GBN"><a href="#回退N帧协议GBN" class="headerlink" title="回退N帧协议GBN"></a>回退N帧协议GBN</h4><p>停止-等待协议的信道利用率很低，若出现超时重传，则信道利用率更低</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%9B%9E%E9%80%80N%E5%B8%A7%E5%8D%8F%E8%AE%AE.png"></p>
+<h4 id="选择重传协议SR"><a href="#选择重传协议SR" class="headerlink" title="选择重传协议SR"></a>选择重传协议SR</h4><p>回退N帧协议的接受窗口WR只能等于1，因此接受方只能按序接受正确到达的数据分组</p>
+<p>一个数据分组的误码就会导致其后续多个数据分组不能被接收方按序接受而丢弃（尽管他们无乱序和误码）。这必然会造成发送方对这些数据分组的超市重传，显然这是对通信资源的极大浪费</p>
+<ul>
+<li>为了进一步提高性能，可设法只重传误码和数据分组。因此，接受窗口的尺寸WR不应再等于1，以便接受方先收下失序到达但无误码并且序号落在接受窗口内的那些数据分组，等到所缺分组收齐后再一并送交上层</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AESR.png"></p>
+<h3 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AEPPP.png"></p>
+<h3 id="媒体接入控制"><a href="#媒体接入控制" class="headerlink" title="媒体接入控制"></a>媒体接入控制</h3><p> <img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%AA%92%E4%BD%93%E6%8E%A5%E5%85%A5%E6%8E%A7%E5%88%B6.png"></p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%AA%92%E4%BD%93%E6%8E%A5%E5%85%A5%E6%8E%A7%E5%88%B62.png"></p>
+<h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><ul>
+<li><p>当多个主机连接在同一广播信道上，要想实现两个主机之间的通信，则每个主机必须有一个唯一的标识，即一个数据链路层的地址</p>
+</li>
+<li><p>在每个主机发送的<strong>帧中必须携带标识发送主机和接受主机的地址</strong>。由于这类地址是用于媒体接入控制MAC（Media Access Contronl），因此这类地址被称为MAC地址</p>
+<ul>
+<li>MAC地址一般被固话在网卡（网络适配器）的电可擦可编程只读存储器EEPROM中，因此MAC地址也被称为硬件地址</li>
+<li>MAC地址有时也被称为物理地址。但是这并不意味着MAC地址属于网络体系结构中的物理层</li>
+</ul>
+</li>
+<li><p>一般情况下，用户主机会包含两个网络适配器：有线局域网适配器（有线网卡）和无线局域网适配器（无线网卡）。每个网络适配器都有一个全球唯一的MAC地址。而交换机和路由器往往拥有更多的网络接口，所以会拥有更多的MAC地址。综上所述，严格来说，<strong>MAC地址是对网络上各接口的唯一标识，而不是对网络上各设备的唯一标识</strong></p>
+</li>
+</ul>
+<h3 id="IP地址（简要）"><a href="#IP地址（简要）" class="headerlink" title="IP地址（简要）"></a>IP地址（简要）</h3><ul>
+<li><p>IP地址是因特网上的主机和路由器所使用的地址，用于标识两部分信息：</p>
+<ul>
+<li>网络编号：标识因特网上数以百万计的网络</li>
+<li>主机编号：标识同一网络上不同主机（或路由器各接口）</li>
+</ul>
+</li>
+<li><p>很显然，MAC地址并不具备区分不同网络的功能</p>
+<ul>
+<li>如果只是一个单独的网络，不接入因特网，可以只使用MAC地址</li>
+<li>如果主机所在的网络要接入因特网，则IP地址和MAC地址都需要使用</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/IPMAC%E5%9C%B0%E5%9D%80%E5%8F%98%E5%8C%96.png"></p>
+<ul>
+<li>数据包转发过程中源IP地址和目的IP地址保持不变</li>
+<li>源MAC地址逐个链路或逐个网络改变 </li>
+</ul>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p>如何通过IP地址找到相应的MAC地址</p>
+<ul>
+<li>源主机在自己的ARP高速缓存表中查找目的主机的IP地址所对应的MAC地址，若找到了,则可以封装MAC帧进行发送;若找不到，则发送ARP请求(封装在广播MAC帧中) ;</li>
+<li>目的主机收到ARP请求后，将源主机的IP地址与MAC地址记录到自己的ARP高速缓存表中，然后给源主机发送ARP响应(封装在单播MAC帧中)，ARP响应中包含有目的主机的IP地址和MAC地址;</li>
+<li>源主机收到ARP响应后，将目的主机的IP地址与MAC地址记录到自己的ARP高速缓存表中，然后就可以封装之前想发送的MAC帧并发送给目的主机:</li>
+<li>ARP的作用范围:逐段链路或逐个网络使用:</li>
+<li>除ARP请求和响应外，ARP还有其他类型的报文(例如用于检查IP地址冲突的“无故ARP.免费ARP(Gratuitous ARP)”) ;</li>
+<li>ARP没有安全验证机制，存在ARP欺骗(攻击)问题。</li>
+</ul>
+<h3 id="集线器和交换机的区别"><a href="#集线器和交换机的区别" class="headerlink" title="集线器和交换机的区别"></a>集线器和交换机的区别</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA.png"></p>
+<p>集线器HUB： 半双工</p>
+<ul>
+<li>早期以太网的互连设备</li>
+<li>工作在OSI体系结构的物理层</li>
+<li>对接收到的信号进行放大、转发</li>
+<li>使用集线器作为互连设备的以太网仍然属于共享总线式以太网。集线器互连起来的所有主机共享总线带宽，属于同个碰撞域和广播域。</li>
+</ul>
+<p>交换机SWITCH：全双工</p>
+<ul>
+<li>目前以太网中使用最广 泛的互连设备</li>
+<li>工作在OSI体系结构的数据链路层(也包括物理层)根据MAC地址对帧进行转发</li>
+<li>使用交换机作为互连设备的以太网，称为交换式以太网。交换机可以根据MAC地址过滤帧，即隔离碰撞域。</li>
+<li>交换机的每个接口是一个独立的碰撞域</li>
+<li>交换机隔离碰撞域但不隔离广播域(VLAN除外)</li>
+</ul>
+<h3 id="以太网交换机自学习和转发帧的过程"><a href="#以太网交换机自学习和转发帧的过程" class="headerlink" title="以太网交换机自学习和转发帧的过程"></a>以太网交换机自学习和转发帧的过程</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6%E4%B9%A0.png"></p>
+<h3 id="生成树协议STP"><a href="#生成树协议STP" class="headerlink" title="生成树协议STP"></a>生成树协议STP</h3><ul>
+<li>以太网交换机使用生成树协议STP(Spanning Tree Protocol),可以在增加冗余链路来提高网络可靠性的同时又避免网络环路带来的各种问题</li>
+<li>不论交换机之间采用怎样的物理连接，交换机都能够自动计算并构建一个逻辑上没有环路的网络，其逻辑拓扑结构必须是树型的(无逻辑环路) ;</li>
+<li>最终生成的树型逻辑拓扑要确保连通整个网络;</li>
+<li>当首次连接交换机或网络物理拓扑发生变化时(有可能是人为改变或故障) ,交换机都将进行生成树的重新计算。</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE.png"></p>
+<h3 id="虚拟局域网VLAN"><a href="#虚拟局域网VLAN" class="headerlink" title="虚拟局域网VLAN"></a>虚拟局域网VLAN</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><ul>
+<li>以太网交换机工作在数据链路层(也包括物理层)</li>
+<li>使用一个或多个以太网交换机互连起来的交换式以太网，其所有站点都属于同一一个广播域。随着交换式以太网规模的扩大，广播域相应扩大。</li>
+<li>巨大的广播域会带来很多弊端:广播风暴，难以管理和维护，潜在的安全问题</li>
+<li>网络中会频繁出现广播信息(TCP/IP协议栈中很多协议都会使用广播，例如ARP、RIP、DHCP等)</li>
+<li>分割广播域的方法:使用路由器可以隔离广播域，但路由器成本较高，虚拟局域网VLAN技术应运而生。</li>
+<li>虚拟局域网VLAN(Virtual Local Area Network)是种将局域网内的<strong>设备划分成与物理位无关的逻辑组的技术，这些逻辑组具有某些共同的需求。</strong></li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/VLAN%E6%A6%82%E8%BF%B0.png"></p>
+<h4 id="实现机制"><a href="#实现机制" class="headerlink" title="实现机制"></a>实现机制</h4><p>端口：</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%AB%AF%E5%8F%A3%E7%B1%BB%E5%9E%8B.png"></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">#网络</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">#数据链路层</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/IP%E5%9C%B0%E5%9D%80/">#IP地址</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/MAC%E5%9C%B0%E5%9D%80/">#MAC地址</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">网络层</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">物理层</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E6%88%90%E5%B8%A7"><span class="nav-text">封装成帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="nav-text">差错检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-text">可靠传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2-%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AESW"><span class="nav-text">停止-等待协议SW</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E9%80%80N%E5%B8%A7%E5%8D%8F%E8%AE%AEGBN"><span class="nav-text">回退N帧协议GBN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AESR"><span class="nav-text">选择重传协议SR</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AEPPP"><span class="nav-text">点对点协议PPP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E6%8E%A5%E5%85%A5%E6%8E%A7%E5%88%B6"><span class="nav-text">媒体接入控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="nav-text">MAC地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%9C%B0%E5%9D%80%EF%BC%88%E7%AE%80%E8%A6%81%EF%BC%89"><span class="nav-text">IP地址（简要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="nav-text">ARP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BA%BF%E5%99%A8%E5%92%8C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">集线器和交换机的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BD%AC%E5%8F%91%E5%B8%A7%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-text">以太网交换机自学习和转发帧的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AESTP"><span class="nav-text">生成树协议STP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91VLAN"><span class="nav-text">虚拟局域网VLAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="nav-text">实现机制</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
