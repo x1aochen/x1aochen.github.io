@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            C++语法 |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/wallhaven-l3zyg2_1920x1080.png","description":null},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C++语法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-03-07 23:43:18</span>
+        <span class="mobile">2022-03-07 23:43</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/C/">C++</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.7k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><ol>
+<li>要在其他文件使用变量，加extern</li>
+<li>const必须初始化，类中不能初始化，类中只能通过构造函数</li>
+<li>对于<strong>非内部数据类型</strong>的输入参数，应该将“值传递”的方式改为“const 引用传递”，目的是提高效率。例如将void func(A a) 改为void func(const A &amp;a)</li>
+<li>对于内部数据类型的输入参数，不要将“值传递”的方式改为“const 引用传递”。否则既达不到提高效率的目的，又降低了函数的可理解性。例如void func(int x) 不应该改为void func(const int &amp;x)</li>
+<li>const对象只能访问const成员函数</li>
+<li>有些地方不加const编译不过</li>
+</ol>
+<hr>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><ul>
+<li>在类对象实例化之前就已分配了空间，并且只分配一次</li>
+</ul>
+<ol>
+<li>static静态成员变量<strong>不能在类的内部初始化</strong>。在类的内部只是声明，定义必须在类定义体的外部，通常在类的实现文件中初始化</li>
+<li>类中的静态变量<strong>由对象共享。</strong>对于不同的对象，不能有相同静态变量的多个副本</li>
+<li><strong>静态对象</strong>的范围是贯穿程序的生命周期</li>
+<li>允许静态成员函数仅访问静态数据成员或其他静态成员函数，它们无法访问类的非静态数据成员或成员函数</li>
+</ol>
+<hr>
+<h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><ol>
+<li>内联能提高函数效率，但并不是所有的函数都定义成内联函数！内联是以代码膨胀(复制)为代价，仅仅省去了函数调用的开销，从而提高函数的执行效率</li>
+<li>如果函数体内代码较长（增加内存消耗）或者出现循环（效率减少），那么不宜用内联</li>
+</ol>
+<hr>
+<h3 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h3><ol>
+<li>静态成员不影响类大小。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">char</span> e;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">funA</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> c;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//一个虚指针 + 一个字符型，内存对齐，大小为8</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>类的数据成员按其声明顺序加入内存（字节对齐）</li>
+<li>返回值类型为size_t，</li>
+<li>size_t类型是一个类型定义，通常将一些无符号的整形定义为size_t，比如说unsigned int或者unsigned long，甚至unsigned long long</li>
+</ol>
+<hr>
+<h3 id="pure-virtual"><a href="#pure-virtual" class="headerlink" title="pure virtual"></a>pure virtual</h3><ol>
+<li>抽象类至少包含一个纯虚函数</li>
+<li>不能创建抽象类对象，可以通过抽象类的指针或引用访问派生类对象</li>
+<li>如果我们不在派生类中覆盖纯虚函数，那么派生类也会变成抽象类</li>
+</ol>
+<hr>
+<h3 id="vptr-vtable"><a href="#vptr-vtable" class="headerlink" title="vptr_vtable"></a>vptr_vtable</h3><ol>
+<li><p><strong>每个使用虚函数的类（或者从使用虚函数的类派生）都有自己的虚拟表</strong>。该表只是编译器在编译时设置的静态数组。虚拟表包含可由类的对象调用的每个虚函数的一个条目。此表中的每个条目只是一个函数指针，指向该类可访问的派生函数</p>
+</li>
+<li><p>vptr在创建类实例时自动设置，以便指向该类的虚拟表</p>
+</li>
+<li><p>```c++<br>Base *p = new Drived;<br>p-&gt;func();</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   * 首先识别func()是个虚函数</span><br><span class="line">   * 其次用p的vptr来获取Drived的虚表</span><br><span class="line">   * 查找虚表中调用的是哪个版本的func()，此处调用的是Drived::func()</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">### virtual</span><br><span class="line"></span><br><span class="line">1. 虚函数是动态绑定的，默认参数是静态绑定的。默认参数的使用需要看**指针或者应用本身的类型**，而不是**对象的类型**，这与虚函数的调用机制相反</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">class A&#123;</span><br><span class="line">public:</span><br><span class="line">    virtual void func(int i = 10)&#123;&#125;&#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; &quot;A::func()&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B:public A&#123;</span><br><span class="line">public:</span><br><span class="line">    virtual void func(int i = 20)&#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; &quot;B::func()&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    A *p = new B;</span><br><span class="line">    p-&gt;func(); // i= 10，B::func()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>static成员<strong>不属于任何类对象或类实例</strong>，所以即使给此函数加上virutal也是没有任何意义的</p>
+</li>
+<li><p>静态成员函数<strong>没有this指针</strong>。所以无法访问vptr，进而不能访问虚函数表</p>
+</li>
+<li><p>构造函数不能是虚函数，而<strong>析构函数必须是虚析构函数</strong>（父类指针指向子类对象，因为是虚函数，编译器会忽略指针的类型，而根据指针的指向来选择函数，先调用子类，在调用父类）</p>
+</li>
+<li><p>唯一可以内联的时候是：编译器知道所调用的对象是哪个类 Base::func()</p>
+</li>
+</ol>
+<hr>
+<h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><ol>
+<li>ASSERT ()是一个调试程序时经常使用的<strong>宏</strong>，在程序运行时它计算括号内的表达式，如果表达式为FALSE (0),  程序将报告错误，并终止执行。如果表达式不为0，则继续执行后面的语句。这个宏通常原来判断程序中是否出现了明显非法的数据，如果出现了终止程序以免导致严重后果，同时也便于查找错误</li>
+</ol>
+<hr>
+<h3 id="extern-“C”"><a href="#extern-“C”" class="headerlink" title="extern “C”"></a>extern “C”</h3><ol>
+<li>因为C++与C的编译区别，C++调用C函数时应该加上extern “C”</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;add.h&quot;</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">add</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><table>
+<thead>
+<tr>
+<th>C</th>
+<th>C++</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不能将函数放在结构体声明</td>
+<td>能将函数放在结构体声明</td>
+</tr>
+<tr>
+<td>在C结构体声明中不能使用C++访问修饰符。</td>
+<td>public、protected、private 在C++中可以使用。</td>
+</tr>
+<tr>
+<td>在C中定义结构体变量，如果使用了下面定义必须加struct。</td>
+<td>可以不加struct</td>
+</tr>
+<tr>
+<td>结构体不能继承（没有这一概念）。</td>
+<td>可以继承</td>
+</tr>
+<tr>
+<td>若结构体的名字与函数名相同，可以正常运行且正常的调用！</td>
+<td>若结构体的名字与函数名相同，使用结构体，只能使用带struct定义！</td>
+</tr>
+</tbody></table>
+<p>struct 更适合看成是一个数据结构的实现体，class 更适合看成是一个对象的实现体</p>
+<hr>
+<h3 id="union"><a href="#union" class="headerlink" title="union"></a>union</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">Data</span>&#123;</span></span><br><span class="line">    <span class="built_in">Data</span>(<span class="keyword">int</span> i = <span class="number">5</span>):<span class="built_in">i</span>(i)&#123;&#125; <span class="comment">//可以有构造和析构函数</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">float</span> j;</span><br><span class="line">    <span class="keyword">char</span> s;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">//不可以有虚函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> <span class="title">Data</span> <span class="title">data</span>;</span></span><br><span class="line">   	data.i = <span class="number">10</span>;</span><br><span class="line">    data.j = <span class="number">2.5</span>;</span><br><span class="line">    cout &lt;&lt; data.j &lt;&lt; data.i; <span class="comment">//i的值会被损坏</span></span><br><span class="line">    data.s = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; data.s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//sizeof(data) = 4; //最大变量的大小</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>但是任何时候只能有一个成员带有值</strong></p>
+<hr>
+<h3 id="friend"><a href="#friend" class="headerlink" title="friend"></a>friend</h3><ol>
+<li>友元函数：普通函数可以访问某个类中的私有或保护成员</li>
+<li>友元类：类A声明friend类B，类B可以访问类A的私有或保护成员（单向）</li>
+<li>友元关系不可传递</li>
+</ol>
+<ul>
+<li>优点：提高了程序的运行效率</li>
+<li>缺点：破坏了类的封装性和数据的透明性</li>
+</ul>
+<hr>
+<h3 id="using"><a href="#using" class="headerlink" title="using"></a>using</h3><p>改变访问性：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"> <span class="function">std::<span class="keyword">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> n;  &#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line"> std::<span class="keyword">size_t</span> n;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">private</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"> <span class="keyword">using</span> Base::size;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line"> <span class="keyword">using</span> Base::n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>取代typedef：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> vector&lt;<span class="keyword">int</span>&gt; V1; </span><br><span class="line"><span class="keyword">using</span> V2 = vector&lt;<span class="keyword">int</span>&gt;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h3><p>枚举类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//enum class Color2:int //前向声明</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">Color2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    RED=<span class="number">2</span>,</span><br><span class="line">    YELLOW,</span><br><span class="line">    BLUE</span><br><span class="line">&#125;;</span><br><span class="line">r2 c2 = Color2::RED;</span><br><span class="line">cout &lt;&lt; <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(c2) &lt;&lt; endl; <span class="comment">//必须转！</span></span><br></pre></td></tr></table></figure>
+
+<p>怎样在类中建立整个类中永恒的常量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span></span><br><span class="line">        BOY = <span class="number">0</span>,</span><br><span class="line">        GIRL</span><br><span class="line">    &#125;SexType;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//访问的时候通过，Person::BOY或者Person::GIRL来进行访问。</span></span><br><span class="line"><span class="comment">//sizeof(Person) = 1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>在类中不会占用空间</strong>，在编译时被全部求值</li>
+<li>隐含类型是整数，最大值有限</li>
+</ol>
+<hr>
+<h3 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">decltype</span>(expression) <span class="comment">//返回该表达式类型</span></span><br></pre></td></tr></table></figure>
+
+<p>与using/typedef合用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">size_t</span> = <span class="keyword">decltype</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="number">0</span>));<span class="comment">//sizeof(a)的返回值为size_t类型</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">ptrdiff_t</span> = <span class="keyword">decltype</span>((<span class="keyword">int</span>*)<span class="number">0</span> - (<span class="keyword">int</span>*)<span class="number">0</span>);</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">nullptr_t</span> = <span class="keyword">decltype</span>(<span class="literal">nullptr</span>);</span><br><span class="line">vector&lt;<span class="keyword">int</span> &gt;vec;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">decltype</span><span class="params">(vec.begin())</span> vectype</span>;</span><br><span class="line"><span class="keyword">for</span> (vectype i = vec.begin; i != vec.<span class="built_in">end</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="typeid"><a href="#typeid" class="headerlink" title="typeid"></a>typeid</h3><p><strong>获取类型信息</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="comment">//typeid(dataType)</span></span><br><span class="line"><span class="comment">//typeid(expression)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">const</span> type_info &amp;nInfo = <span class="built_in"><span class="keyword">typeid</span></span>(n);</span><br><span class="line">    cout &lt;&lt; nInfo.<span class="built_in">name</span>() &lt;&lt; nInfo.<span class="built_in">raw_name</span>() &lt;&lt; nInfo.<span class="built_in">hash_code</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>操作数可以是普通变量、对象、内置类型（int、float等）、自定义类型（结构体和类），还可以是一个表达式</li>
+<li>返回type_info对象的引用</li>
+</ol>
+<h3 id="amp-ptr"><a href="#amp-ptr" class="headerlink" title="&amp;_ptr"></a>&amp;_ptr</h3><table>
+<thead>
+<tr>
+<th>引用</th>
+<th>指针</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>必须初始化</td>
+<td>可以不初始化</td>
+</tr>
+<tr>
+<td>不能为空</td>
+<td>可以为空</td>
+</tr>
+<tr>
+<td>不能更换目标</td>
+<td>可以更换目标</td>
+</tr>
+<tr>
+<td>只能有一级</td>
+<td>可以有多级指针</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">v[<span class="number">5</span>] = <span class="number">10</span>;    <span class="comment">//[]操作符返回引用，然后vector对应元素才能被修改</span></span><br><span class="line">              <span class="comment">//如果[]操作符不返回引用而是指针的话，赋值语句则需要这样写</span></span><br><span class="line">*v[<span class="number">5</span>] = <span class="number">10</span>;   <span class="comment">//这种书写方式，完全不符合我们对[]调用的认知，容易产生误解</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>右值引用：</li>
+</ol>
+<ul>
+<li>消除两个对象交互时不必要的拷贝，节省运算存储资源，提高效率</li>
+<li>能够更间接明确地定义泛型函数</li>
+</ul>
+<ol start="2">
+<li>C++编译器在编译程序的时候将指针和引用编译成了<strong>完全一样的机器码</strong>。所以C++中的引用只是C++对指针操作的一个“语法糖”，在底层实现时C++编译器实现这两种操作的方法完全相同</li>
+</ol>
+<h3 id="define"><a href="#define" class="headerlink" title="define"></a>define</h3><p><strong>define这是简单的字符串替换</strong></p>
+<ol>
+<li>字符串化操作符（#）</li>
+</ol>
+<ul>
+<li>在一个宏中的参数前面使用一个#,预处理器会把这个参数转换为一个字符数组，换言之就是：**#是“字符串化”的意思，出现在宏定义中的#是把跟在后面的参数转换成一个字符串**</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> func(s) cout&lt;&lt; s&lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> func1(s) cout &lt;&lt; #s&lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> str(a) #a</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>符号连接符（##）</li>
+</ol>
+<ul>
+<li>“##”是一种分隔连接方式，它的作用是先分隔，然后进行强制连接。将宏定义的多个形参转换成一个实际参数</li>
+<li><strong>连接后的实际参数名，必须为实际存在的参数名或是编译器已知的宏定义</strong></li>
+<li>如果##后的参数本身也是一个宏的话，##会阻止这个宏的展开</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> expA(s) cout &lt;&lt; a##s &lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> expB(s) cout &lt;&lt; gc_ ## s &lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> expC(s,e) cout &lt;&lt; ab##s##e &lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc_hello1 <span class="meta-string">&quot;I am gc_hello1&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> abcd <span class="meta-string">&quot;world&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* ahello = <span class="string">&quot;I am gc_hello&quot;</span>;</span><br><span class="line">    <span class="built_in">expA</span>(hello);</span><br><span class="line">    <span class="built_in">expB</span>(hello1);</span><br><span class="line">    <span class="built_in">expC</span>(c,d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>续行操作符（\）</li>
+</ol>
+<ul>
+<li>当定义的宏不能用一行表达完整时，可以用”\”表示下一行继续此宏的定义</li>
+</ul>
+<ol start="4">
+<li>与typedef比较：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PIONTER int*</span></span><br><span class="line">PIONTER a,b; <span class="comment">//等同于int* a,b;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span>* POINTER1</span><br><span class="line">POINTER1 c,d;<span class="comment">//等同于int *c;int *d;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="override"><a href="#override" class="headerlink" title="override"></a>override</h3><ol>
+<li><p>可以显式的在派生类中声明，哪些成员函数需要被重写，如果没被重写，则编译器会报错</p>
+</li>
+<li><p>用于检查自己重写的函数，是否条件正确</p>
+</li>
+</ol>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><ol>
+<li> 第一个用在类，用于说明该类是继承体系下最后的一个类，不要其他类继承我，当继承时就会报错</li>
+<li>第二个用在虚函数，表示这个虚函数不能再被override了，再override就会报错</li>
+</ol>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/03/08/LeetCode/%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">排序数组</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/07/LeetCode/%E4%B8%83%E8%BF%9B%E5%88%B6%E6%95%B0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">七进制数</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-text">const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-text">static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inline"><span class="nav-text">inline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sizeof"><span class="nav-text">sizeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pure-virtual"><span class="nav-text">pure virtual</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vptr-vtable"><span class="nav-text">vptr_vtable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#assert"><span class="nav-text">assert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extern-%E2%80%9CC%E2%80%9D"><span class="nav-text">extern “C”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#struct"><span class="nav-text">struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#union"><span class="nav-text">union</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#friend"><span class="nav-text">friend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using"><span class="nav-text">using</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enum"><span class="nav-text">enum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decltype"><span class="nav-text">decltype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typeid"><span class="nav-text">typeid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-ptr"><span class="nav-text">&amp;_ptr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#define"><span class="nav-text">define</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#override"><span class="nav-text">override</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-text">final</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
