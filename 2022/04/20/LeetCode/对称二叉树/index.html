@@ -9,7 +9,7 @@
     
     <title>
         
-            分类 |
+            对称二叉树 |
         
         keep
     </title>
@@ -75,7 +75,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/categories"
                             >
                                 分类
@@ -114,7 +114,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/categories">分类</a>
                 </li>
             
@@ -134,13 +134,116 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="category-list-container">
-        <div class="category-list-content">
-            <ul class="all-category-list"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/C/">C++</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="all-category-list-count">28</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Unity/">Unity</a><span class="all-category-list-count">2</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><span class="all-category-list-count">10</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="all-category-list-count">8</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><span class="all-category-list-count">6</span></li></ul>
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">对称二叉树</span>
         </div>
-        <div class="category-comments">
-            
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-20 09:44:52</span>
+        <span class="mobile">2022-04-20 09:44</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/LeetCode/">LeetCode</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>158 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">symmetricTree</span><span class="params">(TreeNode* r,TreeNode* l)</span></span>&#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(r),q.<span class="built_in">push</span>(l);</span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">    </span><br><span class="line">            TreeNode* ri = q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">            TreeNode* le = q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="comment">//如果两边对称都为空，直接跳过</span></span><br><span class="line">            <span class="keyword">if</span> (!le &amp;&amp; !ri) <span class="keyword">continue</span>;</span><br><span class="line">			</span><br><span class="line">            <span class="keyword">if</span> ((!le || !ri) || le-&gt;val != ri-&gt;val) <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">			<span class="comment">//对称进入队列</span></span><br><span class="line">            q.<span class="built_in">push</span>(le-&gt;right); q.<span class="built_in">push</span>(ri-&gt;left);</span><br><span class="line">            q.<span class="built_in">push</span>(ri-&gt;right); q.<span class="built_in">push</span>(le-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">symmetricTree</span>(root,root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>两子树根节点相同，且每颗子树的左右子树互为对称</p>
+<p>若对称两节点满足不为空且值相同，则进入判断其子树</p>
+
         </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/18/LeetCode/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">二叉树的最大深度</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
     </div>
 </div>
 
@@ -183,6 +286,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -228,6 +348,14 @@
 
     </div>
 
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3"><span class="nav-text">迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
     
 
     <div class="image-viewer-container">
@@ -283,6 +411,8 @@
 
 
 <div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
     
 </div>
 
