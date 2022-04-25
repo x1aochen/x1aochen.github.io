@@ -9,7 +9,7 @@
     
     <title>
         
-            对称二叉树 |
+            回文链表 |
         
         keep
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">对称二叉树</span>
+            <span class="title-hover-animation">回文链表</span>
         </div>
 
         
@@ -154,8 +154,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-04-20 09:44:52</span>
-        <span class="mobile">2022-04-20 09:44</span>
+        <span class="pc">2022-04-22 09:46:11</span>
+        <span class="mobile">2022-04-22 09:46</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -175,7 +175,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>&nbsp;
+                        <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">快慢指针</a>&nbsp;
                     </li>
                 
             </ul>
@@ -185,7 +189,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>158 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>230 字</span>
         </span>
     
     
@@ -202,10 +206,10 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">symmetricTree</span><span class="params">(TreeNode* r,TreeNode* l)</span></span>&#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(r),q.<span class="built_in">push</span>(l);</span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">    </span><br><span class="line">            TreeNode* ri = q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">            TreeNode* le = q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="comment">//如果两边对称都为空，直接跳过</span></span><br><span class="line">            <span class="keyword">if</span> (!le &amp;&amp; !ri) <span class="keyword">continue</span>;</span><br><span class="line">			</span><br><span class="line">            <span class="keyword">if</span> ((!le || !ri) || le-&gt;val != ri-&gt;val) <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">			<span class="comment">//对称进入队列</span></span><br><span class="line">            q.<span class="built_in">push</span>(le-&gt;right); q.<span class="built_in">push</span>(ri-&gt;left);</span><br><span class="line">            q.<span class="built_in">push</span>(ri-&gt;right); q.<span class="built_in">push</span>(le-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSymmetric</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">symmetricTree</span>(root,root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+            <h3 id="快慢指针翻转"><a href="#快慢指针翻转" class="headerlink" title="快慢指针翻转"></a>快慢指针翻转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//快指针为空时，慢指针指向中，途中翻转前半部分</span></span><br><span class="line">        ListNode* pre = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next)&#123;</span><br><span class="line">            <span class="comment">//快指针先走防止慢指针反转操作干扰</span></span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            <span class="comment">//反转</span></span><br><span class="line">            ListNode* tmp = slow-&gt;next;</span><br><span class="line">            slow-&gt;next = pre;        </span><br><span class="line">            pre = slow;</span><br><span class="line">            slow = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//奇个数，快指针为元素末尾节点</span></span><br><span class="line">        <span class="keyword">if</span> (fast) slow = slow-&gt;next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (slow)&#123;</span><br><span class="line">            <span class="keyword">if</span> (slow-&gt;val != pre-&gt;val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>两子树根节点相同，且每颗子树的左右子树互为对称</p>
-<p>若对称两节点满足不为空且值相同，则进入判断其子树</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>从中间向两边进行遍历比较，全部相同则是回文链表</p>
+<p>快慢指针，过程中<strong>翻转前半部分链表</strong>，结束后慢指针为链表的中点往前一步</p>
 
         </div>
 
@@ -215,7 +219,11 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">#二叉树</a>&nbsp;
+                        <a href="/tags/%E9%93%BE%E8%A1%A8/">#链表</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">#快慢指针</a>&nbsp;
                     </li>
                 
             </ul>
@@ -224,29 +232,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/04/22/LeetCode/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">回文链表</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/04/18/LeetCode/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/"
+                           href="/2022/04/20/LeetCode/%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">二叉树的最大深度</span>
+                                <span class="post-nav-title-item">对称二叉树</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -367,7 +360,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3"><span class="nav-text">迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E7%BF%BB%E8%BD%AC"><span class="nav-text">快慢指针翻转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
