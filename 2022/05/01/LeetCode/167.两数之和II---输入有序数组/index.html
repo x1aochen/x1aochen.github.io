@@ -9,6 +9,8 @@
     
     <title>
         
+            167.两数之和II - 输入有序数组 |
+        
         keep
     </title>
     
@@ -135,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation"></span>
+            <span class="title-hover-animation">167.两数之和II - 输入有序数组</span>
         </div>
 
         
@@ -152,16 +154,38 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-04-27 01:26:20</span>
-        <span class="mobile">2022-04-27 01:26</span>
+        <span class="pc">2022-05-01 09:31:21</span>
+        <span class="mobile">2022-05-01 09:31</span>
     </span>
     
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/LeetCode/">LeetCode</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>823 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>118 字</span>
         </span>
     
     
@@ -178,20 +202,22 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="AI人工智障"><a href="#AI人工智障" class="headerlink" title="AI人工智障"></a>AI人工智障</h2><h3 id="群体移动堵塞，拥挤，抖动"><a href="#群体移动堵塞，拥挤，抖动" class="headerlink" title="群体移动堵塞，拥挤，抖动"></a>群体移动堵塞，拥挤，抖动</h3><p>使用NavMeshAgent在对AI进行寻路追逐玩家时，出现堵塞，拥挤抖动现象</p>
-<p>这是因为Unity Navigation是预处理Bake的，游戏运行过程中，第一个到达的AI所占位置仍然是被Bake，第二个AI仍然会往预先算出的路径走去，而该位置已经被先到达AI所占，后续AI则会一直到不了终点</p>
-<p>NavMeshObstacle导航网格障碍物组件，在运行过程中，新的物体可以被当做障碍物，勾选Carve雕刻选项，并关闭OnlyStation（仅静止时雕刻），这样，游戏过程中，物体停止后就可以在地上挖洞，其他AI则会避开</p>
-<p>但是AI既要使用导航代理寻路，又要可以在游戏中挖洞，unity中这两个组件是不能在一起运行的（出现抖动，胡乱瞎走行为，并且控制台出现警告）</p>
-<p>详情：<a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=PxudQmMTLkg" >https://www.youtube.com/watch?v=PxudQmMTLkg<i class="fas fa-external-link-alt"></i></a></p>
-<p>解决方法：物体<strong>移动的距离在一定时间内</strong>小于一个阈值时，判定物体被阻塞或停止，此时便可以挖洞，那么就关闭NavMeshAgent，开启NavMeshObstacle</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.AI;</span><br><span class="line"></span><br><span class="line">[RequireComponent(typeof(NavMeshAgent), typeof(NavMeshObstacle))]</span><br><span class="line">public class ObstacleAgent : MonoBehaviour</span><br><span class="line"> &#123;</span><br><span class="line">    [SerializeField]</span><br><span class="line">    //雕刻时间阈值，物体在这个时间内 移动距离始终小于雕刻移动阈值，则进行雕刻</span><br><span class="line">    private float carvingTime = 0.5f;</span><br><span class="line">    [SerializeField]</span><br><span class="line">    //雕刻移动阈值，物体移动的距离超过这个值，那么不进行雕刻</span><br><span class="line">    private float carvingMoveThreshold = 0.1f;</span><br><span class="line">    [HideInInspector]</span><br><span class="line">    public NavMeshAgent agent;</span><br><span class="line">    private NavMeshObstacle obstacle;</span><br><span class="line">    //记录上一次移动的时间</span><br><span class="line">    private float lastMoveTime;</span><br><span class="line">    //记录上一次移动位置</span><br><span class="line">    private Vector3 lastPos;</span><br><span class="line"></span><br><span class="line">    private void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        agent = GetComponent&lt;NavMeshAgent&gt;();</span><br><span class="line">        obstacle = GetComponent&lt;NavMeshObstacle&gt;();</span><br><span class="line"></span><br><span class="line">        //先将obstacle阻碍组件关闭</span><br><span class="line">        obstacle.enabled = false;</span><br><span class="line">        //静止不动才雕刻设为false</span><br><span class="line">        obstacle.carveOnlyStationary = false;</span><br><span class="line">        //始终雕刻</span><br><span class="line">        obstacle.carving = true;</span><br><span class="line"></span><br><span class="line">        lastPos = transform.position; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        //如果物体当前位置距上一次位置超过了 雕刻的移动阈值，就不需要进行雕刻</span><br><span class="line">        if (Vector3.Distance(lastPos,transform.position) &gt; carvingMoveThreshold)</span><br><span class="line">        &#123;</span><br><span class="line">            lastMoveTime = Time.time;</span><br><span class="line">            lastPos = transform.position;</span><br><span class="line">        &#125;</span><br><span class="line">        //如果物体正常移动超过了雕刻移动阈值，那么lastMoveTime在这一帧是一定等于Time.time的，所以直接不判断</span><br><span class="line">        //但是物体在移动距离小于阈值的状态下，lastMoveTime记录的就是上一次正常移动的时间点，这个时间点加上雕刻时间阈值，小于当前时间</span><br><span class="line">        //则判定物体已经在一段时间内没有进行移动或移动距离始终 &lt; 雕刻移动阈值</span><br><span class="line">        if (lastMoveTime + carvingTime &lt; Time.time)</span><br><span class="line">        &#123;</span><br><span class="line">            agent.enabled = false;</span><br><span class="line">            obstacle.enabled = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //对外公开的设置目标点方法</span><br><span class="line">    public void SetDistination(Vector3 pos,float stopDis, float speed)</span><br><span class="line">    &#123;</span><br><span class="line">        //即将移动了，不能共存，导航障碍物就需要关闭</span><br><span class="line">        obstacle.enabled = false;</span><br><span class="line"></span><br><span class="line">        //时间位置不重新设置，出现瞬移</span><br><span class="line">        lastMoveTime = Time.time;</span><br><span class="line">        lastPos = transform.position;</span><br><span class="line">        //先关闭Obstacle，等待一帧再开启Agent</span><br><span class="line">        //如果在同一帧进行，那么Obstacle在还没来得及关闭的情况下，Agent就开启了，导致AI此时所处位置是一个洞，就会出现瞬移</span><br><span class="line">        StartCoroutine(MoveAgent(pos,stopDis, speed));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private IEnumerator MoveAgent(Vector3 pos, float stopDis, float speed)</span><br><span class="line">    &#123;</span><br><span class="line">        //等待一帧</span><br><span class="line">        yield return null;</span><br><span class="line">        agent.enabled = true;</span><br><span class="line">        agent.SetDestination(pos);</span><br><span class="line">        agent.stoppingDistance = stopDis;</span><br><span class="line">        agent.speed = speed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>,right = numbers.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = numbers[left] + numbers[right];</span><br><span class="line">            <span class="keyword">if</span> (tmp &lt; target)</span><br><span class="line">                left++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (tmp &gt; target)</span><br><span class="line">                right--;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> &#123;left + <span class="number">1</span>,right + <span class="number">1</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220427012506.png"></p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>利用数组顺序排列的条件，双指针从两遍向中间遍历，两指针的数相加和目标值做比较，根据大小，移动其中一指针，最后得到解</p>
 
         </div>
 
         
 
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">#双指针</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -201,10 +227,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/04/22/LeetCode/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/"
+                           href="/2022/04/26/Unity/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">回文链表</span>
+                                <span class="post-nav-title-item">AI</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -325,7 +351,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C"><span class="nav-text">AI人工智障</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%E4%BD%93%E7%A7%BB%E5%8A%A8%E5%A0%B5%E5%A1%9E%EF%BC%8C%E6%8B%A5%E6%8C%A4%EF%BC%8C%E6%8A%96%E5%8A%A8"><span class="nav-text">群体移动堵塞，拥挤，抖动</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-text">双指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
