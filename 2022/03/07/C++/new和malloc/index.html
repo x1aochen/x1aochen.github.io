@@ -9,7 +9,7 @@
     
     <title>
         
-            七进制数 |
+            new和malloc |
         
         keep
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">七进制数</span>
+            <span class="title-hover-animation">new和malloc</span>
         </div>
 
         
@@ -154,8 +154,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-07 10:49:31</span>
-        <span class="mobile">2022-03-07 10:49</span>
+        <span class="pc">2022-03-07 23:43:18</span>
+        <span class="mobile">2022-03-07 23:43</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -163,18 +163,37 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/LeetCode/">LeetCode</a>&nbsp;
+                        <a href="/categories/C/">C++</a>&nbsp;
                     </li>
                 
             </ul>
         </span>
     
     
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/new/">new</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/malloc/">malloc</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%86%85%E5%AD%98/">内存</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>146 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>468 字</span>
         </span>
     
     
@@ -191,16 +210,46 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="十进制转x进制"><a href="#十进制转x进制" class="headerlink" title="十进制转x进制"></a>十进制转x进制</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">convertToBase7</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 不断除7，取余，直到num为0</span></span><br><span class="line">        string str;</span><br><span class="line">        string res;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">&quot;0&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span> (num != <span class="number">0</span>)&#123;</span><br><span class="line">                res = <span class="built_in">to_string</span>(num % <span class="number">7</span>);</span><br><span class="line">                str.<span class="built_in">insert</span>(<span class="number">0</span>,res);</span><br><span class="line">       			num = num / <span class="number">7</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (num &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span> (num != <span class="number">0</span>)&#123;</span><br><span class="line">            res = <span class="built_in">to_string</span>(-(num % <span class="number">7</span>));</span><br><span class="line">            str.<span class="built_in">insert</span>(<span class="number">0</span>,res);</span><br><span class="line">            num = num / <span class="number">7</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            str.<span class="built_in">insert</span>(<span class="number">0</span>,<span class="string">&quot;-&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+            <h2 id="new和malloc"><a href="#new和malloc" class="headerlink" title="new和malloc"></a>new和malloc</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span>) :<span class="built_in">re</span>(r), <span class="built_in">im</span>(i)</span><br><span class="line">	&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">real</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> re; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">imag</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> im; &#125;</span><br><span class="line">    ~<span class="built_in">complex</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;call dtor to delete&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">double</span> re, im;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	complex* p = <span class="keyword">new</span> complex;</span><br><span class="line">	cout &lt;&lt; p-&gt;<span class="built_in">real</span>() &lt;&lt; p-&gt;<span class="built_in">imag</span>() &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">	complex* q = (complex*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(complex)); <span class="comment">//指定大小，并强制转换</span></span><br><span class="line">	cout &lt;&lt; q-&gt;<span class="built_in">real</span>() &lt;&lt; q-&gt;<span class="built_in">imag</span>();</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">delete</span> p; </span><br><span class="line">	<span class="built_in">free</span>(q); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>就是十进制转任何进制的模板，结果反向取余即可</p>
-<p>负数可以跟正数放在一起处理，直接abs(num)拿绝对值</p>
-<p>注意字符串的插入操作，先转型</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220309220218.png"></p>
+<h4 id="构造-析构的调用"><a href="#构造-析构的调用" class="headerlink" title="构造/析构的调用"></a>构造/析构的调用</h4><p>new在申请空间的时候会调用构造函数，malloc不会调用，释放时new也会调用析构函数，而free不会</p>
+<h4 id="是否指定内存大小"><a href="#是否指定内存大小" class="headerlink" title="是否指定内存大小"></a>是否指定内存大小</h4><p>new无需指定内存块大小，编译器会根据类型自行计算，而malloc需要显示的指出所需内存大小</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">complex* q = (complex*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>上述做法是可以通过编译的，但是…</p>
+<h4 id="返回类型"><a href="#返回类型" class="headerlink" title="返回类型"></a>返回类型</h4><p>new分配成功时，返回的是对象类型的指针，无须进行类型转换，故new是符合类型安全的操作符，而malloc返回的是void*，需要通过强制类型转换成所需类型</p>
+<h4 id="分配失败的返回值"><a href="#分配失败的返回值" class="headerlink" title="分配失败的返回值"></a>分配失败的返回值</h4><p>new分配失败时，会抛出bad_alloc异常，而不会像malloc一样返回NULL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* q  = (<span class="keyword">int</span>*)<span class="built_in">malloc</span> (<span class="built_in"><span class="keyword">sizeof</span></span> (<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">NULL</span> == a)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>* a = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in"><span class="keyword">catch</span></span> (bad_alloc)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="动态分配内存块"><a href="#动态分配内存块" class="headerlink" title="动态分配内存块"></a>动态分配内存块</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98%E5%9D%97.png"></p>
+<p>上图分别为debug和release下的情况，灰色则是debug操作下所需的空间</p>
+<p>cookie记录分配到的空间所占大小，以16进制表示</p>
+<p>实际分配的大小比类的大小大得多</p>
+<h4 id="对数组的处理"><a href="#对数组的处理" class="headerlink" title="对数组的处理"></a>对数组的处理</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/arrayNew.png"></p>
+<p>如果数组delete不写[]，编译器不知道需要删除的是数组，红色框中仍然删除，但是只调用一次析构，那么数组内指针所指向空间则只删除一个，剩下的则会导致内存泄漏</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E6%95%B0%E7%BB%84delete1.png"></p>
 
         </div>
 
         
 
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/new/">#new</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/malloc/">#malloc</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%86%85%E5%AD%98/">#内存</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -209,13 +258,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/03/07/C++/new%E5%92%8Cmalloc/"
+                           href="/2022/03/07/C++/C++%E8%AF%AD%E6%B3%95/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">new和malloc</span>
+                                <span class="post-nav-title-item">C++语法</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -225,10 +274,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/03/06/LeetCode/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/"
+                           href="/2022/03/07/LeetCode/%E4%B8%83%E8%BF%9B%E5%88%B6%E6%95%B0/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">买卖股票的最佳时机</span>
+                                <span class="post-nav-title-item">七进制数</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -349,7 +398,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%ACx%E8%BF%9B%E5%88%B6"><span class="nav-text">十进制转x进制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new%E5%92%8Cmalloc"><span class="nav-text">new和malloc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0-%E6%9E%90%E6%9E%84%E7%9A%84%E8%B0%83%E7%94%A8"><span class="nav-text">构造&#x2F;析构的调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E6%8C%87%E5%AE%9A%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="nav-text">是否指定内存大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B"><span class="nav-text">返回类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-text">分配失败的返回值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%E5%9D%97"><span class="nav-text">动态分配内存块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-text">对数组的处理</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
