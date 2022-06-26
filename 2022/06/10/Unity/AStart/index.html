@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="陈嘉俊">
+    
+    <title>
+        
+            A* |
+        
+        keep
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/%E5%AE%89%E5%85%A8%E5%B8%BD.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/网站头像.jpg","favicon":"/images/安全帽.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/wallhaven-l3zyg2_1920x1080.png","description":null},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                keep
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">A*</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-10 11:23:55</span>
+        <span class="mobile">2022-06-10 11:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Unity/">Unity</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/A/">A*</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="A-和NavMesh"><a href="#A-和NavMesh" class="headerlink" title="A*和NavMesh"></a>A*和NavMesh</h3><h4 id="A"><a href="#A" class="headerlink" title="A*"></a>A*</h4><ol>
+<li>利用启发式函数，大大减少计算量</li>
+<li>易编辑，直接通过改变节点的表现形式，容易对地图进行动态的修改（例如生成建筑物）</li>
+<li>使用方块作为节点，如果地图很大，方块的数量就会导致处理时间的增加</li>
+<li>单位体积不一样的话，大单位可能会覆盖不可行走区域</li>
+</ol>
+<h4 id="NavMesh"><a href="#NavMesh" class="headerlink" title="NavMesh"></a>NavMesh</h4><ol>
+<li>是对A*的一种扩展，基于场景不同区域，划分成众多不规则三角形</li>
+<li>通过计算导航网格上两点的位置关系，就可知道是否可行走或有无障碍物</li>
+<li>自带单位体积，在经过一些转角就可以加上体积半径进行计算</li>
+<li>也可以动态的改变地图区域，但是相对复杂</li>
+</ol>
+<p>A*学习网站：<a class="link"   target="_blank" rel="noopener" href="http://theory.stanford.edu/~amitp/GameProgramming/" >http://theory.stanford.edu/~amitp/GameProgramming/<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="广度优先算法"><a href="#广度优先算法" class="headerlink" title="广度优先算法"></a>广度优先算法</h3><p>从起点出发，每次可以朝上下左右四个方向进行移动，在一轮搜索完毕后，会标记这些探索过得方块为边界（绿色方块）， 然后循环往复的从这些边界方块开始，朝他们的上下左右四个方向继续探索 ，直到遍历到终点方块</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%BD%95%E5%88%B6_2022_06_25_09_47_37_938.gif"></p>
+<ul>
+<li>因为对路径的寻找是没有方向性的，会朝各个方向进行探索，所以在最坏的情况下，算法要跑完整张地图才能找到最短路径</li>
+</ul>
+<h3 id="A-算法"><a href="#A-算法" class="headerlink" title="A*算法"></a>A*算法</h3><p>A*算法也叫<strong>启发式（Heuristic）</strong>搜索，与广度优先不同的是，在每一轮循环的时候不会去搜索每个边界，而是选择当前“代价”最低的方块进行探索</p>
+<h4 id="代价"><a href="#代价" class="headerlink" title="代价"></a>代价</h4><ul>
+<li>当前路径代价（g）：代表从起点出发，一共走过多少个格子</li>
+<li>预估代价（h）：代表当前方块到终点方块大概需要的距离<ul>
+<li>欧拉距离（Euler Distance)：两点之间的直线距离</li>
+<li>曼哈顿距离（Manhattan Distance)：两点在竖直方向和水平方向上的距离总和</li>
+</ul>
+</li>
+<li>寻路消耗（f）：<strong>f = g + h</strong></li>
+</ul>
+<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>搜索过的方块个数明显比广度优先少很多</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220625100330.png"></p>
+<h4 id="详细原理"><a href="#详细原理" class="headerlink" title="详细原理"></a>详细原理</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/Snipaste_2022-06-25_11-14-37.png"></p>
+<ul>
+<li>每到达一个新的节点，则计算其周围<strong>还未在开启或关闭列表中</strong>的并且不是阻挡的点，送进开启列表中，并记录父对象</li>
+<li>然后排序开启列表，找出代价最少点，移入关闭列表（这步是算法最消耗性能的地方）</li>
+<li>每次往关闭列表中放点时，都判断这个点是否是终点</li>
+<li>找到终点后，<strong>根据父对象回溯</strong></li>
+<li>父对象存在意义：终点之前，因为程序并不知道阻挡的存在，所以总是会往一个<strong>看似</strong>正确的方向移动，最终遇到阻挡时，才会回退，直到正确路径，所以关闭列表中的节点最终并不是全部有用的</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>油管大神：<a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/c/SebastianLague/videos" >https://www.youtube.com/c/SebastianLague/videos<i class="fas fa-external-link-alt"></i></a></p>
+<p>代码实现：<a class="link"   target="_blank" rel="noopener" href="https://github.com/x1aochen/AStart_Algorithm" >https://github.com/x1aochen/AStart_Algorithm<i class="fas fa-external-link-alt"></i></a> //详细注释</p>
+<h4 id="使用堆结构做开启列表的优化"><a href="#使用堆结构做开启列表的优化" class="headerlink" title="使用堆结构做开启列表的优化"></a>使用堆结构做开启列表的优化</h4><p>使用List存储开启列表，在每次寻找代价最低节点时，总是需要遍历全部元素，大大降低了性能，使用堆排序，维持一个顶部总是为最低代价的堆结构以提升性能</p>
+<p>相同路径优化前：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Node currenNode = openSet[0]</span><br><span class="line">//找到代价最低节点，总是需要遍历开启列表中的全部元素</span><br><span class="line">for (int i = 1;i &lt; openSet.Count; i++)</span><br><span class="line">&#123;</span><br><span class="line">    //找到代价更小点，或者代价相等，但是h消耗更小点</span><br><span class="line">    if (openSet[i].fCost &lt; currenNode.fCost || openSet[i].fCost == currenNode.fCost &amp;&amp; openSet[i].hCost &lt; currenNode.hCost)</span><br><span class="line">    &#123;</span><br><span class="line">       currenNode = openSet[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/Snipaste_2022-06-25_22-59-09.png"></p>
+<p>优化后：</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/Snipaste_2022-06-25_23-04-59.png"></p>
+<h4 id="多个单位行进与回溯路径简化"><a href="#多个单位行进与回溯路径简化" class="headerlink" title="多个单位行进与回溯路径简化"></a>多个单位行进与回溯路径简化</h4><ul>
+<li>添加了任务请求类，使用协程处理多个单位需要同时进行寻路时的处理，在找到路径后通过回调函数中call到寻路后所需执行的事件，这边是往目标点移动</li>
+</ul>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/%E5%BD%95%E5%88%B6_2022_06_26_12_13_51_359.gif"></p>
+<ul>
+<li><p>原先存储在Grid类中的路径已经不需要了，转而在PathFinding中直接使用数组来存储回溯路径，并且简化了路径，使其只存储那些在方向上发生了改变的点，相比原本List中存放整条路径上的全部点，大大降低了内存消耗</p>
+<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/notes/Snipaste_2022-06-26_11-54-19.png"></p>
+</li>
+</ul>
+<p>未完待续。。。。。。</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/A/">#A*</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/26/Unity/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">随便记录</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/25/LeetCode/%E7%AC%ACK%E4%B8%AA%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%AD%A3%E6%95%B4%E6%95%B0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">第K个缺失的正整数</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E5%92%8CNavMesh"><span class="nav-text">A*和NavMesh</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A"><span class="nav-text">A*</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NavMesh"><span class="nav-text">NavMesh</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95"><span class="nav-text">广度优先算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E7%AE%97%E6%B3%95"><span class="nav-text">A*算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7"><span class="nav-text">代价</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E5%8E%9F%E7%90%86"><span class="nav-text">详细原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%A0%86%E7%BB%93%E6%9E%84%E5%81%9A%E5%BC%80%E5%90%AF%E5%88%97%E8%A1%A8%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-text">使用堆结构做开启列表的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E5%8D%95%E4%BD%8D%E8%A1%8C%E8%BF%9B%E4%B8%8E%E5%9B%9E%E6%BA%AF%E8%B7%AF%E5%BE%84%E7%AE%80%E5%8C%96"><span class="nav-text">多个单位行进与回溯路径简化</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
