@@ -205,7 +205,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
         </span>
     
     
@@ -373,17 +373,35 @@ toggles[i].onValueChanged.AddListener((bool value) =&gt; ShowTaskDetails(value, 
 <li>和缩放有关，过大则不参与</li>
 </ol>
 <h2 id="特殊文件夹"><a href="#特殊文件夹" class="headerlink" title="特殊文件夹"></a>特殊文件夹</h2><ol>
-<li>standard Assets 此文件夹下脚本最先被编译</li>
-<li>Editor 允许里面的脚本访问 unity edior的API</li>
+<li>standard Assets 此文件夹下脚本最先被编译，里面会放一些Unity自带的组件，如3rd Person Controller等</li>
+<li> Pro Standard Assets文件夹，这个文件夹紧接着上一个编译，但是存放的是专业版才有的功能</li>
 <li>Plugins 插件目录，只能是Assets文件夹的直接子目录，优先编译</li>
-<li>Resources 里面的的文件不管有没使用，都会跟随游戏一起打包。可以使用Resources.UnloadUnusedAssets释放内存</li>
+</ol>
+<ul>
+<li>以上三个文件夹中的脚本都不会调用其他文件夹中的脚本，所以被优先编译不会报错，但是它们可以通过GameObject.SendMessage()和其他脚本通信</li>
+</ul>
+<ol>
+<li>Editor 允许里面的脚本访问 unity edior的API</li>
 <li>Gizmos，存放用Gizmos.DrawIcon方法使用的贴图，图标资源。放在Gizmos文件夹中的贴图资源可以直接通过名称使用，可以被Editor作为gizmo画在屏幕上</li>
 </ol>
+<p>Resources：</p>
+<ul>
+<li>里面的的文件不管有没使用，都会跟随游戏一起打包。</li>
+<li>打包后只读</li>
+<li>资源会被压缩成二进制</li>
+<li>无法动态更改</li>
+<li>可以使用Resources.UnloadUnusedAssets释放内存</li>
+</ul>
 <p>StreamingAssets：</p>
 <ul>
-<li>打包资源，二进制文件放在此文件夹下才能够随工程打包</li>
-<li>不压缩不加密</li>
-<li>PC端是可读可写的</li>
+<li><p>UnityWebRequest加载</p>
+</li>
+<li><p>打包资源，二进制文件放在此文件夹下才能够随工程打包</p>
+</li>
+<li><p>不压缩不加密</p>
+</li>
+<li><p>PC端是可读可写的</p>
+</li>
 </ul>
 <p>在移动端</p>
 <ol>
@@ -431,7 +449,6 @@ toggles[i].onValueChanged.AddListener((bool value) =&gt; ShowTaskDetails(value, 
 <li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/woodengm/article/details/112614506?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-112614506-blog-124702410.pc_relevant_antiscanv3&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=2" >https://blog.csdn.net/woodengm/article/details/112614506?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-112614506-blog-124702410.pc_relevant_antiscanv3&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=2<i class="fas fa-external-link-alt"></i></a></li>
 <li>这个版本不需要像链接这样做，但是打开ExampleConfig热补丁配置文件全部都是被注释的，取消注释就好了</li>
 </ul>
-<p><em>打包后还是报错，开了ExampleConfig生成代码一堆报错，未解决</em></p>
 </li>
 <li><p>Toggle监听不能添加带self的函数，无效</p>
 </li>
@@ -482,14 +499,29 @@ toggles[i].onValueChanged.AddListener((bool value) =&gt; ShowTaskDetails(value, 
         
             <div class="article-nav">
                 
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/28/Unity/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%9D%91/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">事件函数的坑</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/06/10/Unity/AStart/"
+                           href="/2022/06/12/Unity/%E7%83%AD%E6%9B%B4%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B%E4%B8%8E%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">A*</span>
+                                <span class="post-nav-title-item">热更版本检测与更新流程</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
