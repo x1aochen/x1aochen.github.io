@@ -189,7 +189,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>970 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k 字</span>
         </span>
     
     
@@ -223,11 +223,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">agent.SetDestination(transform.position);</span><br></pre></td></tr></table></figure>
 
 <p>因为在停止移动中设置了当前位置，导致AI做位移动画时，navAgent判断需要移动，会把AI拖回原地</p>
-<p>解决方法，设置agent速度为0</p>
+<ul>
+<li>解决方法，设置agent速度为0</li>
+</ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">agent.speed = 0;</span><br><span class="line">agent.angularSpeed = 0;</span><br></pre></td></tr></table></figure>
 
-
-
+<ul>
+<li>直接取消勾线Root Motion其实也可以解决，但是需要自己为需要位移的动画再添加相应逻辑</li>
+</ul>
 
         </div>
 

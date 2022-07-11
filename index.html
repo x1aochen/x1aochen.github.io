@@ -193,6 +193,73 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2022/07/11/Git/git%E6%93%8D%E4%BD%9C/">
+                        Git基本操作
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        [TOC]
+Git在本地环境的使用本地初始化一个Git仓库本地新建文件夹，用作Git的本地仓库，并创建新文件
+初始化仓库：文件夹下git bash here，键入
+1git init
+
+
+本地查看本地仓库的状态1git status
+
+
+状态信息：
+...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Jul 11 2022 21:05:31 GMT+0800">2022-07-11</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Git/">Git</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/git/">git</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/github/">github</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022/07/11/Git/git%E6%93%8D%E4%BD%9C/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2022/07/02/Unity/Unity%E7%BC%96%E8%AF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5/">
                         编译
                     </a>
@@ -251,15 +318,16 @@ IL(Intermediate Language)https://zhuanlan.zhihu.com/p/10023399...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/06/28/Unity/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%9D%91/">
+                    <a href="/2022/06/28/Unity/%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0%E7%9A%84%E5%9D%91/">
                         事件函数的坑
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        事件函数 EventFunctionAwake和StartAwake：始终在任何Start函数之前并在实例化预制件之后调用此函数。（如果游戏对象在启动期间处于非活动状态，则在激活之后才会调用 Awake）
-start：仅当启用脚本实例后，才会在第一次...
+                        事件函数 EventFunction事件函数不需要重写的原因
+是因为Unity是通过反射对方法进行调用，而且并不是所有继承了MonoBehaviour的脚本都需要写上全部的事件函数
+在引擎内部存在一张表，这张表的形成是通过在场景中查找全部的MonoB...
                     
                 </div>
 
@@ -299,7 +367,7 @@ start：仅当启用脚本实例后，才会在第一次...
         
     </div>
 
-    <a href="/2022/06/28/Unity/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%9D%91/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/06/28/Unity/%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0%E7%9A%84%E5%9D%91/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -387,6 +455,58 @@ Jump end 动作没做完，就按下空格，导致使用连跳时，会先播�
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2022/06/14/Lua/Lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                        Lua
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Lua面向对象复制表方式12345678910111213141516function clone(table)    local ins = &#123;&#125;    for k, v in pairs(table) do        in...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 14 2022 22:03:15 GMT+0800">2022-06-14</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Lua/">Lua</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Lua/">Lua</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022/06/14/Lua/Lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2022/06/12/Unity/%E7%83%AD%E6%9B%B4%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B%E4%B8%8E%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6/">
                         热更版本检测与更新流程
                     </a>
@@ -396,10 +516,10 @@ Jump end 动作没做完，就按下空格，导致使用连跳时，会先播�
                     
                         热更版本检测与更新机制版本检测打包准备每次打包，要对应生成一个配置文件，assetslist.txt
 记录打包时间
-公司里用于专门打包的PC（高配CPU和内存）
+用于专门打包的PC（高配CPU和内存）
 SVN，GIT，更新到最新版本，然后执行框架的打包功能
 assetslist.txt
-第...
+第一行 ...
                     
                 </div>
 
@@ -491,6 +611,63 @@ assetslist.txt
     </div>
 
     <a href="/2022/06/10/Unity/AStart/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022/06/02/C++/linux%E4%B8%8B%E4%BD%BF%E7%94%A8jsoncpp/">
+                        linux下使用jsoncpp
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        linux下使用jsoncppwindows安装配置流程：
+https://subingwen.cn/cpp/jsoncpp/
+因为是用vs远程在linux进行开发，所以windows下要
+
+没有这个的话，编译器找不到头文件会报错
+linux下安装j...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Jun 02 2022 15:18:21 GMT+0800">2022-06-02</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/C/">C++</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/json/">json</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022/06/02/C++/linux%E4%B8%8B%E4%BD%BF%E7%94%A8jsoncpp/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -600,173 +777,6 @@ assetslist.txt
     </div>
 
     <a href="/2022/05/01/LeetCode/167.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8CII---%E8%BE%93%E5%85%A5%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/04/26/Unity/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C/">
-                        AI
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        AI人工智障群体移动堵塞，拥挤，抖动使用NavMeshAgent在对AI进行寻路追逐玩家时，出现堵塞，拥挤抖动现象
-这是因为Unity Navigation是预处理Bake的，游戏运行过程中，第一个到达的AI所占位置仍然是被Bake，第二个AI仍然会...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Apr 26 2022 00:21:29 GMT+0800">2022-04-26</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Unity/">Unity</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/AI/">AI</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Navgation/">Navgation</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/04/26/Unity/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/04/22/LeetCode/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/">
-                        回文链表
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        快慢指针翻转12345678910111213141516171819202122232425262728293031323334353637383940/** * Definition for singly-linked list. * struc...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Apr 22 2022 09:46:11 GMT+0800">2022-04-22</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/LeetCode/">LeetCode</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">快慢指针</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/04/22/LeetCode/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/04/20/LeetCode/%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                        对称二叉树
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        迭代123456789101112131415161718192021222324class Solution &#123;public:    bool symmetricTree(TreeNode* r,TreeNode* l)&#123;   ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Apr 20 2022 09:44:52 GMT+0800">2022-04-20</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/LeetCode/">LeetCode</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/04/20/LeetCode/%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
