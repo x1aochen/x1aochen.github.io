@@ -185,7 +185,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.7k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
         </span>
     
     
@@ -210,22 +210,21 @@
 
 
 <h3 id="项目概括"><a href="#项目概括" class="headerlink" title="项目概括"></a>项目概括</h3><ul>
-<li><p>实现了背包，任务，NPC，商店，战斗等RPG游戏常见功能性系统</p>
-</li>
-<li><p>玩家可以在游戏中NPC处领取任务，副本里击杀敌人完成任务并领取任务奖励，获得更高级的装备后，攻克更高级的副本</p>
-</li>
-<li><p>游戏一大特点是实现了一些传统RPG所不具备的技能系统，玩家可以根据武器的选择，释放不同的技能，每个技能都拥有自己的特点，如自动索敌，增加状态BUFF，群体攻击等。</p>
-</li>
-<li><p>游戏实现了脚本，资源的热更新并支持跨平台的数据传输</p>
-</li>
+<li>实现了背包，任务，NPC，商店，战斗等RPG游戏常见功能性系统</li>
+<li>玩家可以在游戏中NPC处领取任务，副本里击杀敌人完成任务并领取任务奖励，获得更高级的装备后，攻克更高级的副本</li>
+<li>游戏一大特点是实现了一些传统RPG所不具备的技能系统，玩家可以根据武器的选择，释放不同的技能，每个技能都拥有自己的特点，如自动索敌，增加状态BUFF，群体攻击等。</li>
+<li>游戏通过xLua实现了脚本，资源的热更新并使用socket完成跨平台的数据传输</li>
+<li>角色的战斗，寻路，移动跳跃等通过外观类的调用，减少了外部处理的对象数目并且实现松耦合关系，使得系统的改变并不会影响外部的调用，调整外观类即可</li>
 </ul>
-<h4 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h4><p>VS2019，VSCode，Unity2021，Linux，Github，xLua，DoTween</p>
+<h4 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h4><p>VS2019，VSCode，Unity2021，Linux，Github，xLua，DoTween，Sqlite</p>
 <h3 id="部分系统概括"><a href="#部分系统概括" class="headerlink" title="部分系统概括"></a>部分系统概括</h3><h4 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h4><p>支持物品的<strong>分类，拖拽，装备，交易</strong>等</p>
 <ul>
 <li>背包是跟物品绑定的</li>
+<li>物品通过物品工厂，实例化出不同类别物品</li>
 <li>每个物品会有对应的数据类，并且会在物品预制体上挂载实例类和一个拖拽功能的类，实例类会设置自己所对应物品数据，会做一些拖拽的响应事件，一些动画的效果。</li>
 <li>背包的话，通过格子的复用，脚本对外开放设置物品方法，在Toggle组改变的时候，清空所有格子对应的物品，再根据物品类型重新设置对应物品，达到一个分类的功能；并且格子还实现鼠标进入离开点击这几个UI接口方法，实现显示物品信息，或者点击物品显示对应的方法，像使用，卖出，丢弃。</li>
 <li>装备栏的话他也是一个格子，为了达到装备栏与物品类型的匹配，格子也会有属于自己的类型，通过类型判断是否装备物品；拖拽到相应格子，则会进行逻辑判断，如增加角色状态</li>
+<li><strong>通过工厂模式制作物品，再增加新物品时，无需修改现有系统，封装了对物品对象的创建细节</strong></li>
 <li><strong>通过格子类，进行游戏物品的挂载，更加灵活和复用</strong></li>
 <li><strong>通过实现UGUI接口方法，UI的拖拽装备等复杂性问题很好的得到了解决</strong></li>
 </ul>
@@ -241,7 +240,7 @@
 <li>完成任务后，这些任务响应的事件也会相应的注销掉，并且任务的状态也会改变，我们就可以领取奖励，那么就会调用管理类里面的移除方法，把该任务从玩家所领取的任务表中移除掉，并且，调用加入物品的方法，把奖励物品加入玩家背包，一些有后继解锁任务的，则会在此时解锁对应任务</li>
 <li><strong>通过各个ID，完美的根据任务状态实现不同对话内容，只需配置好对应的ID，无需添加代码即实现添加新内容</strong></li>
 <li><strong>反射动态动态创建所需任务，更加降低了耦合，提高了程序的灵活性和扩展性</strong></li>
-<li><strong>通过事件的传递，发送方以及任务实例的接收方，都无法获得得知对方是谁，更好的实现程序的封装性，解除耦合</strong></li>
+<li><strong>通过观察者模式进行事件的传递，发送方以及任务实例的接收方，都无需知道对方的存在，更好的实现程序的封装性，解除耦合</strong></li>
 </ul>
 <h4 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h4><p>支持，<strong>跟随武器切换当前技能，释放技能特效，技能UI</strong>等</p>
 <ul>
@@ -255,24 +254,6 @@
 <li><strong>增加新技能，只需添加预制体，和技能对应脚本，就可很方便的完成对新技能的扩展</strong></li>
 </ul>
 <h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h4><p>对<a class="link"   target="_blank" rel="noopener" href="http://x1aochen.cc/2022/04/26/Unity/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C/" > 群体AI堵塞 <i class="fas fa-external-link-alt"></i></a>的解决</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
-<li>UI并没有使用一些常见的UI框架（MVC，MVVM，ECS等），导致后期功能有限，扩展不易</li>
-<li>设计模式运用较少</li>
-<li>部分Bug未解决，例如：<ul>
-<li>跳跃进入传送门，导致动画播放的是跳跃动画，而直接加载场景，在第二场景就会一直处于跳跃动画<ul>
-<li>解决思路：直接在每次进入场景后，重置动画状态机条件变量</li>
-</ul>
-</li>
-<li>Boss状态机随着状态的增多，开始变得繁琐，逻辑复杂，导致一堆莫名其妙的BUG，而耗费太多精力来解决<ul>
-<li>是状态机的有限性，和难于扩展</li>
-<li>像Boss这种AI，因为状态数量较多，更应该使用行为树来做</li>
-</ul>
-</li>
-<li>lua这块，没有使用像MD5（主要是还没学）来确保信息的完整一致，而是用土方法进行大量的判断</li>
-</ul>
-</li>
-<li>总体整个Demo的最终呈现效果其实自己并不太满意，但是因为时间和能力的关系，短期内并无法达到一个质的提升，遂就此罢休，待以后技术进步，会去实现更多自己想要的东西</li>
-</ol>
 
         </div>
 
@@ -321,35 +302,34 @@
         </div>
 
         <div class="page-main-content-bottom">
-            .footer {
-  font-size: 1rem;
-  color: var(--third-text-color);
-
-
-  a {
-    color: var(--third-text-color);
-
-
-    &:hover {
-      color: var(--primary-color);
-
-    }
-  }
-
-  .info-container {
-    padding-bottom: 10px;
-    text-align: center;
-  }
-
-  .info-item {
-    margin: 5px 0;
-  }
-
-  .icon-animate {
-    animation: icon-animate 1.2s ease-in-out infinite;
-  }
-
-}
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">陈嘉俊</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
 
         </div>
     </div>
@@ -420,7 +400,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95Demo"><span class="nav-text">面试Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%A6%82%E6%8B%AC"><span class="nav-text">项目概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-text">开发工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC"><span class="nav-text">部分系统概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-text">背包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8ENPC"><span class="nav-text">任务与NPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E8%83%BD"><span class="nav-text">技能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-text">状态机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95Demo"><span class="nav-text">面试Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%A6%82%E6%8B%AC"><span class="nav-text">项目概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-text">开发工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC"><span class="nav-text">部分系统概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-text">背包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8ENPC"><span class="nav-text">任务与NPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E8%83%BD"><span class="nav-text">技能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-text">状态机</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
