@@ -185,7 +185,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k 字</span>
         </span>
     
     
@@ -207,9 +207,9 @@
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
     frameborder="0" allowfullscreen>
 </iframe>
-### 项目概括
 
-<ul>
+
+<h3 id="项目概括"><a href="#项目概括" class="headerlink" title="项目概括"></a>项目概括</h3><ul>
 <li><p>实现了背包，任务，NPC，商店，战斗等RPG游戏常见功能性系统</p>
 </li>
 <li><p>玩家可以在游戏中NPC处领取任务，副本里击杀敌人完成任务并领取任务奖励，获得更高级的装备后，攻克更高级的副本</p>
@@ -220,33 +220,29 @@
 </li>
 </ul>
 <h4 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h4><p>VS2019，VSCode，Unity2021，Linux，Github，xLua，DoTween</p>
-<h3 id="部分系统实现概括"><a href="#部分系统实现概括" class="headerlink" title="部分系统实现概括"></a>部分系统实现概括</h3><h4 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h4><p>支持物品的<strong>分类，拖拽，装备，交易</strong>等</p>
+<h3 id="部分系统概括"><a href="#部分系统概括" class="headerlink" title="部分系统概括"></a>部分系统概括</h3><h4 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h4><p>支持物品的<strong>分类，拖拽，装备，交易</strong>等</p>
 <ul>
-<li><p>背包是跟物品绑定的</p>
-</li>
-<li><p>每个物品会有对应的数据类，并且会在物品预制体上挂载实例类和一个拖拽功能的类，实例类会设置自己所对应物品数据，会做一些拖拽的响应事件，一些动画的效果。</p>
-</li>
-<li><p>背包的话，每个格子都会挂载一个背包格子类，实现了设置当前物品的方法，为了实现格子的复用，在Toggle组改变的时候，就会清空所有格子对应的物品，再根据物品类型重新设置对应物品，达到一个分类的功能，然后格子也会实现鼠标进入离开点击这几个接口方法，主要就是显示物品信息，或者点击物品显示对应的方法，像使用，卖出，丢弃。</p>
-</li>
-<li><p>装备栏的话他也是一个格子，为了实现对应物品类型装备到对应的格子上，所以格子他也会有像物品那样去分类，拖拽到相应格子，如果是匹配的话就会进行对应的装备物品逻辑处理，比如去增加玩家属性</p>
-</li>
-<li><p>任务界面那边显示的任务奖励，也是一样的通过格子来设置物品，只是在那个地方的物品就不需要去挂载拖拽功能</p>
-</li>
+<li>背包是跟物品绑定的</li>
+<li>每个物品会有对应的数据类，并且会在物品预制体上挂载实例类和一个拖拽功能的类，实例类会设置自己所对应物品数据，会做一些拖拽的响应事件，一些动画的效果。</li>
+<li>背包的话，每个格子都会挂载一个背包格子类，实现了设置当前物品的方法，为了实现格子的复用，在Toggle组改变的时候，就会清空所有格子对应的物品，再根据物品类型重新设置对应物品，达到一个分类的功能；并且格子还实现鼠标进入离开点击这几个UI接口方法，实现显示物品信息，或者点击物品显示对应的方法，像使用，卖出，丢弃。</li>
+<li>装备栏的话他也是一个格子，为了实现对应物品类型装备到对应的格子上，所以格子他也会有像物品那样去分类；拖拽到相应格子，如果是匹配的话就会进行对应的装备物品逻辑处理，比如去增加玩家属性</li>
+<li>任务界面那边显示的任务奖励，也是一样的通过格子来设置物品，只是在那个地方的物品就不需要去挂载拖拽功能</li>
+<li><strong>通过格子类，进行游戏物品的挂载，更加灵活和复用</strong></li>
+<li><strong>通过实现UGUI接口方法，UI的拖拽装备等复杂性问题很好的得到了解决</strong></li>
 </ul>
 <h4 id="任务与NPC"><a href="#任务与NPC" class="headerlink" title="任务与NPC"></a>任务与NPC</h4><p>支持<strong>任务自动寻路至NPC，NPC对话内容随任务状态而改变，任务完成后的子任务解锁</strong>等</p>
 <ul>
-<li><p>三个ID：</p>
-<ul>
+<li>三个ID：<ul>
 <li>任务ID，NPC自身ID，对话内容ID</li>
 <li>对话内容由<strong>NpcID</strong>和<strong>任务状态</strong>得到对应的对话内容ID</li>
 </ul>
 </li>
-<li><p>每个任务会有各自任务实例Item类，主要是接收<strong>任务响应事件，判断任务进度，和领取任务奖励</strong></p>
-</li>
-<li><p>在玩家找NPC接受任务后，会调用管理类里面的添加任务方法，根据接受的任务ID<strong>通过反射去创建所对应的任务实例</strong>，加入到正在进行中的列表里面，这样的话就成功的接收了一个任务，这个任务实例就去接收任务事件的响应，就会进行进度的更新，并且判断是否完成等</p>
-</li>
-<li><p>完成任务后，这些任务响应的事件也会相应的注销掉，并且任务的状态也会改变，我们就可以领取奖励，那么就会调用管理类里面的移除方法，把该任务从玩家所领取的任务表中移除掉，并且，调用加入物品的方法，把奖励物品加入玩家背包，一些有后继解锁任务的，则会在此时解锁对应任务</p>
-</li>
+<li>每个任务会有各自任务实例Item类，主要是接收<strong>任务响应事件，判断任务进度，和领取任务奖励</strong></li>
+<li>在玩家找NPC接受任务后，会调用管理类里面的添加任务方法，根据接受的任务ID<strong>通过反射去创建所对应的任务实例</strong>，加入到正在进行中的列表里面，这样的话就成功的接收了一个任务，这个任务实例就去接收任务事件的响应，就会进行进度的更新，并且判断是否完成等</li>
+<li>完成任务后，这些任务响应的事件也会相应的注销掉，并且任务的状态也会改变，我们就可以领取奖励，那么就会调用管理类里面的移除方法，把该任务从玩家所领取的任务表中移除掉，并且，调用加入物品的方法，把奖励物品加入玩家背包，一些有后继解锁任务的，则会在此时解锁对应任务</li>
+<li><strong>通过各个ID，完美的根据任务状态实现不同对话内容，只需配置好对应的ID，无需添加代码即实现添加新内容</strong></li>
+<li><strong>反射动态动态创建所需任务，更加降低了耦合，提高了程序的灵活性和扩展性</strong></li>
+<li><strong>通过事件的传递，发送方以及任务实例的接收方，都无法获得得知对方是谁，更好的实现程序的封装性，解除耦合</strong></li>
 </ul>
 <h4 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h4><p>支持，<strong>跟随武器切换当前技能，释放技能特效，技能UI</strong>等</p>
 <ul>
@@ -259,6 +255,9 @@
 <li>技能系统会根据玩家的输入和当前的武器，去得到所对应技能ID，通知技能管理类准备技能，成功后则会根据技能数据里的动画名称，播放对应播放，并且在动画播放后，会在我们所需要发出的时间点接收到<strong>动画事件所发出的事件通知</strong>，然后去通知管理类释放技能游戏对象</li>
 <li>技能游戏物体的重置，则会对游戏物体当前的<strong>位置，旋转，攻击力等</strong>进行重置，并且向目标移动而去。增加状态，判断敌人距离等技能逻辑则会对应的在此处去实现</li>
 <li>大部分技能都是做成一个<strong>触发器</strong>，通过OnTrigger来判断是否击中敌人，可以通过OnTrigger的方法参数去调用敌人身上受到伤害的方法</li>
+<li><strong>外部通过系统类触发技能的使用，更好的实现对技能管理这个主要处理技能释放逻辑类的封装</strong></li>
+<li><strong>技能通过重置接口以便外部调用，实现不同技能的重置方法多态性</strong></li>
+<li><strong>增加新技能，只需添加预制体，和技能对应脚本，就可很方便的完成对新技能的扩展</strong></li>
 </ul>
 <h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h4><p>对<a class="link"   target="_blank" rel="noopener" href="http://x1aochen.cc/2022/04/26/Unity/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C/" > 群体AI堵塞 <i class="fas fa-external-link-alt"></i></a>的解决</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
@@ -425,7 +424,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95Demo"><span class="nav-text">面试Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-text">开发工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E6%A6%82%E6%8B%AC"><span class="nav-text">部分系统实现概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-text">背包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8ENPC"><span class="nav-text">任务与NPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E8%83%BD"><span class="nav-text">技能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-text">状态机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95Demo"><span class="nav-text">面试Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%A6%82%E6%8B%AC"><span class="nav-text">项目概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-text">开发工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC"><span class="nav-text">部分系统概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-text">背包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8ENPC"><span class="nav-text">任务与NPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E8%83%BD"><span class="nav-text">技能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-text">状态机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
