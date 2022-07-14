@@ -9,7 +9,7 @@
     
     <title>
         
-            分类: 作品 |
+            AlgorithmVisualization |
         
         keep
     </title>
@@ -75,7 +75,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/categories"
                             >
                                 分类
@@ -114,7 +114,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/categories">分类</a>
                 </li>
             
@@ -134,49 +134,134 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="category-container">
-        <div class="category-name">
-            <i class="fas fa-folder"></i>&nbsp;作品
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">AlgorithmVisualization</span>
         </div>
-        <div class="category-post-list">
-            
-<div class="archive-list-container">
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E7%BD%91%E7%AB%99%E5%A4%B4%E5%83%8F.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">陈嘉俊</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-07-13 23:43:18</span>
+        <span class="mobile">2022-07-13 23:43</span>
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
                 
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/07/13/%E4%BD%9C%E5%93%81/ARPG%E9%9D%A2%E8%AF%95Demo/"
-                        >ARPG面试Demo</a>
-                        <span class="article-date">07-13</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/07/13/%E4%BD%9C%E5%93%81/%E7%AE%97%E6%B3%95%E5%8F%AF%E8%A7%86%E5%8C%96/"
-                        >算法可视化</a>
-                        <span class="article-date">07-13</span>
+                    <li>
+                        <a href="/categories/Game/">Game</a>&nbsp;
                     </li>
                 
             </ul>
-        </section>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>548 字</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
     
 </div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>常用算法的可视化，学习和改进中</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/x1aochen/AlgorithmVisualization" >源码<i class="fas fa-external-link-alt"></i></a></p>
+<iframe width="700" height="500"
+    src="//player.bilibili.com/player.html?aid=898110403&bvid=BV1xN4y1M7wS&cid=764369769&page=1"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    frameborder="0" allowfullscreen>
+</iframe>
+
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>动态生成节点数量，洗牌打乱，根据不同算法，执行相关逻辑</p>
+<p>可一键排序也可以观察算法的执行过程，实时显示算法执行时间</p>
+<p>照相机移动：右键，滚轮，上下左右，和开发时的Scene窗口上移动差不多的方式</p>
+<h3 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h3><ul>
+<li>SortHelper类中用协程完成节点位置相关的功能，包括洗牌的重置，树节点的颜色变化；这个类暂时没有引用其他任何类，所以代码较其他类更多，也有一些冗余，是整个程序被引用最多的类</li>
+<li>在比较大小方面，用字典key存储每个物体的Transform，int存对应的数值。其实也可以直接比较Transform的Y轴缩放大小，因为生成的时候就是对Y轴缩放做了改变</li>
+<li>每个算法都继承了BaseAlgorithm抽象类，必须实现排序功能；声明完成排序的事件，外部进行添加和删除，内部调用；声明了计时器功能，用于一键排序时计入代码执行时间<ul>
+<li>一键排序的计时，在游戏开始后第一次执行总是会慢很多，这是因为JIT的机制，第一次执行时会进行编译</li>
+</ul>
+</li>
+<li>树节点的生成会根据树高自动判断每个节点位置。其实就是把最后一排的间距定义死，在往上推出每一层的节点间距</li>
+<li>UI没有数据相关，功能也不多，暂时简单实现了EventManager类，在UI面板类中调用Call，其他所需的类中添加相应的监听AddListener</li>
+<li>Unity下拉框的Bug，下拉菜单弹出时，首选项是被选中状态，当点击首选项的时候永远不会调用首选项的方法<ul>
+<li>网上查了下，就是重写Dropdown，在每次显示时，再对Toggle的事件进行重新添加监听</li>
+<li>感觉这样也很麻烦，而且Dropdown每次show和hide的时候就是把菜单从场景中删除和再生成，不太懂为什么这样做</li>
+</ul>
+</li>
+</ul>
 
         </div>
-    </div>
-    <div class="category-paginator">
-        <div class="paginator">
-    
 
-    
-</div>
+        
 
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/07/13/Game/ARPGDemo/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ARPGDemo</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/07/11/Git/git%E6%93%8D%E4%BD%9C/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Git基本操作</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
     </div>
 </div>
 
@@ -219,6 +304,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -264,6 +366,14 @@
 
     </div>
 
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-text">功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F"><span class="nav-text">程序</span></a></li></ol>
+    </div>
+</div>
+        </aside>
     
 
     <div class="image-viewer-container">
@@ -319,6 +429,8 @@
 
 
 <div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
     
 </div>
 
