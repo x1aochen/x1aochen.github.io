@@ -9,7 +9,7 @@
     
     <title>
         
-            new和malloc |
+            ARPG面试Demo |
         
         keep
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">new和malloc</span>
+            <span class="title-hover-animation">ARPG面试Demo</span>
         </div>
 
         
@@ -154,8 +154,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-07 23:43:18</span>
-        <span class="mobile">2022-03-07 23:43</span>
+        <span class="pc">2022-07-13 23:43:18</span>
+        <span class="mobile">2022-07-13 23:43</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -163,7 +163,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/C/">C++</a>&nbsp;
+                        <a href="/categories/%E4%BD%9C%E5%93%81/">作品</a>&nbsp;
                     </li>
                 
             </ul>
@@ -175,15 +175,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/new/">new</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/malloc/">malloc</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/%E5%86%85%E5%AD%98/">内存</a>&nbsp;
+                        <a href="/tags/ARPG/">ARPG</a>&nbsp;
                     </li>
                 
             </ul>
@@ -193,7 +185,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>468 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
         </span>
     
     
@@ -210,25 +202,83 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="new和malloc"><a href="#new和malloc" class="headerlink" title="new和malloc"></a>new和malloc</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span>) :<span class="built_in">re</span>(r), <span class="built_in">im</span>(i)</span><br><span class="line">	&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">real</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> re; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">imag</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> im; &#125;</span><br><span class="line">    ~<span class="built_in">complex</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;call dtor to delete&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">double</span> re, im;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	complex* p = <span class="keyword">new</span> complex;</span><br><span class="line">	cout &lt;&lt; p-&gt;<span class="built_in">real</span>() &lt;&lt; p-&gt;<span class="built_in">imag</span>() &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">	complex* q = (complex*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(complex)); <span class="comment">//指定大小，并强制转换</span></span><br><span class="line">	cout &lt;&lt; q-&gt;<span class="built_in">real</span>() &lt;&lt; q-&gt;<span class="built_in">imag</span>();</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">delete</span> p; </span><br><span class="line">	<span class="built_in">free</span>(q); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="面试Demo"><a href="#面试Demo" class="headerlink" title="面试Demo"></a>面试Demo</h2><iframe width="700" height="500"
+    src="//player.bilibili.com/player.html?aid=855274590&bvid=BV1NL4y1P7hH&cid=754887075&page=1"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    frameborder="0" allowfullscreen>
+</iframe>
+### 项目概括
 
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220309220218.png"></p>
-<h4 id="构造-析构的调用"><a href="#构造-析构的调用" class="headerlink" title="构造/析构的调用"></a>构造/析构的调用</h4><p>new在申请空间的时候会调用构造函数，malloc不会调用，释放时new也会调用析构函数，而free不会</p>
-<h4 id="是否指定内存大小"><a href="#是否指定内存大小" class="headerlink" title="是否指定内存大小"></a>是否指定内存大小</h4><p>new无需指定内存块大小，编译器会根据类型自行计算，而malloc需要显示的指出所需内存大小</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">complex* q = (complex*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-
-<p>上述做法是可以通过编译的，但是…</p>
-<h4 id="返回类型"><a href="#返回类型" class="headerlink" title="返回类型"></a>返回类型</h4><p>new分配成功时，返回的是对象类型的指针，无须进行类型转换，故new是符合类型安全的操作符，而malloc返回的是void*，需要通过强制类型转换成所需类型</p>
-<h4 id="分配失败的返回值"><a href="#分配失败的返回值" class="headerlink" title="分配失败的返回值"></a>分配失败的返回值</h4><p>new分配失败时，会抛出bad_alloc异常，而不会像malloc一样返回NULL</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* q  = (<span class="keyword">int</span>*)<span class="built_in">malloc</span> (<span class="built_in"><span class="keyword">sizeof</span></span> (<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">NULL</span> == a)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>* a = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in"><span class="keyword">catch</span></span> (bad_alloc)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="动态分配内存块"><a href="#动态分配内存块" class="headerlink" title="动态分配内存块"></a>动态分配内存块</h3><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98%E5%9D%97.png"></p>
-<p>上图分别为debug和release下的情况，灰色则是debug操作下所需的空间</p>
-<p>cookie记录分配到的空间所占大小，以16进制表示</p>
-<p>实际分配的大小比类的大小大得多</p>
-<h4 id="对数组的处理"><a href="#对数组的处理" class="headerlink" title="对数组的处理"></a>对数组的处理</h4><p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/arrayNew.png"></p>
-<p>如果数组delete不写[]，编译器不知道需要删除的是数组，红色框中仍然删除，但是只调用一次析构，那么数组内指针所指向空间则只删除一个，剩下的则会导致内存泄漏</p>
-<p><img src="https://1-1309415301.cos.ap-shanghai.myqcloud.com/C/%E6%95%B0%E7%BB%84delete1.png"></p>
+<ul>
+<li><p>实现了背包，任务，NPC，商店，战斗等RPG游戏常见功能性系统</p>
+</li>
+<li><p>玩家可以在游戏中NPC处领取任务，副本里击杀敌人完成任务并领取任务奖励，获得更高级的装备后，攻克更高级的副本</p>
+</li>
+<li><p>游戏一大特点是实现了一些传统RPG所不具备的技能系统，玩家可以根据武器的选择，释放不同的技能，每个技能都拥有自己的特点，如自动索敌，增加状态BUFF，群体攻击等。</p>
+</li>
+<li><p>游戏实现了脚本，资源的热更新并支持跨平台的数据传输</p>
+</li>
+</ul>
+<h4 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h4><p>VS2019，VSCode，Unity2021，Linux，Github，xLua，DoTween</p>
+<h3 id="部分系统实现概括"><a href="#部分系统实现概括" class="headerlink" title="部分系统实现概括"></a>部分系统实现概括</h3><h4 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h4><p>支持物品的<strong>分类，拖拽，装备，交易</strong>等</p>
+<ul>
+<li><p>背包是跟物品绑定的</p>
+</li>
+<li><p>每个物品会有对应的数据类，并且会在物品预制体上挂载实例类和一个拖拽功能的类，实例类会设置自己所对应物品数据，会做一些拖拽的响应事件，一些动画的效果。</p>
+</li>
+<li><p>背包的话，每个格子都会挂载一个背包格子类，实现了设置当前物品的方法，为了实现格子的复用，在Toggle组改变的时候，就会清空所有格子对应的物品，再根据物品类型重新设置对应物品，达到一个分类的功能，然后格子也会实现鼠标进入离开点击这几个接口方法，主要就是显示物品信息，或者点击物品显示对应的方法，像使用，卖出，丢弃。</p>
+</li>
+<li><p>装备栏的话他也是一个格子，为了实现对应物品类型装备到对应的格子上，所以格子他也会有像物品那样去分类，拖拽到相应格子，如果是匹配的话就会进行对应的装备物品逻辑处理，比如去增加玩家属性</p>
+</li>
+<li><p>任务界面那边显示的任务奖励，也是一样的通过格子来设置物品，只是在那个地方的物品就不需要去挂载拖拽功能</p>
+</li>
+</ul>
+<h4 id="任务与NPC"><a href="#任务与NPC" class="headerlink" title="任务与NPC"></a>任务与NPC</h4><p>支持<strong>任务自动寻路至NPC，NPC对话内容随任务状态而改变，任务完成后的子任务解锁</strong>等</p>
+<ul>
+<li><p>三个ID：</p>
+<ul>
+<li>任务ID，NPC自身ID，对话内容ID</li>
+<li>对话内容由<strong>NpcID</strong>和<strong>任务状态</strong>得到对应的对话内容ID</li>
+</ul>
+</li>
+<li><p>每个任务会有各自任务实例Item类，主要是接收<strong>任务响应事件，判断任务进度，和领取任务奖励</strong></p>
+</li>
+<li><p>在玩家找NPC接受任务后，会调用管理类里面的添加任务方法，根据接受的任务ID<strong>通过反射去创建所对应的任务实例</strong>，加入到正在进行中的列表里面，这样的话就成功的接收了一个任务，这个任务实例就去接收任务事件的响应，就会进行进度的更新，并且判断是否完成等</p>
+</li>
+<li><p>完成任务后，这些任务响应的事件也会相应的注销掉，并且任务的状态也会改变，我们就可以领取奖励，那么就会调用管理类里面的移除方法，把该任务从玩家所领取的任务表中移除掉，并且，调用加入物品的方法，把奖励物品加入玩家背包，一些有后继解锁任务的，则会在此时解锁对应任务</p>
+</li>
+</ul>
+<h4 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h4><p>支持，<strong>跟随武器切换当前技能，释放技能特效，技能UI</strong>等</p>
+<ul>
+<li>技能的重要数据：<ul>
+<li>ID，使用者，预制体</li>
+</ul>
+</li>
+<li>每个技能有对应的技能脚本</li>
+<li>通过<strong>技能系统类和技能管理类</strong>完成技能的调度，释放技能游戏对象，接受动画事件，处理技能冷却等</li>
+<li>技能系统会根据玩家的输入和当前的武器，去得到所对应技能ID，通知技能管理类准备技能，成功后则会根据技能数据里的动画名称，播放对应播放，并且在动画播放后，会在我们所需要发出的时间点接收到<strong>动画事件所发出的事件通知</strong>，然后去通知管理类释放技能游戏对象</li>
+<li>技能游戏物体的重置，则会对游戏物体当前的<strong>位置，旋转，攻击力等</strong>进行重置，并且向目标移动而去。增加状态，判断敌人距离等技能逻辑则会对应的在此处去实现</li>
+<li>大部分技能都是做成一个<strong>触发器</strong>，通过OnTrigger来判断是否击中敌人，可以通过OnTrigger的方法参数去调用敌人身上受到伤害的方法</li>
+</ul>
+<h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h4><p>对<a class="link"   target="_blank" rel="noopener" href="http://x1aochen.cc/2022/04/26/Unity/AI%E4%BA%BA%E5%B7%A5%E6%99%BA%E9%9A%9C/" > 群体AI堵塞 <i class="fas fa-external-link-alt"></i></a>的解决</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>UI并没有使用一些常见的UI框架（MVC，MVVM，ECS等），导致后期功能有限，扩展不易</li>
+<li>设计模式运用较少</li>
+<li>部分Bug未解决，例如：<ul>
+<li>跳跃进入传送门，导致动画播放的是跳跃动画，而直接加载场景，在第二场景就会一直处于跳跃动画<ul>
+<li>解决思路：直接在每次进入场景后，重置动画状态机条件变量</li>
+</ul>
+</li>
+<li>Boss状态机随着状态的增多，开始变得繁琐，逻辑复杂，导致一堆莫名其妙的BUG，而耗费太多精力来解决<ul>
+<li>是状态机的有限性，和难于扩展</li>
+<li>像Boss这种AI，因为状态数量较多，更应该使用行为树来做</li>
+</ul>
+</li>
+<li>lua这块，没有使用像MD5（主要是还没学）来确保信息的完整一致，而是用土方法进行大量的判断</li>
+</ul>
+</li>
+<li>总体整个Demo的最终呈现效果其实自己并不太满意，但是因为时间和能力的关系，短期内并无法达到一个质的提升，遂就此罢休，待以后技术进步，会去实现更多自己想要的东西</li>
+</ol>
 
         </div>
 
@@ -238,15 +288,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/new/">#new</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/malloc/">#malloc</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/%E5%86%85%E5%AD%98/">#内存</a>&nbsp;
+                        <a href="/tags/ARPG/">#ARPG</a>&nbsp;
                     </li>
                 
             </ul>
@@ -255,29 +297,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/03/07/C++/C++%E8%AF%AD%E6%B3%95/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C++语法</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/03/07/C++/ARPG%E9%9D%A2%E8%AF%95Demo/"
+                           href="/2022/07/13/%E4%BD%9C%E5%93%81/%E7%AE%97%E6%B3%95%E5%8F%AF%E8%A7%86%E5%8C%96/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">111</span>
+                                <span class="post-nav-title-item">算法可视化</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -398,7 +425,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new%E5%92%8Cmalloc"><span class="nav-text">new和malloc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0-%E6%9E%90%E6%9E%84%E7%9A%84%E8%B0%83%E7%94%A8"><span class="nav-text">构造&#x2F;析构的调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E6%8C%87%E5%AE%9A%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F"><span class="nav-text">是否指定内存大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B"><span class="nav-text">返回类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-text">分配失败的返回值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%E5%9D%97"><span class="nav-text">动态分配内存块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-text">对数组的处理</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95Demo"><span class="nav-text">面试Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-text">开发工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E6%A6%82%E6%8B%AC"><span class="nav-text">部分系统实现概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-text">背包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%8ENPC"><span class="nav-text">任务与NPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E8%83%BD"><span class="nav-text">技能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-text">状态机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
