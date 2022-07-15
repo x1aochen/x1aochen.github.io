@@ -332,19 +332,109 @@
 </li>
 <li><p>DontDestroyOnLoad的坑</p>
 <ul>
-<li><p>场景来回切换，会生成两个游戏物体</p>
+<li>场景来回切换，会生成两个游戏物体</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GameObject[] players = GameObject.FindGameObjectsWithTag(&quot;Player&quot;);</span><br><span class="line">if (players.Length &gt; 1)</span><br><span class="line">&#123;</span><br><span class="line">    Destroy(players[1]);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">    DontDestroyOnLoad(player);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除掉多出来的一个</li>
+</ul>
 </li>
-<li><p>```c#<br>GameObject[] players = GameObject.FindGameObjectsWithTag(“Player”);<br>if (players.Length &gt; 1)<br>{</p>
-<pre><code>Destroy(players[1]);
-</code></pre>
-<p>}<br>else<br>{</p>
-<pre><code>DontDestroyOnLoad(player);
-</code></pre>
-<p>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    * 删除掉多出来的一个</span><br><span class="line">    </span><br><span class="line">29. AB包打包不允许有任何报错，否则就打不出来</span><br><span class="line"></span><br><span class="line">30. 不能用File.Exits() 判断streamingAssets下的资源是否存在，永远返回false，网上的解释是因为streamingAssets本身是一个虚拟路径，并不真实存在</span><br><span class="line"></span><br><span class="line">31. 消息传递：</span><br><span class="line"></span><br><span class="line">    * 广播消息 BroadcastMessage() ，广播给所有的孩子</span><br><span class="line">      * 可降低代码的耦合性</span><br><span class="line">    * sendMessage 只能发送同物体身上脚本</span><br><span class="line">    * sendMessageUpwards 向上发送</span><br><span class="line"></span><br><span class="line">## SQLite</span><br><span class="line"></span><br><span class="line">### 准备</span><br><span class="line"></span><br><span class="line">因为不同版本unity可能不兼容</span><br><span class="line"></span><br><span class="line">Plugins文件夹下放入，mono.Data.Sqlite.dll（编辑器找）和libsqlite3和sqlite3.dll（官网下载）</span><br><span class="line"></span><br><span class="line">### 操作</span><br><span class="line"></span><br><span class="line">* 每次操作都需要开启和关闭</span><br><span class="line"></span><br><span class="line">* 同名表单只能有一份</span><br><span class="line">  * 连续创建即报错</span><br><span class="line">* 文本输入不是纯数字，必须加上单引号</span><br><span class="line">* 查询多条数据时，需要把读取代码放入循环中，直至读完</span><br><span class="line">* 直接在编辑器中删除数据库，是没法真正删除的</span><br><span class="line">  * 关闭unity，在文件路径中删除</span><br><span class="line"></span><br><span class="line">* 发布版本同sqlite3同样64位</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 优化</span><br><span class="line"></span><br><span class="line">降低Draw Calls数</span><br><span class="line"></span><br><span class="line">### 动态批处理</span><br><span class="line"></span><br><span class="line">1. 网格顶点数300</span><br><span class="line">2. 材质相同且材质着色器必须是单pass</span><br><span class="line">3. 纹理不影响</span><br><span class="line">4. 必须是Mesh Renderer 渲染的组件</span><br><span class="line">5. 每个物体的阴影占用一个</span><br><span class="line">6. 所有静态物体不参与</span><br><span class="line">7. 缩放倍数相差大时无法参与</span><br><span class="line"></span><br><span class="line">### 静态批处理</span><br><span class="line"></span><br><span class="line">场景，建筑</span><br><span class="line"></span><br><span class="line">1. 必须是静态</span><br><span class="line">2. 和顶点无关</span><br><span class="line">3. pass无关</span><br><span class="line">4. 和缩放有关，过大则不参与</span><br><span class="line"></span><br><span class="line">## 特殊文件夹</span><br><span class="line"></span><br><span class="line">1. standard Assets 此文件夹下脚本最先被编译，里面会放一些Unity自带的组件，如3rd Person Controller等</span><br><span class="line">2.  Pro Standard Assets文件夹，这个文件夹紧接着上一个编译，但是存放的是专业版才有的功能</span><br><span class="line">3. Plugins 插件目录，只能是Assets文件夹的直接子目录，优先编译</span><br><span class="line"></span><br><span class="line">* 以上三个文件夹中的脚本都不会调用其他文件夹中的脚本，所以被优先编译不会报错，但是它们可以通过GameObject.SendMessage()和其他脚本通信</span><br><span class="line"></span><br><span class="line">1. Editor 允许里面的脚本访问 unity edior的API</span><br><span class="line">2. Gizmos，存放用Gizmos.DrawIcon方法使用的贴图，图标资源。放在Gizmos文件夹中的贴图资源可以直接通过名称使用，可以被Editor作为gizmo画在屏幕上</span><br><span class="line"></span><br><span class="line">Resources：</span><br><span class="line"></span><br><span class="line">* 里面的的文件不管有没使用，都会跟随游戏一起打包。</span><br><span class="line">* 打包后只读</span><br><span class="line">* 资源会被压缩成二进制</span><br><span class="line">* 无法动态更改</span><br><span class="line">* 可以使用Resources.UnloadUnusedAssets释放内存</span><br><span class="line"></span><br><span class="line">StreamingAssets：</span><br><span class="line"></span><br><span class="line">* UnityWebRequest加载</span><br><span class="line"></span><br><span class="line">* 打包资源，二进制文件放在此文件夹下才能够随工程打包</span><br><span class="line">* 不压缩不加密</span><br><span class="line">* PC端是可读可写的</span><br><span class="line"></span><br><span class="line">在移动端</span><br><span class="line"></span><br><span class="line">1. 不能使用FILE等等文件操作来访问，安卓沙盒采用协议地址，文件类找不到</span><br><span class="line">2. 要修改只能复制到PersistentDataPath下</span><br><span class="line">3. 只读</span><br><span class="line"></span><br><span class="line">* 几个平台下的路径：</span><br><span class="line"></span><br><span class="line">  ```c#</span><br><span class="line">  #if UNITY_EDITOR || UNITY_STANDALONE</span><br><span class="line">              url = &quot;file://&quot; + Application.dataPath + &quot;/StreamingAssets/&quot; + fileName;</span><br><span class="line">  #elif UNITY_IPHONE</span><br><span class="line">              url = &quot;file://&quot; + Application.dataPath + &quot;/Raw/&quot; + fileName;</span><br><span class="line">  #elif UNITY_ANDROID</span><br><span class="line">              url = &quot;jar:file://&quot; + Application.dataPath + &quot;!/assets/&quot; + fileName;</span><br><span class="line">  #endif</span><br></pre></td></tr></table></figure></li>
+<li><p>AB包打包不允许有任何报错，否则就打不出来</p>
+</li>
+<li><p>不能用File.Exits() 判断streamingAssets下的资源是否存在，永远返回false，网上的解释是因为streamingAssets本身是一个虚拟路径，并不真实存在</p>
+</li>
+<li><p>消息传递：</p>
+<ul>
+<li>广播消息 BroadcastMessage() ，广播给所有的孩子<ul>
+<li>可降低代码的耦合性</li>
+</ul>
+</li>
+<li>sendMessage 只能发送同物体身上脚本</li>
+<li>sendMessageUpwards 向上发送</li>
 </ul>
 </li>
 </ol>
+<h2 id="SQLite"><a href="#SQLite" class="headerlink" title="SQLite"></a>SQLite</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>因为不同版本unity可能不兼容</p>
+<p>Plugins文件夹下放入，mono.Data.Sqlite.dll（编辑器找）和libsqlite3和sqlite3.dll（官网下载）</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ul>
+<li><p>每次操作都需要开启和关闭</p>
+</li>
+<li><p>同名表单只能有一份</p>
+<ul>
+<li>连续创建即报错</li>
+</ul>
+</li>
+<li><p>文本输入不是纯数字，必须加上单引号</p>
+</li>
+<li><p>查询多条数据时，需要把读取代码放入循环中，直至读完</p>
+</li>
+<li><p>直接在编辑器中删除数据库，是没法真正删除的</p>
+<ul>
+<li>关闭unity，在文件路径中删除</li>
+</ul>
+</li>
+<li><p>发布版本同sqlite3同样64位</p>
+</li>
+</ul>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>降低Draw Calls数</p>
+<h3 id="动态批处理"><a href="#动态批处理" class="headerlink" title="动态批处理"></a>动态批处理</h3><ol>
+<li>网格顶点数300</li>
+<li>材质相同且材质着色器必须是单pass</li>
+<li>纹理不影响</li>
+<li>必须是Mesh Renderer 渲染的组件</li>
+<li>每个物体的阴影占用一个</li>
+<li>所有静态物体不参与</li>
+<li>缩放倍数相差大时无法参与</li>
+</ol>
+<h3 id="静态批处理"><a href="#静态批处理" class="headerlink" title="静态批处理"></a>静态批处理</h3><p>场景，建筑</p>
+<ol>
+<li>必须是静态</li>
+<li>和顶点无关</li>
+<li>pass无关</li>
+<li>和缩放有关，过大则不参与</li>
+</ol>
+<h2 id="特殊文件夹"><a href="#特殊文件夹" class="headerlink" title="特殊文件夹"></a>特殊文件夹</h2><ol>
+<li>standard Assets 此文件夹下脚本最先被编译，里面会放一些Unity自带的组件，如3rd Person Controller等</li>
+<li> Pro Standard Assets文件夹，这个文件夹紧接着上一个编译，但是存放的是专业版才有的功能</li>
+<li>Plugins 插件目录，只能是Assets文件夹的直接子目录，优先编译</li>
+</ol>
+<ul>
+<li>以上三个文件夹中的脚本都不会调用其他文件夹中的脚本，所以被优先编译不会报错，但是它们可以通过GameObject.SendMessage()和其他脚本通信</li>
+</ul>
+<ol>
+<li>Editor 允许里面的脚本访问 unity edior的API</li>
+<li>Gizmos，存放用Gizmos.DrawIcon方法使用的贴图，图标资源。放在Gizmos文件夹中的贴图资源可以直接通过名称使用，可以被Editor作为gizmo画在屏幕上</li>
+</ol>
+<p>Resources：</p>
+<ul>
+<li>里面的的文件不管有没使用，都会跟随游戏一起打包。</li>
+<li>打包后只读</li>
+<li>资源会被压缩成二进制</li>
+<li>无法动态更改</li>
+<li>可以使用Resources.UnloadUnusedAssets释放内存</li>
+</ul>
+<p>StreamingAssets：</p>
+<ul>
+<li><p>UnityWebRequest加载</p>
+</li>
+<li><p>打包资源，二进制文件放在此文件夹下才能够随工程打包</p>
+</li>
+<li><p>不压缩不加密</p>
+</li>
+<li><p>PC端是可读可写的</p>
+</li>
+</ul>
+<p>在移动端</p>
+<ol>
+<li>不能使用FILE等等文件操作来访问，安卓沙盒采用协议地址，文件类找不到</li>
+<li>要修改只能复制到PersistentDataPath下</li>
+<li>只读</li>
+</ol>
+<ul>
+<li><p>几个平台下的路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#if UNITY_EDITOR || UNITY_STANDALONE</span><br><span class="line">            url = &quot;file://&quot; + Application.dataPath + &quot;/StreamingAssets/&quot; + fileName;</span><br><span class="line">#elif UNITY_IPHONE</span><br><span class="line">            url = &quot;file://&quot; + Application.dataPath + &quot;/Raw/&quot; + fileName;</span><br><span class="line">#elif UNITY_ANDROID</span><br><span class="line">            url = &quot;jar:file://&quot; + Application.dataPath + &quot;!/assets/&quot; + fileName;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></li>
+</ul>
 <p>PersistentDataPath：</p>
 <ol>
 <li><p>可读可写</p>
@@ -574,7 +664,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82"><span class="nav-text">杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-text">文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PlayerPrefs-%E6%9C%AC%E5%9C%B0%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-text">PlayerPrefs 本地持久化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%98%E5%82%A8"><span class="nav-text">序列化反序列化中二进制存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON"><span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML"><span class="nav-text">XML</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xLua"><span class="nav-text">xLua</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xlua-v2-1-15"><span class="nav-text">xlua_v2.1.15</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82"><span class="nav-text">杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQLite"><span class="nav-text">SQLite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-text">操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-text">动态批处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-text">静态批处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">特殊文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-text">文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PlayerPrefs-%E6%9C%AC%E5%9C%B0%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-text">PlayerPrefs 本地持久化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%98%E5%82%A8"><span class="nav-text">序列化反序列化中二进制存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON"><span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML"><span class="nav-text">XML</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xLua"><span class="nav-text">xLua</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xlua-v2-1-15"><span class="nav-text">xlua_v2.1.15</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
